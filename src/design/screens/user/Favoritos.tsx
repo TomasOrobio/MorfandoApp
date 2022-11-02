@@ -25,7 +25,7 @@ const Favoritos = () => {
                     <View >
                         <Text style={ stylesApp.titleName }> Nombre restaurante </Text>
                         <Text style={ stylesApp.descriptionName }> Adress restaurante </Text>
-                        <Text style={ stylesApp.descriptionName }> Rate Icon acaa</Text>
+                        
                     </View>
             </View>
 
