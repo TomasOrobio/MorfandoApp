@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import {StyleSheet} from 'react-native';
 
 export const colores = {
@@ -5,6 +6,11 @@ export const colores = {
 };
 
 export const styles = StyleSheet.create({
+  fondo:{
+    flex:1,
+    backgroundColor: '#FCFCFC',
+    margin : 5,
+  },
   backgroundScreen:{
     flex:1,
     backgroundColor: '#FCFCFC',
@@ -24,7 +30,7 @@ export const styles = StyleSheet.create({
   titleHeader: {
     fontSize: 30,
     marginBottom: 10,
-    fontFamily:"Poppins-Bold",
+    fontFamily:'Poppins-Bold',
     color:'white',
     marginTop:'3%'
   },

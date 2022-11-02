@@ -1,3 +1,4 @@
+/* eslint-disable react/self-closing-comp */
 /* eslint-disable eol-last */
 /* eslint-disable react/jsx-no-undef */
 /* eslint-disable no-trailing-spaces */

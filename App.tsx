@@ -15,14 +15,14 @@ import HomeScreen from './src/design/screens/user/HomeScreen';
 import Perfil from './src/design/screens/user/Profile';
 import Favoritos from "./src/design/screens/user/Favoritos";
 import LoginPage from "./src/design/screens/user/LoginPage";
-import { StackNavigation } from './src/design/components/StackNavigation';
+import {TabNavigation} from './src/design/components/TabNavigation';
 
 const App = () => {
   return (
 
     <>
     <NavigationContainer>
-      <StackNavigation/>
+      <TabNavigation/>
     </NavigationContainer>
 
     </>
