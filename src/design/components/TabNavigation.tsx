@@ -43,7 +43,7 @@ export const TabNavigation = () => {
       />
       <Tab.Screen
         name="Perfil"
-        component={Register}
+        component={Profile}
         options={{
           tabBarLabel: 'Perfil',
           tabBarIcon: ({color, size}) => (

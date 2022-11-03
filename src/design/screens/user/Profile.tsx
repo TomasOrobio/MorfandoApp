@@ -19,8 +19,8 @@ const Perfil = () => {
         <View>
 
             {/* HeaderOrangeBar */}
-            <View style={styles.BannerHeaderapp}>
-                <Text style={styles.BannerTextHeaderapp}> Perfil </Text>
+            <View style={styles.bannerHeaderapp}>
+                <Text style={styles.bannerHeaderapp}> Perfil </Text>
             </View>
 
             {/* FotoProfile + Text */}
@@ -32,30 +32,30 @@ const Perfil = () => {
                 </View>
             </View>
 
-            <ButtonWithTitle width={'30%'} height={40} title={'Cambiar Foto'}></ButtonWithTitle>
+            <ButtonWithTitle width={'30%'} height={40} title={'Cambiar Foto'} />
 
             {/* Input Personal Info */}
             <View>
 
                 <View style={stylesScreen.inputContainer}>
-                    <TextFieldEdit placeholder={'Telefono'}></TextFieldEdit>
+                    <TextFieldEdit placeholder={'Telefono'} />
                                     {/* {/* //Styles.icon    */}
                 </View>
 
                 <View style={stylesScreen.inputContainer}>
-                    <TextFieldEdit placeholder={'Telefono'}></TextFieldEdit>
+                    <TextFieldEdit placeholder={'Telefono'} />
                                     {/* {/* //Styles.icon    */}
                 </View>
 
                 <View style={stylesScreen.inputContainer}>
-                    <TextFieldEdit placeholder={'Telefono'}></TextFieldEdit>
+                    <TextFieldEdit placeholder={'Telefono'} />
                                    {/* {/* //Styles.icon    */}
                 </View>
 
             </View>
 
-            <ButtonWithTitle  width={'30%'} height={50} title={'Cerrar Session'}></ButtonWithTitle>
-            <ButtonWithTitle width={'30%'} height={50} title={'Eliminar Cuenta'}></ButtonWithTitle>
+            <ButtonWithTitle  width={'30%'} height={50} title={'Cerrar Session'} />
+            <ButtonWithTitle width={'30%'} height={50} title={'Eliminar Cuenta'} />
 
         </View>
 
