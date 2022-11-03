@@ -27,7 +27,7 @@ export const TabNavigation = () => {
         options={{
           tabBarLabel: 'Inicio',
           tabBarIcon: ({color, size}) => (
-            <Icon name="storefront-outline" color={'black'} size={26} />
+            <Icon name="home" color={color} size={size} />
           ),
         }}
       />
@@ -35,9 +35,9 @@ export const TabNavigation = () => {
         name="Favoritos"
         component={Favoritos}
         options={{
-          tabBarLabel: 'Inicio',
+          tabBarLabel: 'Favoritos',
           tabBarIcon: ({color, size}) => (
-            <Icon name="storefront-outline" color={'black'} size={26} />
+            <Icon name="star" color={'black'} size={size} />
           ),
         }}
       />
@@ -45,9 +45,9 @@ export const TabNavigation = () => {
         name="Perfil"
         component={Register}
         options={{
-          tabBarLabel: 'Inicio',
+          tabBarLabel: 'Perfil',
           tabBarIcon: ({color, size}) => (
-            <Icon name="storefront-outline" color={'black'} size={26} />
+            <Icon name="account" color={'black'} size={size} />
           ),
         }}
       />
