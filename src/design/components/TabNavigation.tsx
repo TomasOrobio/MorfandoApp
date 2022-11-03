@@ -20,7 +20,7 @@ const Tab = createBottomTabNavigator();
 
 export const TabNavigation = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator screenOptions={{headerShown: false}}>
       <Tab.Screen
         name="Inicio"
         component={Register}
