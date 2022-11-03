@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
   fondo:{
     flex:1,
     backgroundColor: '#FCFCFC',
-    margin : 5,
+    margin : 0,
   },
   backgroundScreen:{
     flex:1,
@@ -24,7 +24,10 @@ export const styles = StyleSheet.create({
   // Header App
   bannerHeaderapp:{
     backgroundColor: '#FFBC4F',  //TODO
-    height: '10%',
+    height: '15%',
+    top: -20,
+    width: '100%',
+    borderRadius: 35,
     alignItems:'center',
     alignContent:'center',
     textAlign:'center',

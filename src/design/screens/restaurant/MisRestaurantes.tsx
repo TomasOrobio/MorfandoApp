@@ -10,7 +10,7 @@ import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import { styles } from '../../theme/appTheme';
 import { ScrollView } from 'react-native-gesture-handler';
-import { Gradient } from '../../components/Gradient';
+
 
 const Misrestaurantes = () => {
 
@@ -24,11 +24,11 @@ const Misrestaurantes = () => {
                 <Text style={styles.Headerapptext}> Mis Restaurantes  </Text>
             </View> */}
 
-            <Gradient>
-                <View style={styles.Headerapp}>
+
+                <View style={styles.bannerHeaderapp}>
                 <Text> Mis Restaurantes  </Text>
                 </View>
-            </Gradient>
+
 
             {/* Mis Restaurantes Items */}
             <ScrollView>

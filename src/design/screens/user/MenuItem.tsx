@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable no-trailing-spaces */
 import { View, Text, StyleSheet, Image, FlatList } from 'react-native'
 import React from 'react'
 import ListRestaurant from '../../components/ListRestaurant';
@@ -90,7 +92,7 @@ const Perfil = () => {
                     <IconEntypo style={stylesApp.icon} name='add-user' size={30}/>
                     <IconEntypo style={stylesApp.icon} name='add-user' size={30}/>                    
                 </View>
-                <ScrollView style={stylesApp.NavRestaurant}>
+                <View style={stylesApp.NavRestaurant}>
                 <FlatList 
                     data={ restaurants }  
                     renderItem={ ({item, index}) => <ListRestaurant item={item} /> } 
@@ -98,7 +100,7 @@ const Perfil = () => {
                     ListHeaderComponent = { () => <Text style={{ fontWeight: 'bold', fontSize:20, }}> Menu</Text> }      
                     ItemSeparatorComponent = { () => <Text style={{ marginBottom: 10, }}></Text> }
                 />
-                </ScrollView>
+                </View>
 
             </View>
     );

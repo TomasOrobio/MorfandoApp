@@ -15,6 +15,9 @@ import Horarios from '../screens/restaurant/Horarios';
 import FotosRestaurante from '../screens/restaurant/FotosRestaurante';
 import CrearMenu from '../screens/restaurant/CrearMenu';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import LoginPage from '../screens/user/LoginPage';
+import MenuItem from '../screens/user/MenuItem';
+import MisRestaurantes from '../screens/restaurant/MisRestaurantes';
 
 const Tab = createBottomTabNavigator();
 
@@ -23,7 +26,7 @@ export const TabNavigation = () => {
     <Tab.Navigator screenOptions={{headerShown: false}}>
       <Tab.Screen
         name="Inicio"
-        component={Register}
+        component={MisRestaurantes} //Filtros ChangePassword
         options={{
           tabBarLabel: 'Inicio',
           tabBarIcon: ({color, size}) => (
@@ -33,21 +36,21 @@ export const TabNavigation = () => {
       />
       <Tab.Screen
         name="Favoritos"
-        component={Favoritos}
+        component={InformacionRestaurante} //MenuItem Platos Register
         options={{
           tabBarLabel: 'Favoritos',
           tabBarIcon: ({color, size}) => (
-            <Icon name="star" color={'black'} size={size} />
+            <Icon name="star" color={color} size={size} />
           ),
         }}
       />
       <Tab.Screen
         name="Perfil"
-        component={Profile}
+        component={FotosRestaurante} //CrearMenu Horarios FotosRestaurante InformacionRestaurante MisRestaurantes
         options={{
           tabBarLabel: 'Perfil',
           tabBarIcon: ({color, size}) => (
-            <Icon name="account" color={'black'} size={size} />
+            <Icon name="account" color={color} size={size} />
           ),
         }}
       />

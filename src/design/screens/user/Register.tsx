@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import { StyleSheet, View, Text, TextInput, Image } from 'react-native';
+import { StyleSheet, View, Text, TextInput, Image, ScrollView } from 'react-native';
+import { ButtonWithTitle } from '../../components/ButtonWithTittle';
 import {COLORS} from '../../theme/appTheme';
 
 const Register = () => {
@@ -45,7 +46,7 @@ const Register = () => {
           placeholder = "Contraseña"
           />
         </View>
-
+        <ButtonWithTitle width={120} height={60} title={'Guardar'}/>
       </View>
     );
   };

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React from 'react'
 import { View, Text, Button, TextInput, StyleSheet } from 'react-native';
 import { TouchableHighlight } from 'react-native-gesture-handler';
@@ -8,7 +9,7 @@ import { styles } from '../../theme/appTheme';
 const HomeScreen = () => {
     return (
         <View style={appstyles.container}>
-            <Text style={appstyles.title}> Iniciar Sesion </Text>
+            <Text style={appstyles.title}> Iniciar Sesión </Text>
 
             {/* InputData */}
             <View>
@@ -29,7 +30,7 @@ const HomeScreen = () => {
                 {/* Iniciar Sesion */}
                 <View style={appstyles.ViewButton}>
                     <TouchableHighlight style={appstyles.button}>
-                        <Text style={appstyles.buttontext}> Iniciar Sesion </Text>
+                        <Text style={appstyles.buttontext}> Iniciar Sesión </Text>
                     </TouchableHighlight>
                 </View> 
 
