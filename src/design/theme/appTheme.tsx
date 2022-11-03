@@ -1,8 +1,11 @@
 /* eslint-disable prettier/prettier */
 import {StyleSheet} from 'react-native';
 
-export const colores = {
-  primary: '#FFFFFF',
+export const COLORS = {
+  principal: '#FFBC4F',
+  blanco: '#FCFCFC',
+  negro: '#141414',
+  gris: '#72777A',
 };
 
 export const styles = StyleSheet.create({
