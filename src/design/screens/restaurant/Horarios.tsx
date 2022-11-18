@@ -1,6 +1,3 @@
-/* eslint-disable no-trailing-spaces */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable prettier/prettier */
 import React, { useState } from "react";
 import { View, Switch, StyleSheet, Text, ProgressBarAndroid } from "react-native";
 import {COLORS} from '../../theme/appTheme';
@@ -12,30 +9,30 @@ const Horarios = () => {
     const [selected, setSelected] = React.useState("");
   
     const data = [
-      {key:'Horario seleccionado correctamente.',value:'12:00AM'},
-      {key:'Horario seleccionado correctamente.',value:'01:00AM'},
-      {key:'Horario seleccionado correctamente.',value:'02:00AM'},
-      {key:'Horario seleccionado correctamente.',value:'03:00AM'},
-      {key:'Horario seleccionado correctamente.',value:'04:00AM'},
-      {key:'Horario seleccionado correctamente.',value:'05:00AM'},
-      {key:'Horario seleccionado correctamente.',value:'06:00AM'},
-      {key:'Horario seleccionado correctamente.',value:'07:00AM'},
-      {key:'Horario seleccionado correctamente.',value:'08:00AM'},
-      {key:'Horario seleccionado correctamente.',value:'09:00AM'},
-      {key:'Horario seleccionado correctamente.',value:'10:00AM'},
-      {key:'Horario seleccionado correctamente.',value:'11:00AM'},
-      {key:'Horario seleccionado correctamente.',value:'12:00PM'},
-      {key:'Horario seleccionado correctamente.',value:'01:00PM'},
-      {key:'Horario seleccionado correctamente.',value:'02:00PM'},
-      {key:'Horario seleccionado correctamente.',value:'03:00PM'},
-      {key:'Horario seleccionado correctamente.',value:'04:00PM'},
-      {key:'Horario seleccionado correctamente.',value:'05:00PM'},
-      {key:'Horario seleccionado correctamente.',value:'06:00PM'},
-      {key:'Horario seleccionado correctamente.',value:'07:00PM'},
-      {key:'Horario seleccionado correctamente.',value:'08:00PM'},
-      {key:'Horario seleccionado correctamente.',value:'09:00PM'},
-      {key:'Horario seleccionado correctamente.',value:'10:00PM'},
-      {key:'Horario seleccionado correctamente.',value:'11:00PM'},
+      {key:'',value:'12:00AM'},
+      {key:'',value:'01:00AM'},
+      {key:'',value:'02:00AM'},
+      {key:'',value:'03:00AM'},
+      {key:'',value:'04:00AM'},
+      {key:'',value:'05:00AM'},
+      {key:'',value:'06:00AM'},
+      {key:'',value:'07:00AM'},
+      {key:'',value:'08:00AM'},
+      {key:'',value:'09:00AM'},
+      {key:'',value:'10:00AM'},
+      {key:'',value:'11:00AM'},
+      {key:'',value:'12:00PM'},
+      {key:'',value:'01:00PM'},
+      {key:'',value:'02:00PM'},
+      {key:'',value:'03:00PM'},
+      {key:'',value:'04:00PM'},
+      {key:'',value:'05:00PM'},
+      {key:'',value:'06:00PM'},
+      {key:'',value:'07:00PM'},
+      {key:'',value:'08:00PM'},
+      {key:'',value:'09:00PM'},
+      {key:'',value:'10:00PM'},
+      {key:'',value:'11:00PM'},
     ];
   
     return (
@@ -55,7 +52,7 @@ const Horarios = () => {
                 search={false} 
                 boxStyles={{width: 130,alignSelf: 'center', left: 10}}
                 inputStyles={{color: COLORS.negro, fontFamily: 'Poppins-Regular'}}
-                dropdownStyles={{ width:'100%', height:'100%',left: 10, borderColor: '#D0D0D0', backgroundColor: COLORS.blanco }}
+                dropdownStyles={{ width:'100%', height:'100%',left: 10, borderColor: '#D0D0D0', backgroundColor: COLORS.gris }}
                 defaultOption={{  key:'1', value:'12:00PM' }}   //default selected option
                 />
             </View>
@@ -332,7 +329,7 @@ const Horarios = () => {
   
   const styles = StyleSheet.create({
     container: {
-      backgroundColor: 'white',
+      backgroundColor: COLORS.blanco,
       flex: 1,
     },
   

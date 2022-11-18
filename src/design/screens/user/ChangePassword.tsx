@@ -1,31 +1,47 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable no-trailing-spaces */
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import { View, Text, StyleSheet, Image, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView, KeyboardAvoidingView } from 'react-native';
 import {COLORS} from '../../theme/appTheme';
 
 const ChangePassword = () => {
-    return (
+    return (    
+
         <View style = {styles.container}>
+
+          
+
+          <View style = {{flex: .2}}>
+              <TouchableOpacity style = {styles.buttonBack}>
+              <Text style = {styles.textBack}>BACK</Text>
+              </TouchableOpacity>
+          </View>
   
-          <View style={{flex: 3}}>
+          <View style={{flex: 1.5}}>
           <Image 
           style = {styles.imagen}
-          source = {require('../../../assets/images/ChangePass.png')}
-          >
-          </Image>
+          source = {require('../../../assets/images/imgCambiarContraseña.png')}
+           />
           </View>
     
-          <View style={{flex: 1}}>
+          <View style={{flex: .5}}>
           <Text style={styles.textTitle}>Cambiar Contraseña</Text>
           <Text style={styles.textSubtitle}>Te enviaremos un mail para restablercer la contraseña.</Text>
           </View>
 
     
-          <View style={{flex: 2}}>
+          <View style={{flex: .5}}>
             <TextInput 
             style = {styles.input}
             placeholder = 'Email'
             />
+          </View>
+
+          <View style = {{flex: .5}}>
+            <TouchableOpacity style = {styles.buttonGuardar}>
+                <Text style = {styles.textGuardar}>Guardar</Text>
+              </TouchableOpacity>
           </View>
           
         </View>
@@ -66,6 +82,7 @@ const ChangePassword = () => {
         margin: 20,
         padding: 10,
         width: '90%',
+        height: '40%',
         borderWidth: 2,
         borderColor: COLORS.principal,
         borderRadius: 10,
@@ -76,7 +93,40 @@ const ChangePassword = () => {
         alignSelf: 'center',
         height: 225,
         width: 336.4,
-        top: 141,
+        top: 60,
+      },
+      buttonBack: {
+        width: '15%',
+        height: '50%',
+        color: COLORS.negro,
+        borderColor: COLORS.principal,
+        borderWidth: 2,
+        borderRadius: 100,
+        backgroundColor: COLORS.principal,
+        
+      },
+      textBack: {
+        fontFamily: 'Poppins-Medium',
+        color: COLORS.negro,
+        textAlign: 'center',
+      },
+      buttonGuardar: {
+        width: '90%',
+        height: '50%',
+        color: COLORS.negro,
+        borderColor: COLORS.principal,
+        borderWidth: 2,
+        borderRadius: 100,
+        alignSelf: 'center',
+        backgroundColor: COLORS.principal,
+      },
+      textGuardar: {
+        fontFamily: 'Poppins-Medium',
+        fontSize: 18,
+        color: COLORS.blanco,
+        textAlign: 'center',
+        top: '25%'
+        
       },
     
     });

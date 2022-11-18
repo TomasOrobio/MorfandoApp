@@ -1,9 +1,7 @@
-/* eslint-disable no-trailing-spaces */
-/* eslint-disable prettier/prettier */
 import React from "react";
-import { View, StyleSheet, Text, TextInput, ProgressBarAndroid, ScrollView } from "react-native";
+import { View, StyleSheet, Text, TextInput, ProgressBarAndroid, ScrollView, TouchableOpacity } from "react-native";
 import {COLORS} from '../../theme/appTheme';
-import SelectList from 'react-native-dropdown-select-list';
+import SelectList from 'react-native-dropdown-select-list'
 
 const InformacionRestaurante = () => {
     const [selected, setSelected] = React.useState("");
@@ -54,17 +52,23 @@ const InformacionRestaurante = () => {
     ];
 
     return (
-      <ScrollView style={styles.container}>
+      <View style={styles.container}>
 
-        <View style={{flex: 1}}>
+        <View style={{flex: .1}}>
+            <TouchableOpacity style = {styles.buttonBack}>
+              <Text style = {styles.textBack}>BACK</Text>
+            </TouchableOpacity>
+        </View>
+
+        <View style={{flex: .1}}>
             <Text style = {styles.text}>Información Restaurante</Text>
         </View>
 
-        <View style={{flex: 6}}>
+        <ScrollView style={{flex: 1}}>
             <TextInput 
             style = {styles.input}
             placeholder = 'Email'
-            placeholderTextColor={COLORS.negro}
+            placeholderTextColor={COLORS.gris}
             />
         
 
@@ -74,9 +78,9 @@ const InformacionRestaurante = () => {
                 data={especialidad}  
                 search={false} 
                 boxStyles={{width: '90%',alignSelf: 'center', marginTop: 15, borderColor: '#D0D0D0',borderRadius: 10, borderWidth: 1}}
-                inputStyles={{color: COLORS.negro, fontFamily: 'Poppins-Regular', fontSize: 16, right: 18}}
+                inputStyles={{color: COLORS.gris, fontFamily: 'Poppins-Regular', fontSize: 16, right: 18}}
                 dropdownitemStyles={{width:'40%', height:'40%'}}
-                dropdownStyles={{ width:'90%', height:'100%',left: 20, borderColor: '#D0D0D0', backgroundColor: COLORS.blanco }}
+                dropdownStyles={{ width:'90%', height:'100%',left: '5%', borderColor: '#D0D0D0', backgroundColor: COLORS.principal }}
                 placeholder = 'Especialidad'
             />
         
@@ -85,7 +89,7 @@ const InformacionRestaurante = () => {
             <TextInput 
             style = {styles.input}
             placeholder = 'Calle'
-            placeholderTextColor={COLORS.negro}
+            placeholderTextColor={COLORS.gris}
             />
         
 
@@ -93,7 +97,8 @@ const InformacionRestaurante = () => {
             <TextInput 
             style = {styles.input}
             placeholder = 'Número'
-            placeholderTextColor={COLORS.negro}
+            placeholderTextColor={COLORS.gris}
+            keyboardType='numeric'
             />
         
 
@@ -101,7 +106,7 @@ const InformacionRestaurante = () => {
             <TextInput 
             style = {styles.input}
             placeholder = 'Barrio'
-            placeholderTextColor={COLORS.negro}
+            placeholderTextColor={COLORS.gris}
             />
         
 
@@ -109,7 +114,7 @@ const InformacionRestaurante = () => {
             <TextInput 
             style = {styles.input}
             placeholder = 'Localidad'
-            placeholderTextColor={COLORS.negro}            
+            placeholderTextColor={COLORS.gris}            
             />
         
 
@@ -119,9 +124,9 @@ const InformacionRestaurante = () => {
                 data={pais}  
                 search={false} 
                 boxStyles={{width: '90%',alignSelf: 'center', marginTop: 15, borderColor: '#D0D0D0' ,borderRadius: 10, borderWidth: 1}}
-                inputStyles={{color: COLORS.negro, fontFamily: 'Poppins-Regular', fontSize: 16, right: 18}}
+                inputStyles={{color: COLORS.gris, fontFamily: 'Poppins-Regular', fontSize: 16, right: 18}}
                 dropdownitemStyles={{width:'40%', height:'40%'}}
-                dropdownStyles={{ width:'90%', height:'100%',left: 20, borderColor: '#D0D0D0', backgroundColor: COLORS.blanco }}
+                dropdownStyles={{ width:'90%', height:'100%',left: '5%', borderColor: '#D0D0D0', backgroundColor: COLORS.principal }}
                 placeholder = 'País'
             />
         
@@ -130,15 +135,15 @@ const InformacionRestaurante = () => {
                 data={provincia}  
                 search={false} 
                 boxStyles={{width: '90%',alignSelf: 'center', marginTop: 15, borderColor: '#D0D0D0',borderRadius: 10, borderWidth: 1}}
-                inputStyles={{color: COLORS.negro, fontFamily: 'Poppins-Regular', fontSize: 16, right: 18}}
+                inputStyles={{color: COLORS.gris, fontFamily: 'Poppins-Regular', fontSize: 16, right: 18}}
                 dropdownitemStyles={{width:'40%', height:'40%'}}
-                dropdownStyles={{ width:'90%', height:'100%',left: 20, borderColor: '#D0D0D0', backgroundColor: COLORS.blanco }}
+                dropdownStyles={{ width:'90%', height:'100%',left: '5%', borderColor: '#D0D0D0', backgroundColor: COLORS.principal}}
                 placeholder = 'Provincia'
             />
-        </View>
+        </ScrollView>
 
 
-        <View style={{flex: 1}}>
+        <View style={{flex: .1}}>
             <ProgressBarAndroid
             style={styles.barraProgreso}
             styleAttr="Horizontal"
@@ -147,9 +152,15 @@ const InformacionRestaurante = () => {
             color={COLORS.principal}
             width = {'90%'}
             />
+        </View>
+
+        <View style = {{flex: .2}}>
+            <TouchableOpacity style = {styles.buttonGuardar}>
+                <Text style = {styles.textGuardar}>Guardar</Text>
+            </TouchableOpacity>
         </View>     
   
-      </ScrollView>
+      </View>
   
     );
   }
@@ -169,24 +180,53 @@ const InformacionRestaurante = () => {
         width: '90%',
         alignSelf: 'center',
         marginTop: 15,
-               
+             
     },
-
     text: {
       fontFamily: 'Poppins-Regular',
-      fontSize: 16,
+      fontSize: 18,
       color: COLORS.negro,        
-      marginTop: 20,
-      width: '55%',
-      height: '20%',
-      margin: 18,
-      top: 30,
+      width: '60%',
+      height: '40%',
+      margin: '5%'
     },
   
     barraProgreso: {
       alignSelf: 'center',
-      marginBottom: 60,
       flex: 1
+    },
+    buttonGuardar: {
+      width: '40%',
+      height: '50%',
+      color: COLORS.negro,
+      borderColor: COLORS.principal,
+      borderWidth: 2,
+      borderRadius: 100,
+      top: 20,
+      alignSelf: 'center',
+      backgroundColor: COLORS.principal,
+    },
+    textGuardar: {
+      fontFamily: 'Poppins-Medium',
+      color: COLORS.blanco,
+      textAlign: 'center',
+      top: '25%'
+      
+    },
+    buttonBack: {
+      width: '15%',
+      height: '50%',
+      color: COLORS.negro,
+      borderColor: COLORS.principal,
+      borderWidth: 2,
+      borderRadius: 100,
+      backgroundColor: COLORS.principal,
+      
+    },
+    textBack: {
+      fontFamily: 'Poppins-Medium',
+      color: COLORS.negro,
+      textAlign: 'center',
     },
     
   

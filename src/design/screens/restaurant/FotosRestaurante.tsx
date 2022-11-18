@@ -1,39 +1,62 @@
-/* eslint-disable prettier/prettier */
 import React, { useState } from "react";
-import { View, StyleSheet, Text, ProgressBarAndroid, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text, ProgressBarAndroid, TouchableOpacity, Image } from "react-native";
 import {COLORS} from '../../theme/appTheme';
 
 const FotosRestaurante = () => {
     return (
         <View style={styles.container}>
-            <View style={{flex: 1}}>
-                <Text style = {styles.textTitle}>
+
+            <View style = {{flex: .2}}>
+                <TouchableOpacity style = {styles.buttonBack}>
+                <Text style = {styles.textBack}>BACK</Text>
+                </TouchableOpacity>
+            </View>
+
+            <View style={{flex: .1}}>
+                <Text style={styles.text}>
                     Subir Fotos
                 </Text>
             </View>
 
-            <View style={{flex: 2}}>
-                <TouchableOpacity style = {styles.buttonSubirFoto}>
-                    <Text style = {styles.textBoton}>Subir foto</Text>
+            <View style = {{flex: 1}}>
+            <Image 
+          style = {styles.imagen}
+          source = {require('../../../assets/images/restaurante-random.png')}
+           />
+          </View>
+
+            <View style={{flex: .2}}>
+                <TouchableOpacity style = {styles.buttonSeleccionarFoto}>
+                    <Text style = {styles.textSeleccionarFoto}>Seleccionar foto</Text>
                 </TouchableOpacity>
             </View>
 
-            <View style={{flex: 2}}>
-                <Text style={styles.textRangoPrecio}>
+            <View style={{flex: .2}}>
+                <Text style={styles.text}>
                     Rango de Precio
                 </Text>
             </View>
 
-            <View style={{flex: 1}}>
+            <View style={{flex: .8}}>
+                <Text>top bar</Text>
+                <Text>$   $$   $$$   $$$$</Text>
+            </View>
+
+            <View style={{flex: .1}}>
             <ProgressBarAndroid
             style={styles.barraProgreso}
             styleAttr="Horizontal"
             indeterminate={false}
             progress={0.5}
             color={COLORS.principal}
-            width = {'90%'}
             />
             </View> 
+
+            <View style = {{flex: .4}}>
+                <TouchableOpacity style = {styles.buttonGuardar}>
+                    <Text style = {styles.textGuardar}>Guardar</Text>
+                </TouchableOpacity>
+            </View>
 
         </View>
       );
@@ -44,43 +67,79 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.blanco,
         flex: 1,       
     },
-    textTitle: {
-        width: '25%',
-        height: '15%',
-        margin: 20,
-        marginTop: 50,
-        fontSize: 16,
-        fontFamily: 'Poppins-Regular',
-        color: COLORS.negro,        
-    },
-    buttonSubirFoto: {
-        width: '20%',
-        height: '10%',
+    imagen: {
         alignSelf: 'center',
-        alignItems: 'center',
-        top: '45%',
-        borderRadius: 6,
-        borderWidth: 2,
-        borderColor: COLORS.principal,
+        height: '95%',
+        width: '90%',
+        resizeMode: 'contain',
+        borderRadius: 30,
+        borderWidth: 1,
+        borderColor: COLORS.negro,
+        top: '2%'
     },
-    textBoton: {
+    buttonBack: {
+        width: '15%',
+        height: '50%',
+        color: COLORS.negro,
+        borderColor: COLORS.principal,
+        borderWidth: 2,
+        borderRadius: 100,
+        backgroundColor: COLORS.principal,
+    
+    },
+    textBack: {
         fontFamily: 'Poppins-Medium',
-        fontSize: 12,
-        color: COLORS.principal
+        color: COLORS.negro,
+        textAlign: 'center',
+    },
+    buttonSeleccionarFoto: {
+        width: '50%',
+        height: '100%',
+        color: COLORS.negro,
+        borderColor: COLORS.principal,
+        borderWidth: 2,
+        borderRadius: 100,
+        alignSelf: 'center',
+        backgroundColor: COLORS.principal,
 
     },
-    textRangoPrecio: {
-        marginTop: 10,
-        padding: 25,
+    textSeleccionarFoto: {
+        fontFamily: 'Poppins-Medium',
+        fontSize: 16,
+        color: COLORS.blanco,
+        textAlign: 'center',
+        top: '25%'
+
+    },
+    text: {
         fontSize: 20,
         fontFamily: 'Poppins-Regular',
         color: COLORS.negro,
         width: '100%',
-        height: 250,
+        height: '100%',
+        left: '5%',
 
     },
-    barraProgreso: {
+    buttonGuardar: {
+        width: '40%',
+        height: '50%',
+        color: COLORS.negro,
+        borderColor: COLORS.principal,
+        borderWidth: 2,
+        borderRadius: 100,
+        top: 20,
         alignSelf: 'center',
+        backgroundColor: COLORS.principal,
+    },
+    textGuardar: {
+        fontFamily: 'Poppins-Medium',
+        color: COLORS.blanco,
+        textAlign: 'center',
+        top: '25%'
+    
+    },
+    barraProgreso: {
+        alignSelf: 'center',        
     },
 
 });

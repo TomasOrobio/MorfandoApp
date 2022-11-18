@@ -1,168 +1,336 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable no-trailing-spaces */
-import { View, Text, StyleSheet, Image, FlatList } from 'react-native'
-import React from 'react'
-import ListRestaurant from '../../components/ListRestaurant';
-import { GestureHandlerRootView, ScrollView } from 'react-native-gesture-handler';
-import 'react-native-gesture-handler';
-import { gestureHandlerRootHOC } from 'react-native-gesture-handler';
-import IconEntypo from 'react-native-vector-icons/Entypo';
-import { styles } from '../../theme/appTheme';
+import React from "react";
+import { StyleSheet, View, Text, TextInput, Image,ScrollView, TouchableOpacity, KeyboardAvoidingView } from "react-native";
+import {COLORS} from '../../theme/appTheme';
 
+const MenuItem = () => {
+  return (
+    <View style = {styles.container}>
 
-const Perfil = () => {
+      <View style = {{flex: .3}}>
+            <TouchableOpacity style = {styles.buttonBack}>
+              <Text style = {styles.textBack}>BACK</Text>
+            </TouchableOpacity>
+      </View>
 
-    const restaurants = [
-        {
-            name: 'Restaurante n1',
-            rate: '5 estrellas',
-            id: '001',
-        },
-        {
-            name: 'Restaurante n2',
-            rate: '5 estrellas',
-            id: '002',
-        },
-        {
-            name: 'Restaurante n3',
-            rate: '5 estrellas',
-            id: '003',
-        },
-        {
-            name: 'Restaurante n4',
-            rate: '5 estrellas',
-            id: '004',
-        },
-        {
-            name: 'Restaurante n5',
-            rate: '5 estrellas',
-            id: '005',
-        },
-        {
-            name: 'Restaurante n6',
-            rate: '5 estrellas',
-            id: '006',
-        },
-        {
-            name: 'Restaurante n7',
-            rate: '5 estrellas',
-            id: '007',
-        },
-        {
-            name: 'Restaurante n8',
-            rate: '5 estrellas',
-            id: '008',
-        },
-        {
-            name: 'Restaurante n9',
-            rate: '5 estrellas',
-            id: '009',
-        },
-        {
-            name: 'Restaurante n10',
-            rate: '5 estrellas',
-            id: '010',
-        },
-    ]
-    return (
+      <View style = {{flex: 1}}>
+        <Image 
+          style = {styles.imagen}
+          source = {require('../../../assets/images/Resto.jpg')}
+           />
+          </View>
 
-            <View>  
-                {/* Header */}
-                {/* <View style={styles.BannerHeaderapp}>
-                    <Text style={styles.BannerTextHeaderapp}> Menu </Text>
-                </View> */}
+      <View style = {{flex: .5, flexDirection: 'row'}}>
+        <View style = {{flex: 1.5}}>
+            <Text style={styles.textNombreRestaurante}>Nombre restaurante</Text>
+            <Text style = {styles.textCalificacion}>Calificación
+            <Text style = {styles.textDireccion}> Dirección</Text>
+            </Text>
+            <Text style={styles.textDireccion}>Dirección</Text>
+        </View>
 
-                <View style={ stylesApp.container}>
-                    <Text style={ stylesApp.image}> </Text>
-                    {/* <Image source={require('../../Users/tomasorobio/Desktop/MorfandoInc/assets/images/prueba.jpg')}> </Image> */}
-                </View>
+        <View style = {{flex: .5}}>
+            <Text style={styles.textIconos}>ICONO MAPA</Text>
+        </View>
+        
 
-                <View style= {stylesApp.infoContainer}>
-                    <Text style={ stylesApp.title }> Dean and Dennys  </Text>
-                    <View style={ stylesApp.containerDescription}>
-                        <Text style={ stylesApp.text}> Rate  </Text>
-                        <Text style={ stylesApp.text}> $$$ </Text>
-                        <Text style={ stylesApp.text}> Cocina General </Text>
-                    </View>
-                </View>
+      </View>
 
-                {/* Share/Adress/Rate */}
-                <View style={stylesApp.Sharecontainer}>
-                    <IconEntypo style={stylesApp.icon} name='add-user' size={30}/>
-                    <IconEntypo style={stylesApp.icon} name='add-user' size={30}/>
-                    <IconEntypo style={stylesApp.icon} name='add-user' size={30}/>                    
-                </View>
-                <View style={stylesApp.NavRestaurant}>
-                <FlatList 
-                    data={ restaurants }  
-                    renderItem={ ({item, index}) => <ListRestaurant item={item} /> } 
-                    keyExtractor={ (item) => item.id  }       
-                    ListHeaderComponent = { () => <Text style={{ fontWeight: 'bold', fontSize:20, }}> Menu</Text> }      
-                    ItemSeparatorComponent = { () => <Text style={{ marginBottom: 10, }}></Text> }
-                />
-                </View>
+      
+      <View style = {{flex: .3, flexDirection: 'row'}}>
+        <View style = {{flex: 1}}>
+        <Text style={styles.textIconos}>iconos</Text>
+        </View>
 
+        <View style = {{flex: 1}}>
+        <Text style={styles.textIconos}>iconos</Text>
+        </View>
+
+        <View style = {{flex: 1}}>
+        <Text style={styles.textIconos}>iconos</Text>
+        </View>
+      </View>
+
+      <View style = {{flex: 2}}>
+        <ScrollView>
+        <View style = {{flex: 1, flexDirection: 'row'}}>
+            <View style = {{flex: 1}}>
+            <Image 
+          style = {styles.imagen}
+          source = {require('../../../assets/images/Resto.jpg')}
+           />
+          </View>
+
+            <View style = {{flex: 1.5}}>
+            <Text style = {styles.textComida}>Comida</Text>
+            <Text style = {styles.textDescuento}>_%</Text>
+            <Text style = {styles.textPrecio}> Precio</Text>
+            
             </View>
-    );
+
+            <View style = {{flex: .5}}>
+            <Image 
+          style = {styles.imagen}
+          source = {require('../../../assets/images/LibreGluten.png')}
+           />
+          </View>
+
+            <View style = {{flex: .5}}>
+            <Image 
+          style = {styles.imagen}
+          source = {require('../../../assets/images/Vegano.png')}
+           />
+          </View>
+
+        <View style = {{flex: 1, flexDirection: 'row'}}>
+            <View style = {{flex: 1}}>
+            <Image 
+          style = {styles.imagen}
+          source = {require('../../../assets/images/Resto.jpg')}
+           />
+          </View>
+
+            <View style = {{flex: 1.5}}>
+            <Text style = {styles.textComida}>Comida</Text>
+            <Text style = {styles.textDescuento}>_%</Text>
+            <Text style = {styles.textPrecio}> Precio</Text>
+            
+            </View>
+
+            <View style = {{flex: .5}}>
+            <Image 
+          style = {styles.imagen}
+          source = {require('../../../assets/images/LibreGluten.png')}
+           />
+          </View>
+
+            <View style = {{flex: .5}}>
+            <Image 
+          style = {styles.imagen}
+          source = {require('../../../assets/images/Vegano.png')}
+           />
+          </View>
+        </View>
+        </View>
+
+        <View style = {{flex: 1, flexDirection: 'row'}}>
+            <View style = {{flex: 1}}>
+            <Image 
+          style = {styles.imagen}
+          source = {require('../../../assets/images/Resto.jpg')}
+           />
+          </View>
+
+            <View style = {{flex: 1.5}}>
+            <Text style = {styles.textComida}>Comida</Text>
+            <Text style = {styles.textDescuento}>_%</Text>
+            <Text style = {styles.textPrecio}> Precio</Text>
+            
+            </View>
+
+            <View style = {{flex: .5}}>
+            <Image 
+          style = {styles.imagen}
+          source = {require('../../../assets/images/LibreGluten.png')}
+           />
+          </View>
+
+            <View style = {{flex: .5}}>
+            <Image 
+          style = {styles.imagen}
+          source = {require('../../../assets/images/Vegano.png')}
+           />
+          </View>
+        </View>
+
+        <View style = {{flex: 1, flexDirection: 'row'}}>
+            <View style = {{flex: 1}}>
+            <Image 
+          style = {styles.imagen}
+          source = {require('../../../assets/images/Resto.jpg')}
+           />
+          </View>
+
+            <View style = {{flex: 1.5}}>
+            <Text style = {styles.textComida}>Comida</Text>
+            <Text style = {styles.textDescuento}>_%</Text>
+            <Text style = {styles.textPrecio}> Precio</Text>
+            
+            </View>
+
+            <View style = {{flex: .5}}>
+            <Image 
+          style = {styles.imagen}
+          source = {require('../../../assets/images/LibreGluten.png')}
+           />
+          </View>
+
+            <View style = {{flex: .5}}>
+            <Image 
+          style = {styles.imagen}
+          source = {require('../../../assets/images/Vegano.png')}
+           />
+          </View>
+        </View>
+
+        <View style = {{flex: 1, flexDirection: 'row'}}>
+            <View style = {{flex: 1}}>
+            <Image 
+          style = {styles.imagen}
+          source = {require('../../../assets/images/Resto.jpg')}
+           />
+          </View>
+
+            <View style = {{flex: 1.5}}>
+            <Text style = {styles.textComida}>Comida</Text>
+            <Text style = {styles.textDescuento}>_%</Text>
+            <Text style = {styles.textPrecio}> Precio</Text>
+            
+            </View>
+
+            <View style = {{flex: .5}}>
+            <Image 
+          style = {styles.imagen}
+          source = {require('../../../assets/images/LibreGluten.png')}
+           />
+          </View>
+
+            <View style = {{flex: .5}}>
+            <Image 
+          style = {styles.imagen}
+          source = {require('../../../assets/images/Vegano.png')}
+           />
+          </View>
+        </View>
+
+        <View style = {{flex: 1, flexDirection: 'row'}}>
+            <View style = {{flex: 1}}>
+            <Image 
+          style = {styles.imagen}
+          source = {require('../../../assets/images/Resto.jpg')}
+           />
+          </View>
+
+            <View style = {{flex: 1.5}}>
+            <Text style = {styles.textComida}>Comida</Text>
+            <Text style = {styles.textDescuento}>_%</Text>
+            <Text style = {styles.textPrecio}> Precio</Text>
+            
+            </View>
+
+            <View style = {{flex: .5}}>
+            <Image 
+          style = {styles.imagen}
+          source = {require('../../../assets/images/LibreGluten.png')}
+           />
+          </View>
+
+            <View style = {{flex: .5}}>
+            <Image 
+          style = {styles.imagen}
+          source = {require('../../../assets/images/Vegano.png')}
+           />
+          </View>
+        </View>
+
+        </ScrollView>
+      </View>
+      
+      </View>
+    
+  );
 };
-
-const stylesApp = StyleSheet.create({
-    container:{
-        width: '100%',
-        height: '25%',
-        marginTop: 0,
-        flexDirection:'row',
+  
+  const styles = StyleSheet.create({
+    container: {
+      backgroundColor: COLORS.blanco,
+      flex: 1,      
     },
-    infoContainer:{
-        width: '100%',
-        height: 80,
-        // backgroundColor:'blue',
+    buttonBack: {
+        width: '15%',
+        height: '50%',
+        color: COLORS.negro,
+        borderColor: COLORS.principal,
+        borderWidth: 2,
+        borderRadius: 100,
+        backgroundColor: COLORS.principal,
+    
     },
-    image:{
-        width:'100%',
+    textBack: {
+        fontFamily: 'Poppins-Medium',
+        color: COLORS.negro,
+        textAlign: 'center',
+    },
+    imagenResto: {
+        alignSelf: 'center',
         height: '100%',
-        backgroundColor:'red',
-        flex: 1,
+        width: '100%'
     },
-    title:{
-        fontSize: 26,
-        paddingLeft: 0,
-        margin:5,
-        fontFamily:"Poppins-Bold",
+    imagen: {
+        alignSelf: 'center',
+        height: '100%',
+        width: '70%',
+        borderRadius: 30,
+        resizeMode: 'contain',
+    },
+    textComida: {
+        fontFamily: 'Poppins-Regular',
+        fontSize: 16,
+        color: COLORS.negro
+    },
+    textDescuento: {
+        fontFamily: 'Poppins-Regular',
+        fontSize: 12,
+        borderWidth: 2,
+        borderColor: COLORS.principal,
+        borderRadius: 10,
+        backgroundColor: COLORS.principal,
+        width: '20%',
+        textAlign: 'center',
+        color: COLORS.blanco
+    },
+    textPrecio: {
+        fontFamily: 'Poppins-Regular',
+        fontSize: 16,
+        color: COLORS.principal
 
     },
-    text:{
-       margin:10,
+    textNombreRestaurante: {
+        fontFamily: 'Poppins-Medium',
+        fontSize: 24,
+        color: COLORS.negro,
+        left: 5
     },
-    containerDescription:{
-        width:'100%',
-        fontFamily:"Poppins-Regular",
-        backgroundColor: 'red',
-        flexDirection:'row',
-        marginLeft:10,
-        marginRight:10,
-        fontSize:18,
-    },
-    NavRestaurant:{
-        flexDirection:'row',
-        height: '90%',
-        margin: 10,
-        marginTop: 15,
-    },
-    Sharecontainer:{
-        flexDirection:'row',
-        width:'100%',
-        height:'5%',
-    },
-    icon:{
-        flex:1,
-        width:45,
-        height:45,
-        alignSelf:'center',
-        textAlign:'center',
-        marginTop:10,
-    }
-}
-);
+    textEspecialidad: {
+        fontFamily: 'Poppins-Medium',
+        fontSize: 14,
+        color: COLORS.gris,
+        left: 5
 
-export default Perfil;
+    },
+    textCalificacion: {
+        fontFamily: 'Poppins-Medium',
+        fontSize: 14,
+        color: COLORS.gris,
+        left: 5
+
+    },
+    textDireccion: {
+        fontFamily: 'Poppins-Medium',
+        fontSize: 14,
+        color: COLORS.gris,
+        left: 5
+
+    },
+    imagen1: {
+        alignSelf: 'center'
+
+    },
+    textIconos: {
+        color: COLORS.gris
+    },
+    
+    
+  
+  });
+  
+  export default MenuItem;
