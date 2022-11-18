@@ -1,10 +1,38 @@
-// prettier-ignore
 {
-  "extends": "@tsconfig/react-native/tsconfig.json",     /* Recommended React Native TSConfig base */
   "compilerOptions": {
-    /* Visit https://aka.ms/tsconfig.json to read more about this file */
-
-    /* Completeness */
-    "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
-  }
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": false,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "preserve", 
+    "declaration": true, 
+    "plugins": [
+      {
+        "transform": "ts-transformer-keys/transformer"
+      }
+    ]
+  },
+  "baseUrl": "./src",
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/jestTrxProcessor.js",
+    "src/test-*.js",
+    "src/setupTests.js"
+  ],
 }

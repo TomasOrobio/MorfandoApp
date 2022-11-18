@@ -1,0 +1,6 @@
+module Pods_morfandoapp_morfandoappTests {
+  umbrella header "Pods-morfandoapp-morfandoappTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

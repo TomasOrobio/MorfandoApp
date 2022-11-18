@@ -1,0 +1,6 @@
+module Pods_morfandoapp {
+  umbrella header "Pods-morfandoapp-umbrella.h"
+
+  export *
+  module * { export * }
+}
