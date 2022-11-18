@@ -7,11 +7,11 @@
 #define TIMEOUT_SECONDS 600
 #define TEXT_TO_LOOK_FOR @"Welcome to React"
 
-@interface MorfandoAppTests : XCTestCase
+@interface morfandoappTests : XCTestCase
 
 @end
 
-@implementation MorfandoAppTests
+@implementation morfandoappTests
 
 - (BOOL)findSubviewInView:(UIView *)view matching:(BOOL (^)(UIView *view))test
 {
