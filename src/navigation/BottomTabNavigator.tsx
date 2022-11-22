@@ -5,6 +5,8 @@ import HomeScreen from '../screens/user/HomeScreen';
 import FavoriteScreen from '../screens/user/FavoriteScreen';
 import ProfileScreen from '../screens/user/ProfileScreen';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Menu from '../screens/user/Menu';
+import FavoritosConItems from '../screens/user/FavoritosConItems';
 
 const Tab = createBottomTabNavigator();
 
@@ -24,7 +26,7 @@ export const UserNavigation: React.FC = () => {
 		>
 			<Tab.Screen
 				name="Home"
-				component={HomeScreen}
+				component={Menu}
 				options={{
 					tabBarLabel: 'Inicio',
 					tabBarIcon: ({ color, size }) => <Icon name="home" color={color} size={size} />
@@ -32,7 +34,7 @@ export const UserNavigation: React.FC = () => {
 			/>
 			<Tab.Screen
 				name="Favorite"
-				component={FavoriteScreen}
+				component={FavoritosConItems}
 				options={{
 					tabBarLabel: 'Favoritos',
 					tabBarIcon: ({ color, size }) => <Icon name="star" color={color} size={size} />
