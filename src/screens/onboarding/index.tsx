@@ -1,8 +1,11 @@
+import { StackScreenProps } from '@react-navigation/stack';
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, ProgressBarAndroid, TouchableOpacity, Image, ScrollView } from 'react-native';
 import { COLORS } from '../../theme/appTheme';
+import { RootStackParams } from '../types';
 
-export default function ({ navigation }: any) {
+type LoginScreenProps = StackScreenProps<RootStackParams>;
+export default function ({ navigation }: LoginScreenProps) {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [loading, setLoading] = useState(false);

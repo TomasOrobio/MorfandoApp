@@ -1,3 +1,4 @@
+import { CompositeScreenProps } from '@react-navigation/native';
 import { StackScreenProps } from '@react-navigation/stack';
 import React, { useContext, useState } from 'react';
 import { StyleSheet, View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
@@ -5,8 +6,8 @@ import { AuthContext } from '../../provider/AuthProvider';
 import { COLORS } from '../../theme/appTheme';
 import { RootStackParams } from '../types';
 
-type LoginScreenProps = StackScreenProps<RootStackParams, 'Login'>;
-const LoginScreen: React.FC<LoginScreenProps> = ({ route, navigation }) => {
+type LoginScreenProps = StackScreenProps<RootStackParams>;
+function LoginScreen({ route, navigation }: LoginScreenProps) {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [loading, setLoading] = useState(false);
@@ -90,7 +91,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ route, navigation }) => {
 			</View>
 		</View>
 	);
-};
+}
 
 export default LoginScreen;
 

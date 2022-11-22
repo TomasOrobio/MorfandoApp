@@ -7,4 +7,5 @@ export type RootStackParams = {
 	ForgetPassword: undefined;
 	Register: undefined;
 	Home: undefined;
+	Onboarding: undefined;
 };
