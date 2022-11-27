@@ -19,3 +19,4 @@ export const fetchEndpoint = (endpoint: string, method: string, body: any) => {
 
 export const fetchGet = (endpoint: string) => fetchEndpoint(endpoint, 'GET', {});
 export const fetchPost = (endpoint: string, body: any) => fetchEndpoint(endpoint, 'POST', body);
+export const fetchPut = (endpoint: string, body: any) => fetchEndpoint(endpoint, 'PUT', body);
