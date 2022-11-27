@@ -2,7 +2,7 @@ import React from 'react';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParams } from '../types';
 import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
-import { COLORS } from '../../theme/appTheme';
+import { COLORS,style } from '../../theme/appTheme';
 import { fetchPut } from '../../services';
 
 type ChangePasswordScreenProps = StackScreenProps<RootStackParams, 'Login'>;
@@ -39,7 +39,7 @@ const ChangePasswordScreen: React.FC<ChangePasswordScreenProps> = ({ route, navi
 		setLoading(false);
 	}
 	return (
-		<View style={styles.container}>
+		<View style={style.container}>
 			<View style={{ flex: 0.2 }}>
 				<TouchableOpacity style={styles.buttonBack}>
 					<Text style={styles.textBack}>BACK</Text>
