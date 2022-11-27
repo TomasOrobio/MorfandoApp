@@ -1,28 +1,35 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, ProgressBarAndroid, TouchableOpacity, Image, ScrollView } from "react-native";
-import {COLORS} from '../../theme/appTheme';
+import { View, StyleSheet, Text, ProgressBarAndroid, TouchableOpacity, Image, ScrollView, TextInput } from "react-native";
+import { COLORS, style } from '../../theme/appTheme';
 
 const Menu = () => {
     return (
-        <View style={styles.container}>
-            <View style = {{flex: .2, backgroundColor: COLORS.principal}}>
-              <Text style={styles.textTitle}>Dirección</Text>
+        <View style={style.container}>
+            <View style = {{flex: .2}}>
+                <View style={style.bannerHeaderapp}>
+                    <Text style={style.titleHeader}>Dirección</Text>
+                </View>
             </View>
 
             <View style = {{flex: .2, flexDirection: 'row'}}>
                 <View style = {{flex: 1}}>
-                    <Text>SearchBar</Text>
-                </View>
+                <View >
+                    <TextInput 
+                        style={stylesSheet.searchBar}
+                        placeholder={"¿Qué desea buscar?"}
+                    /> 
+                 </View>
+            </View>
 
                 <View style = {{flex: .5}}>
-                    <TouchableOpacity style={styles.buttonFiltrar}>
-                        <Text style={styles.textFiltrar}>Filtrar</Text>
+                    <TouchableOpacity style={stylesSheet.buttonFiltrar}>
+                        <Text style={stylesSheet.textFiltrar}>Filtrar</Text>
                     </TouchableOpacity>
                 </View>
             </View>
 
             <View style = {{flex: .1}}>
-              <Text style={styles.textSubtitle}>Cerca de ti</Text>
+              <Text style={stylesSheet.textSubtitle}>Cerca de ti</Text>
             </View>
 
             <ScrollView style = {{flex: 1}}>
@@ -30,15 +37,15 @@ const Menu = () => {
             <View style = {{flex: 1, flexDirection: 'row'}}>
                 <View style = {{flex: .5}}>
                 <Image 
-          style = {styles.imagen}
+          style = {stylesSheet.imagen}
           source = {require('../../../assets/images/restaurante-random.png')}
            />
           </View>
 
                 <View style = {{flex: 1}}>
-                    <Text style={styles.textNombreRestaurante}>Nombre restaurante</Text>
-                    <Text style={styles.textDireccion}>Dirección</Text>
-                    <Text style={styles.textCalificacion}>Iconos calificación</Text>
+                    <Text style={stylesSheet.textNombreRestaurante}>Nombre restaurante</Text>
+                    <Text style={stylesSheet.textDireccion}>Dirección</Text>
+                    <Text style={stylesSheet.textCalificacion}>Iconos calificación</Text>
                 </View>
             </View>
             </TouchableOpacity>
@@ -47,15 +54,15 @@ const Menu = () => {
             <View style = {{flex: 1, flexDirection: 'row'}}>
                 <View style = {{flex: .5}}>
                 <Image 
-          style = {styles.imagen}
+          style = {stylesSheet.imagen}
           source = {require('../../../assets/images/restaurante-random.png')}
            />
           </View>
 
                 <View style = {{flex: 1}}>
-                    <Text style={styles.textNombreRestaurante}>Nombre restaurante</Text>
-                    <Text style={styles.textDireccion}>Dirección</Text>
-                    <Text style={styles.textCalificacion}>Iconos calificación</Text>
+                    <Text style={stylesSheet.textNombreRestaurante}>Nombre restaurante</Text>
+                    <Text style={stylesSheet.textDireccion}>Dirección</Text>
+                    <Text style={stylesSheet.textCalificacion}>Iconos calificación</Text>
                 </View>
             </View>
             </TouchableOpacity>
@@ -64,15 +71,15 @@ const Menu = () => {
             <View style = {{flex: 1, flexDirection: 'row'}}>
                 <View style = {{flex: .5}}>
                 <Image 
-          style = {styles.imagen}
+          style = {stylesSheet.imagen}
           source = {require('../../../assets/images/restaurante-random.png')}
            />
           </View>
 
                 <View style = {{flex: 1}}>
-                    <Text style={styles.textNombreRestaurante}>Nombre restaurante</Text>
-                    <Text style={styles.textDireccion}>Dirección</Text>
-                    <Text style={styles.textCalificacion}>Iconos calificación</Text>
+                    <Text style={stylesSheet.textNombreRestaurante}>Nombre restaurante</Text>
+                    <Text style={stylesSheet.textDireccion}>Dirección</Text>
+                    <Text style={stylesSheet.textCalificacion}>Iconos calificación</Text>
                 </View>
             </View>
             </TouchableOpacity>
@@ -81,15 +88,15 @@ const Menu = () => {
             <View style = {{flex: 1, flexDirection: 'row'}}>
                 <View style = {{flex: .5}}>
                 <Image 
-          style = {styles.imagen}
+          style = {stylesSheet.imagen}
           source = {require('../../../assets/images/restaurante-random.png')}
            />
           </View>
 
                 <View style = {{flex: 1}}>
-                    <Text style={styles.textNombreRestaurante}>Nombre restaurante</Text>
-                    <Text style={styles.textDireccion}>Dirección</Text>
-                    <Text style={styles.textCalificacion}>Iconos calificación</Text>
+                    <Text style={stylesSheet.textNombreRestaurante}>Nombre restaurante</Text>
+                    <Text style={stylesSheet.textDireccion}>Dirección</Text>
+                    <Text style={stylesSheet.textCalificacion}>Iconos calificación</Text>
                 </View>
             </View>
             </TouchableOpacity>
@@ -98,15 +105,15 @@ const Menu = () => {
             <View style = {{flex: 1, flexDirection: 'row'}}>
                 <View style = {{flex: .5}}>
                 <Image 
-          style = {styles.imagen}
+          style = {stylesSheet.imagen}
           source = {require('../../../assets/images/restaurante-random.png')}
            />
           </View>
 
                 <View style = {{flex: 1}}>
-                    <Text style={styles.textNombreRestaurante}>Nombre restaurante</Text>
-                    <Text style={styles.textDireccion}>Dirección</Text>
-                    <Text style={styles.textCalificacion}>Iconos calificación</Text>
+                    <Text style={stylesSheet.textNombreRestaurante}>Nombre restaurante</Text>
+                    <Text style={stylesSheet.textDireccion}>Dirección</Text>
+                    <Text style={stylesSheet.textCalificacion}>Iconos calificación</Text>
                 </View>
             </View>
             </TouchableOpacity>
@@ -115,15 +122,15 @@ const Menu = () => {
             <View style = {{flex: 1, flexDirection: 'row'}}>
                 <View style = {{flex: .5}}>
                 <Image 
-          style = {styles.imagen}
+          style = {stylesSheet.imagen}
           source = {require('../../../assets/images/restaurante-random.png')}
            />
           </View>
 
                 <View style = {{flex: 1}}>
-                    <Text style={styles.textNombreRestaurante}>Nombre restaurante</Text>
-                    <Text style={styles.textDireccion}>Dirección</Text>
-                    <Text style={styles.textCalificacion}>Iconos calificación</Text>
+                    <Text style={stylesSheet.textNombreRestaurante}>Nombre restaurante</Text>
+                    <Text style={stylesSheet.textDireccion}>Dirección</Text>
+                    <Text style={stylesSheet.textCalificacion}>Iconos calificación</Text>
                 </View>
             </View>
             </TouchableOpacity>
@@ -132,15 +139,15 @@ const Menu = () => {
             <View style = {{flex: 1, flexDirection: 'row'}}>
                 <View style = {{flex: .5}}>
                 <Image 
-          style = {styles.imagen}
+          style = {stylesSheet.imagen}
           source = {require('../../../assets/images/restaurante-random.png')}
            />
           </View>
 
                 <View style = {{flex: 1}}>
-                    <Text style={styles.textNombreRestaurante}>Nombre restaurante</Text>
-                    <Text style={styles.textDireccion}>Dirección</Text>
-                    <Text style={styles.textCalificacion}>Iconos calificación</Text>
+                    <Text style={stylesSheet.textNombreRestaurante}>Nombre restaurante</Text>
+                    <Text style={stylesSheet.textDireccion}>Dirección</Text>
+                    <Text style={stylesSheet.textCalificacion}>Iconos calificación</Text>
                 </View>
             </View>
             </TouchableOpacity>
@@ -152,11 +159,17 @@ const Menu = () => {
       );
     };
     
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: COLORS.blanco,
-        flex: 1,
+const stylesSheet = StyleSheet.create({
+    searchBar:{
+        marginLeft: 5, 
+        fontSize: 20, 
+        height: '70%', 
+        width: '100%', 
+        backgroundColor: 'lightgray', 
+        borderRadius: 50, 
+        top: 20
     },
+    
     imagen: {
         alignSelf: 'center',
         height: 100,
