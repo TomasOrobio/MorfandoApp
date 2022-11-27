@@ -56,7 +56,7 @@ const ChangePasswordScreen: React.FC<ChangePasswordScreenProps> = ({ route, navi
 			</View>
 
 			<View style={{ flex: 0.5 }}>
-				<TextInput style={styles.input} placeholder="Email" />
+				<TextInput style={styles.input} placeholder="Email" value={email} onChangeText={setEmail} />
 			</View>
 
 			<View style={{ flex: 0.5 }}>
