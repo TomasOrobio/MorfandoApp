@@ -4,10 +4,13 @@ import {View, Text, TouchableOpacity, Button, StyleSheet} from 'react-native';
 // import {styles} from '../../theme/appTheme';
 // import { ButtonWithTitle } from '../components/ButtonWithTittle';
 // import Slider from 'rn-range-slider';
-import { COLORS, SIZES } from '../../theme/theme';
+import { COLORS } from '../../theme/appTheme';
 
 const Filtros = () => {
   const [cuisines, setCuisines] = useState();
+  const [cuisinesComida, setCuisinesComida] = useState();
+  const [cuisinesCalificaciones, setCuisinesCalificaciones] = useState();
+  const [cuisinesPrecio, setCuisinesPrecio] = useState();
   //      const renderThumb = useCallback(() => <Thumb/>, []);
   //      const renderRail = useCallback(() => <Rail/>, []);
   //      const renderRailSelected = useCallback(() => <RailSelected/>, []);
@@ -32,13 +35,13 @@ const Filtros = () => {
             }}
             style={[
               stylesScreen.category,
-              {borderColor: cuisines === 1 ? COLORS.primary : COLORS.grey},
+              {borderColor: cuisines === 1 ? COLORS.principal : COLORS.gris},
               ,
             ]}>
             <Text
               style={[
                 stylesScreen.subtitle,
-                {color: cuisines === 1 ? COLORS.primary : COLORS.grey},
+                {color: cuisines === 1 ? COLORS.principal : COLORS.gris},
               ]}>
               Calificaciones
             </Text>
@@ -49,12 +52,12 @@ const Filtros = () => {
             }}
             style={[
               stylesScreen.category,
-              {borderColor: cuisines === 2 ? COLORS.primary : COLORS.grey},
+              {borderColor: cuisines === 2 ? COLORS.principal : COLORS.gris},
             ]}>
             <Text
               style={[
                 stylesScreen.subtitle,
-                {color: cuisines === 2 ? COLORS.primary : COLORS.grey},
+                {color: cuisines === 2 ? COLORS.principal : COLORS.gris},
               ]}>
               Distancia
             </Text>
@@ -65,12 +68,12 @@ const Filtros = () => {
             }}
             style={[
               stylesScreen.category,
-              {borderColor: cuisines === 3 ? COLORS.primary : COLORS.grey},
+              {borderColor: cuisines === 3 ? COLORS.principal : COLORS.gris},
             ]}>
             <Text
               style={[
                 stylesScreen.subtitle,
-                {color: cuisines === 3 ? COLORS.primary : COLORS.grey},
+                {color: cuisines === 3 ? COLORS.principal : COLORS.gris},
               ]}>
               $ - $$$$
             </Text>
@@ -83,80 +86,80 @@ const Filtros = () => {
         <View style={stylesScreen.row}>
           <TouchableOpacity
             onPress={() => {
-              setCuisines(4);
+              setCuisinesComida(4);
             }}
             style={[
               stylesScreen.category,
-              {borderColor: cuisines === 4 ? COLORS.primary : COLORS.grey},
+              {borderColor: cuisinesComida === 4 ? COLORS.principal : COLORS.gris},
             ]}>
             <Text
               style={[
                 stylesScreen.subtitle,
-                {color: cuisines === 4 ? COLORS.primary : COLORS.grey},
+                {color: cuisinesComida === 4 ? COLORS.principal : COLORS.gris},
               ]}>
               General
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-              setCuisines(5);
+              setCuisinesComida(5);
             }}
             style={[
               stylesScreen.category,
-              {borderColor: cuisines === 5 ? COLORS.primary : COLORS.grey},
+              {borderColor: cuisinesComida === 5 ? COLORS.principal : COLORS.gris},
             ]}>
             <Text
               style={[
                 stylesScreen.subtitle,
-                {color: cuisines === 5 ? COLORS.primary : COLORS.grey},
+                {color: cuisinesComida === 5 ? COLORS.principal : COLORS.gris},
               ]}>
               China
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-              setCuisines(6);
+              setCuisinesComida(6);
             }}
             style={[
               stylesScreen.category,
-              {borderColor: cuisines === 6 ? COLORS.primary : COLORS.grey},
+              {borderColor: cuisinesComida === 6 ? COLORS.principal : COLORS.gris},
             ]}>
             <Text
               style={[
                 stylesScreen.subtitle,
-                {color: cuisines === 6 ? COLORS.primary : COLORS.grey},
+                {color: cuisinesComida === 6 ? COLORS.principal : COLORS.gris},
               ]}>
               Mexicana
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-              setCuisines(7);
+              setCuisinesComida(7);
             }}
             style={[
               stylesScreen.category,
-              {borderColor: cuisines === 7 ? COLORS.primary : COLORS.grey},
+              {borderColor: cuisinesComida === 7 ? COLORS.principal : COLORS.gris},
             ]}>
             <Text
               style={[
                 stylesScreen.subtitle,
-                {color: cuisines === 7 ? COLORS.primary : COLORS.grey},
+                {color: cuisinesComida === 7 ? COLORS.principal : COLORS.gris},
               ]}>
               Italiana
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-              setCuisines(8);
+              setCuisinesComida(8);
             }}
             style={[
               stylesScreen.category,
-              {borderColor: cuisines === 8 ? COLORS.primary : COLORS.grey},
+              {borderColor: cuisinesComida === 8 ? COLORS.principal : COLORS.gris},
             ]}>
             <Text
               style={[
                 stylesScreen.subtitle,
-                {color: cuisines === 8 ? COLORS.primary : COLORS.grey},
+                {color: cuisinesComida === 8 ? COLORS.principal : COLORS.gris},
               ]}>
               Peruana
             </Text>
@@ -201,80 +204,80 @@ const Filtros = () => {
         <View style={stylesScreen.row}>
           <TouchableOpacity
             onPress={() => {
-              setCuisines(9);
+              setCuisinesCalificaciones(9);
             }}
             style={[
               stylesScreen.category,
-              {borderColor: cuisines === 9 ? COLORS.primary : COLORS.grey},
+              {borderColor: cuisinesCalificaciones === 9 ? COLORS.principal : COLORS.gris},
             ]}>
             <Text
               style={[
                 stylesScreen.subtitle,
-                {color: cuisines === 9 ? COLORS.primary : COLORS.grey},
+                {color: cuisinesCalificaciones === 9 ? COLORS.principal : COLORS.gris},
               ]}>
               *
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-              setCuisines(10);
+              setCuisinesCalificaciones(10);
             }}
             style={[
               stylesScreen.category,
-              {borderColor: cuisines === 10 ? COLORS.primary : COLORS.grey},
+              {borderColor: cuisinesCalificaciones === 10 ? COLORS.principal : COLORS.gris},
             ]}>
             <Text
               style={[
                 stylesScreen.subtitle,
-                {color: cuisines === 10 ? COLORS.primary : COLORS.grey},
+                {color: cuisinesCalificaciones === 10 ? COLORS.principal : COLORS.gris},
               ]}>
               **
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-              setCuisines(11);
+              setCuisinesCalificaciones(11);
             }}
             style={[
               stylesScreen.category,
-              {borderColor: cuisines === 11 ? COLORS.primary : COLORS.grey},
+              {borderColor: cuisinesCalificaciones === 11 ? COLORS.principal : COLORS.gris},
             ]}>
             <Text
               style={[
                 stylesScreen.subtitle,
-                {color: cuisines === 11 ? COLORS.primary : COLORS.grey},
+                {color: cuisinesCalificaciones === 11 ? COLORS.principal : COLORS.gris},
               ]}>
               ***
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-              setCuisines(12);
+              setCuisinesCalificaciones(12);
             }}
             style={[
               stylesScreen.category,
-              {borderColor: cuisines === 12 ? COLORS.primary : COLORS.grey},
+              {borderColor: cuisinesCalificaciones === 12 ? COLORS.principal : COLORS.gris},
             ]}>
             <Text
               style={[
                 stylesScreen.subtitle,
-                {color: cuisines === 12 ? COLORS.primary : COLORS.grey},
+                {color: cuisinesCalificaciones === 12 ? COLORS.principal : COLORS.gris},
               ]}>
               ****
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-              setCuisines(13);
+              setCuisinesCalificaciones(13);
             }}
             style={[
               stylesScreen.category,
-              {borderColor: cuisines === 13 ? COLORS.primary : COLORS.grey},
+              {borderColor: cuisinesCalificaciones === 13 ? COLORS.principal : COLORS.gris},
             ]}>
             <Text
               style={[
                 stylesScreen.subtitle,
-                {color: cuisines === 13 ? COLORS.primary : COLORS.grey},
+                {color: cuisinesCalificaciones === 13 ? COLORS.principal : COLORS.gris},
               ]}>
               *****
             </Text>
@@ -283,68 +286,68 @@ const Filtros = () => {
       </View>
       {/* Tipo de commida*/}
       <View style={stylesScreen.item}>
-        <Text style={stylesScreen.subtitulo}>Tipo de Comida</Text>
+        <Text style={stylesScreen.subtitulo}>Precio</Text>
         <View style={stylesScreen.row}>
           <TouchableOpacity
             onPress={() => {
-              setCuisines(14);
+              setCuisinesPrecio(14);
             }}
             style={[
               stylesScreen.category,
-              {borderColor: cuisines === 14 ? COLORS.primary : COLORS.grey},
+              {borderColor: cuisinesPrecio === 14 ? COLORS.principal : COLORS.gris},
             ]}>
             <Text
               style={[
                 stylesScreen.subtitle,
-                {color: cuisines === 14 ? COLORS.primary : COLORS.grey},
+                {color: cuisinesPrecio === 14 ? COLORS.principal : COLORS.gris},
               ]}>
               $
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-              setCuisines(15);
+              setCuisinesPrecio(15);
             }}
             style={[
               stylesScreen.category,
-              {borderColor: cuisines === 15 ? COLORS.primary : COLORS.grey},
+              {borderColor: cuisinesPrecio === 15 ? COLORS.principal : COLORS.gris},
             ]}>
             <Text
               style={[
                 stylesScreen.subtitle,
-                {color: cuisines === 15 ? COLORS.primary : COLORS.grey},
+                {color: cuisinesPrecio === 15 ? COLORS.principal : COLORS.gris},
               ]}>
               $$
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-              setCuisines(16);
+              setCuisinesPrecio(16);
             }}
             style={[
               stylesScreen.category,
-              {borderColor: cuisines === 16 ? COLORS.primary : COLORS.grey},
+              {borderColor: cuisinesPrecio === 16 ? COLORS.principal : COLORS.gris},
             ]}>
             <Text
               style={[
                 stylesScreen.subtitle,
-                {color: cuisines === 16 ? COLORS.primary : COLORS.grey},
+                {color: cuisinesPrecio === 16 ? COLORS.principal : COLORS.gris},
               ]}>
               $$$
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-              setCuisines(17);
+              setCuisinesPrecio(17);
             }}
             style={[
               stylesScreen.category,
-              {borderColor: cuisines === 17 ? COLORS.primary : COLORS.grey},
+              {borderColor: cuisinesPrecio === 17 ? COLORS.principal : COLORS.gris},
             ]}>
             <Text
               style={[
                 stylesScreen.subtitle,
-                {color: cuisines === 17 ? COLORS.primary : COLORS.grey},
+                {color: cuisinesPrecio === 17 ? COLORS.principal : COLORS.gris},
               ]}>
               $$$$
             </Text>
@@ -398,9 +401,9 @@ const stylesScreen = StyleSheet.create({
     marginVertical : 10,
   },
   subtitle: {
-    color: COLORS.grey,
+    color: COLORS.gris,
     fontWeight: '500',
-    fontSize: SIZES.h5,
+    fontSize: 12,
 },
   subtitulo: {
     fontFamily: 'Poppins',

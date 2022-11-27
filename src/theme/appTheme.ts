@@ -8,7 +8,7 @@ export const COLORS = {
   gris: '#72777A',
 };
 
-export const styles = StyleSheet.create({
+export const style = StyleSheet.create({
   fondo:{
     flex:1,
     backgroundColor: '#FCFCFC',
