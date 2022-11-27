@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import { View, StyleSheet, Text, TextInput, TouchableOpacity, Switch, ProgressBarAndroid, ScrollView } from "react-native";
 import {COLORS} from '../../theme/appTheme';
-import SelectList from 'react-native-dropdown-select-list'
 
 const CrearMenu = () => {
     const [isEnabled, setIsEnabled] = useState(false);
@@ -10,12 +9,6 @@ const CrearMenu = () => {
     
   return (
     <View style={styles.container}>
-        <View style={{flex: .1}}>
-            <TouchableOpacity style = {styles.buttonBack}>
-              <Text style = {styles.textBack}>BACK</Text>
-            </TouchableOpacity>
-        </View>
-
         <View style={{flex: .1}}>
             <Text style = {styles.textTitle}> Crear Menú </Text>
         </View>
@@ -344,22 +337,22 @@ const CrearMenu = () => {
         
 
 
-        <View style={{flex: .1}}>
+        <View style={{flex: .2}}>
             <ProgressBarAndroid
             style={styles.barraProgreso}
             styleAttr="Horizontal"
             indeterminate={false}
-            progress={0.5}
+            progress={0.85}
             color={COLORS.principal}
             />
-        </View>
 
-        <View style = {{flex: .2}}>
+
+
         <TouchableOpacity style = {styles.buttonGuardar}>
             <Text style = {styles.textGuardar}>Guardar</Text>
         </TouchableOpacity>
-        </View>
 
+        </View>
 
     </View>
   );
@@ -458,12 +451,13 @@ const styles = StyleSheet.create({
         top: 10,
     },
     barraProgreso: {
-        flex: 1,
+        top: 10,
+        width: '90%',
         alignSelf: 'center',
     },
     buttonGuardar: {
         width: '40%',
-        height: '50%',
+        height: '30%',
         color: COLORS.negro,
         borderColor: COLORS.principal,
         borderWidth: 2,

@@ -1,145 +1,147 @@
 import React from "react";
 import { View, StyleSheet, Text, TextInput, ProgressBarAndroid, ScrollView, TouchableOpacity } from "react-native";
-import {COLORS} from '../../theme/appTheme';
-import SelectList from 'react-native-dropdown-select-list'
+import SelectDropdown from "react-native-select-dropdown";
 
 const InformacionRestaurante = () => {
-    const [selected, setSelected] = React.useState("");
-  
     const especialidad = [
-      {key:'',value:'Pastas'},
-      {key:'',value:'Gourmet'},
-      {key:'',value:'Fast Food'},
-      {key:'',value:'Parrilla'},
-      {key:'',value:'Comida China'},
-      {key:'',value:'Comida Vegana'},
-      {key:'',value:'Desayunos'},      
-      {key:'',value:'Pescados y mariscos'},
+        'Pastas',
+        'Gourmet',
+        'Fast Food',
+        'Parrilla',
+        'Comida China',
+        'Comida Vegana',
+        'Desayunos',      
+        'Pescados y mariscos',
     ];
 
     const pais = [
-      {key:'',value:'Argentina'},
-      {key:'',value:'Brasil'},
-      {key:'',value:'Chile'},
-      {key:'',value:'Uruguay'},
+        'Argentina',
+        'Brasil',
+        'Chile',
+        'Uruguay',
     ];
 
-    const provincia = [
-      {key:'',value:'Buenos Aires'},
-      {key:'',value:'Ciudad Autónoma de Buenos Aires'},
-      {key:'',value:'Catamarca'},
-      {key:'',value:'Chaco'},
-      {key:'',value:'Chubut'},
-      {key:'',value:'Córdoba'},
-      {key:'',value:'Corrientes'},
-      {key:'',value:'Entre Ríos'},
-      {key:'',value:'Formosa'},
-      {key:'',value:'Jujuy'},
-      {key:'',value:'La Pampa'},
-      {key:'',value:'La Rioja'},
-      {key:'',value:'Mendoza'},
-      {key:'',value:'Misiones'},
-      {key:'',value:'Neuquén'},
-      {key:'',value:'Río Negro'},
-      {key:'',value:'Salta'},
-      {key:'',value:'San Juan'},
-      {key:'',value:'San Luis'},
-      {key:'',value:'Santa Cruz'},
-      {key:'',value:'Santa Fe'},
-      {key:'',value:'Tierra del Fuego'},
-      {key:'',value:'Tucumán'},
-      
-    ];
+    const provincias = [
+        'Buenos Aires',
+        'Ciudad Autónoma de Buenos Aires',
+        'Catamarca',
+        'Chaco',
+        'Chubut',
+        'Córdoba',
+        'Corrientes',
+        'Entre Ríos',
+        'Formosa',
+        'Jujuy',
+        'La Pampa',
+        'La Rioja',
+        'Mendoza',
+        'Misiones',
+        'Neuquén',
+        'Río Negro',
+        'Salta',
+        'San Juan',
+        'San Luis',
+        'Santa Cruz',
+        'Santa Fe',
+        'Tierra del Fuego',
+        'Tucumán',
+      ];
 
     return (
       <View style={styles.container}>
-
-        <View style={{flex: .1}}>
-            <TouchableOpacity style = {styles.buttonBack}>
-              <Text style = {styles.textBack}>BACK</Text>
-            </TouchableOpacity>
-        </View>
-
-        <View style={{flex: .1}}>
-            <Text style = {styles.text}>Información Restaurante</Text>
-        </View>
 
         <ScrollView style={{flex: 1}}>
             <TextInput 
             style = {styles.input}
             placeholder = 'Email'
-            placeholderTextColor={COLORS.gris}
+            placeholderTextColor={'gray'}
             />
-        
-
-        
-            <SelectList 
-                setSelected={setSelected} 
-                data={especialidad}  
-                search={false} 
-                boxStyles={{width: '90%',alignSelf: 'center', marginTop: 15, borderColor: '#D0D0D0',borderRadius: 10, borderWidth: 1}}
-                inputStyles={{color: COLORS.gris, fontFamily: 'Poppins-Regular', fontSize: 16, right: 18}}
-                dropdownitemStyles={{width:'40%', height:'40%'}}
-                dropdownStyles={{ width:'90%', height:'100%',left: '5%', borderColor: '#D0D0D0', backgroundColor: COLORS.principal }}
-                placeholder = 'Especialidad'
-            />
-        
-
+              
+            <SelectDropdown
+              data={especialidad}
+              
+              onSelect={(selectedItem, index) => {
+              console.log(selectedItem, index)
+              }}
+              buttonTextAfterSelection={(selectedItem, index) => {
+              return selectedItem
+              }}
+              rowTextForSelection={(item, index) => {
+              return item
+              }}
+              buttonStyle={styles.dropdown1BtnStyle}
+              buttonTextStyle={styles.dropdown1BtnTxtStyle}
+              rowStyle={styles.dropdown1RowStyle}
+              rowTextStyle={styles.dropdown1RowTxtStyle}
+              dropdownStyle={styles.dropdown1DropdownStyle}
+                        
+            />      
         
             <TextInput 
             style = {styles.input}
             placeholder = 'Calle'
-            placeholderTextColor={COLORS.gris}
+            placeholderTextColor={'gray'}
             />
-        
-
-        
+                
             <TextInput 
             style = {styles.input}
             placeholder = 'Número'
-            placeholderTextColor={COLORS.gris}
+            placeholderTextColor={'gray'}
             keyboardType='numeric'
             />
-        
-
-        
+                
             <TextInput 
             style = {styles.input}
             placeholder = 'Barrio'
-            placeholderTextColor={COLORS.gris}
+            placeholderTextColor={'gray'}
             />
-        
-
-        
+                
             <TextInput 
             style = {styles.input}
             placeholder = 'Localidad'
-            placeholderTextColor={COLORS.gris}            
+            placeholderTextColor={'gray'}            
             />
-        
 
-        
-            <SelectList 
-                setSelected={setSelected} 
-                data={pais}  
-                search={false} 
-                boxStyles={{width: '90%',alignSelf: 'center', marginTop: 15, borderColor: '#D0D0D0' ,borderRadius: 10, borderWidth: 1}}
-                inputStyles={{color: COLORS.gris, fontFamily: 'Poppins-Regular', fontSize: 16, right: 18}}
-                dropdownitemStyles={{width:'40%', height:'40%'}}
-                dropdownStyles={{ width:'90%', height:'100%',left: '5%', borderColor: '#D0D0D0', backgroundColor: COLORS.principal }}
-                placeholder = 'País'
+            <SelectDropdown
+              data={pais}
+              
+              onSelect={(selectedItem, index) => {
+              console.log(selectedItem, index)
+              }}
+              buttonTextAfterSelection={(selectedItem, index) => {
+              return selectedItem
+              }}
+              rowTextForSelection={(item, index) => {
+              return item
+              }}
+              buttonStyle={styles.dropdown1BtnStyle}
+              buttonTextStyle={styles.dropdown1BtnTxtStyle}
+              rowStyle={styles.dropdown1RowStyle}
+              rowTextStyle={styles.dropdown1RowTxtStyle}
+              dropdownStyle={styles.dropdown1DropdownStyle}
+                        
+            />
+
+            <SelectDropdown
+              data={provincias}
+              
+              onSelect={(selectedItem, index) => {
+              console.log(selectedItem, index)
+              }}
+              buttonTextAfterSelection={(selectedItem, index) => {
+              return selectedItem
+              }}
+              rowTextForSelection={(item, index) => {
+              return item
+              }}
+              buttonStyle={styles.dropdown1BtnStyle}
+              buttonTextStyle={styles.dropdown1BtnTxtStyle}
+              rowStyle={styles.dropdown1RowStyle}
+              rowTextStyle={styles.dropdown1RowTxtStyle}
+              dropdownStyle={styles.dropdown1DropdownStyle}
+                        
             />
         
-            <SelectList 
-                setSelected={setSelected} 
-                data={provincia}  
-                search={false} 
-                boxStyles={{width: '90%',alignSelf: 'center', marginTop: 15, borderColor: '#D0D0D0',borderRadius: 10, borderWidth: 1}}
-                inputStyles={{color: COLORS.gris, fontFamily: 'Poppins-Regular', fontSize: 16, right: 18}}
-                dropdownitemStyles={{width:'40%', height:'40%'}}
-                dropdownStyles={{ width:'90%', height:'100%',left: '5%', borderColor: '#D0D0D0', backgroundColor: COLORS.principal}}
-                placeholder = 'Provincia'
-            />
         </ScrollView>
 
 
@@ -148,15 +150,14 @@ const InformacionRestaurante = () => {
             style={styles.barraProgreso}
             styleAttr="Horizontal"
             indeterminate={false}
-            progress={0.5}
-            color={COLORS.principal}
-            width = {'90%'}
+            progress={0.25}
+            color={'orange'}
             />
         </View>
 
         <View style = {{flex: .2}}>
             <TouchableOpacity style = {styles.buttonGuardar}>
-                <Text style = {styles.textGuardar}>Guardar</Text>
+                <Text style = {styles.textGuardar}>Siguiente</Text>
             </TouchableOpacity>
         </View>     
   
@@ -167,30 +168,23 @@ const InformacionRestaurante = () => {
   
   const styles = StyleSheet.create({
     container: {
-        backgroundColor: COLORS.blanco,
+        backgroundColor: 'white',
         flex: 1
     },
     input: {
         borderWidth: 1,
-        borderColor: '#D0D0D0',
+        borderColor: 'lightgray',
         borderRadius: 10,
         fontSize: 16,
         fontFamily: 'Poppins-Regular',
-        color: COLORS.negro,
+        color: 'gray',
         width: '90%',
         alignSelf: 'center',
         marginTop: 15,
+        textAlign: 'left'
              
     },
-    text: {
-      fontFamily: 'Poppins-Regular',
-      fontSize: 18,
-      color: COLORS.negro,        
-      width: '60%',
-      height: '40%',
-      margin: '5%'
-    },
-  
+      
     barraProgreso: {
       alignSelf: 'center',
       flex: 1
@@ -198,38 +192,47 @@ const InformacionRestaurante = () => {
     buttonGuardar: {
       width: '40%',
       height: '50%',
-      color: COLORS.negro,
-      borderColor: COLORS.principal,
+      color: 'black',
+      borderColor: 'orange',
       borderWidth: 2,
       borderRadius: 100,
       top: 20,
       alignSelf: 'center',
-      backgroundColor: COLORS.principal,
+      backgroundColor: 'orange',
     },
     textGuardar: {
       fontFamily: 'Poppins-Medium',
-      color: COLORS.blanco,
+      color: 'white',
       textAlign: 'center',
       top: '25%'
       
     },
-    buttonBack: {
-      width: '15%',
-      height: '50%',
-      color: COLORS.negro,
-      borderColor: COLORS.principal,
-      borderWidth: 2,
-      borderRadius: 100,
-      backgroundColor: COLORS.principal,
+    dropdown1BtnStyle: {
+      width: '90%',
+      alignSelf: 'center',
+      backgroundColor: 'white',
+      borderRadius: 10,
+      borderWidth: 1,
+      borderColor: 'lightgray',
+      marginTop: 15
+    },
+    dropdown1BtnTxtStyle: {
+      color: 'gray',
+      textAlign: 'left',
+      fontFamily: 'Poppins-Regular',
+    },
+    dropdown1DropdownStyle: {
+      backgroundColor: 'white',
+    },
+    dropdown1RowStyle: { // color del fondo de las opciones
+      backgroundColor: 'white', 
+      borderBottomColor: 'white',
+    }, 
+    dropdown1RowTxtStyle: { //color de las letras de las opciones
+      color: 'black', 
+      textAlign: 'left'},
+      divider: {width: 1},
       
-    },
-    textBack: {
-      fontFamily: 'Poppins-Medium',
-      color: COLORS.negro,
-      textAlign: 'center',
-    },
-    
-  
   });
   
   export default InformacionRestaurante;

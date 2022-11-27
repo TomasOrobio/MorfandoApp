@@ -11,6 +11,8 @@ import {
 } from 'react-native';
 import { AuthContext } from '../../provider/AuthProvider';
 import { COLORS,style } from '../../theme/appTheme';
+import Edit from '../../../assets/images/Edit';
+import { color } from 'react-native-reanimated';
 
 const Perfil = () => {
 	const { setUser } = useContext(AuthContext);
@@ -49,7 +51,7 @@ const Perfil = () => {
 
 				<View style={{ flex: 0.2 }}>
 					<TouchableOpacity style={styles.buttonEditar}>
-						<Text style={styles.textEditar}>Editar</Text>
+						<Edit fontSize={26} color="white" />
 					</TouchableOpacity>
 				</View>
 			</View>
@@ -66,7 +68,7 @@ const Perfil = () => {
 
 				<View style={{ flex: 0.2 }}>
 					<TouchableOpacity style={styles.buttonEditar}>
-						<Text style={styles.textEditar}>Editar</Text>
+						<Edit fontSize={26} color= "white" />
 					</TouchableOpacity>
 				</View>
 			</View>
@@ -78,7 +80,7 @@ const Perfil = () => {
 
 				<View style={{ flex: 0.2 }}>
 					<TouchableOpacity style={styles.buttonEditar}>
-						<Text style={styles.textEditar}>Editar</Text>
+						<Edit fontSize={26} color="white" />
 					</TouchableOpacity>
 				</View>
 			</View>
@@ -182,9 +184,11 @@ const styles = StyleSheet.create({
 		color: 'red',
 		textDecorationLine: 'underline'
 	},
-	buttonEditar: {},
+	buttonEditar: {
+		top: 7,
+	},
 	textEditar: {
-		color: COLORS.gris
+
 	}
 });
 
