@@ -12,20 +12,48 @@ import ForgetPassword from '../screens/auth/ForgetPassword';
 import Loading from '../screens/Loading';
 import { ShopNavigation, UserNavigation } from './BottomTabNavigator';
 import { RootStackParams } from '../screens/types';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { StyleSheet, Text } from 'react-native';
+import { COLORS } from '../theme/appTheme';
+import Back from '../../assets/images/Back';
 
 const AuthStack = createStackNavigator<RootStackParams>();
 
 const Auth = () => {
 	return (
 		<AuthStack.Navigator
-			screenOptions={{
+			screenOptions={({ navigation }) => ({
 				headerShown: false
-			}}
+			})}
 		>
 			<AuthStack.Screen name="Onboarding" component={Onboarding} />
 			<AuthStack.Screen name="Login" component={Login} />
-			<AuthStack.Screen name="Register" component={Register} />
-			<AuthStack.Screen name="ForgetPassword" component={ForgetPassword} />
+			<AuthStack.Screen
+				name="Register"
+				component={Register}
+				options={({ navigation }) => ({
+					headerShown: true,
+					headerTitle: '',
+					headerLeft: () => (
+						<TouchableOpacity style={styles.buttonBack} onPress={() => navigation.goBack()}>
+							<Back fontSize={12} color="#000" />
+						</TouchableOpacity>
+					)
+				})}
+			/>
+			<AuthStack.Screen
+				name="ForgetPassword"
+				component={ForgetPassword}
+				options={({ navigation }) => ({
+					headerShown: true,
+					headerTitle: '',
+					headerLeft: () => (
+						<TouchableOpacity style={styles.buttonBack} onPress={() => navigation.goBack()}>
+							<Back fontSize={12} color="#000" />
+						</TouchableOpacity>
+					)
+				})}
+			/>
 		</AuthStack.Navigator>
 	);
 };
@@ -68,3 +96,15 @@ export default () => {
 		</NavigationContainer>
 	);
 };
+
+const styles = StyleSheet.create({
+	buttonBack: {
+		padding: 10,
+		color: COLORS.negro,
+		borderColor: COLORS.principal,
+		borderWidth: 2,
+		borderRadius: 100,
+		backgroundColor: COLORS.principal,
+		marginLeft: 10
+	}
+});

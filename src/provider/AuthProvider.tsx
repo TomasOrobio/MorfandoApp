@@ -1,9 +1,11 @@
 import React, { createContext, useState, useEffect } from 'react';
 
-interface UserType {
+export interface UserType {
 	email: string;
 	password: string;
 	type: 'user' | 'shop';
+	accessToken: string;
+	refreshToken: string;
 }
 
 type UserContextType = UserType | null | boolean;
