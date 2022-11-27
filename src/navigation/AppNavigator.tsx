@@ -22,9 +22,9 @@ const AuthStack = createStackNavigator<RootStackParams>();
 const Auth = () => {
 	return (
 		<AuthStack.Navigator
-			screenOptions={({ navigation }) => ({
+			screenOptions={{
 				headerShown: false
-			})}
+			}}
 		>
 			<AuthStack.Screen name="Onboarding" component={Onboarding} />
 			<AuthStack.Screen name="Login" component={Login} />

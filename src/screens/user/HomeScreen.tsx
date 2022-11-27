@@ -11,7 +11,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { View, Text, Button, Alert } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import { styles } from '../../theme/appTheme';
+import { style } from '../../theme/appTheme';
 import ListRestaurant from '../../components/ListRestaurant';
 import { SearchBar } from '../../components/SearchBar';
 
@@ -70,7 +70,7 @@ const HomeScreen = () => {
 	];
 
 	return (
-		<View style={styles.fondo}>
+		<View style={style.fondo}>
 			{/* HeaderOrangeBar */}
 			<View>
 				<Text> Pedro Moran 3453, Buenos Aires</Text>
