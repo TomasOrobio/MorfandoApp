@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, View, Text, TextInput, Image,ScrollView, TouchableOpacity, KeyboardAvoidingView } from "react-native";
 import {COLORS} from "../../theme/appTheme";
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const MisRestaurantes = () => {
   return (
@@ -257,7 +258,7 @@ const MisRestaurantes = () => {
 
             <View style = {{flex: .5}}>
                 <TouchableOpacity style = {styles.buttonEditar}>
-                    <Text style = {styles.textEditar}>Editar</Text>
+                    
                 </TouchableOpacity>
             </View>
         </View>
@@ -302,7 +303,7 @@ const MisRestaurantes = () => {
             </View>
 
             <View style = {{flex: .5}}>
-                <TouchableOpacity style = {styles.buttonEditar}>
+                <TouchableOpacity style = {styles.buttonEditar} >
                     <Text style = {styles.textEditar}>Editar</Text>
                 </TouchableOpacity>
             </View>
@@ -335,6 +336,7 @@ const MisRestaurantes = () => {
         fontSize: 30,
         textAlign: 'center',
         color: COLORS.negro,
+        marginTop: 5,
     },
     textNombre: {
         fontFamily: 'Poppins-SemiBold',
@@ -379,9 +381,9 @@ const MisRestaurantes = () => {
     buttonAgregar: {
         width: '15%',
         height: '50%',
-        backgroundColor: COLORS.principal,
+        backgroundColor: "#FFBC4F",
         alignSelf: 'flex-end',
-        margin: 30,
+        margin: 15,
         borderRadius: 100,
         textAlign: 'center'
 

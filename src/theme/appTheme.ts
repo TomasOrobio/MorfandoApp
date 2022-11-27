@@ -24,10 +24,10 @@ export const style = StyleSheet.create({
   // Header App
   bannerHeaderapp:{
     backgroundColor: '#FFBC4F',  //TODO
-    height: '15%',
-    top: -20,
+    height: 125,
+    top: -27,
     width: '100%',
-    borderRadius: 35,
+    borderRadius: 12,
     alignItems:'center',
     alignContent:'center',
     textAlign:'center',
@@ -36,9 +36,12 @@ export const style = StyleSheet.create({
   titleHeader: {
     fontSize: 30,
     marginBottom: 10,
-    fontFamily:'Poppins-Bold',
+    fontFamily:'Poppins',
     color:'white',
-    marginTop:'3%'
+    marginTop:'12%'
   },
-
+  container: {
+    backgroundColor: COLORS.blanco,
+    flex: 1,
+  },
 });

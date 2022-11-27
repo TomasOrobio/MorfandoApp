@@ -1,13 +1,14 @@
 import React from "react";
 import { StyleSheet, View, Text, TextInput, Image,ScrollView, TouchableOpacity, KeyboardAvoidingView } from "react-native";
-import {COLORS} from '../../theme/appTheme';
+import {COLORS, style} from '../../theme/appTheme';
 
 const FavoritosConItems = () => {
   return (
-    <View style = {styles.container}>
-
-        <View style = {{flex: .2, backgroundColor: COLORS.principal}}>
-            <Text style = {styles.textTitle}>Favoritos</Text>
+    <View style = {style.container}>
+        <View style = {{flex: .2}}>
+            <View style={style.bannerHeaderapp}>
+              <Text style={style.titleHeader}>Favoritos</Text>
+            </View>
         </View>
         
         <ScrollView style = {{flex: 1}}>
@@ -251,10 +252,6 @@ const FavoritosConItems = () => {
 };
   
   const styles = StyleSheet.create({
-    container: {
-      backgroundColor: COLORS.blanco,
-      flex: 1,      
-    },
     textTitle: {
         fontFamily: 'Poppins-Regular',
         fontSize: 30,

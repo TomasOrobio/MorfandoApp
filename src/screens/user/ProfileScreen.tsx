@@ -10,7 +10,7 @@ import {
 	KeyboardAvoidingView
 } from 'react-native';
 import { AuthContext } from '../../provider/AuthProvider';
-import { COLORS } from '../../theme/appTheme';
+import { COLORS,style } from '../../theme/appTheme';
 
 const Perfil = () => {
 	const { setUser } = useContext(AuthContext);
@@ -19,9 +19,11 @@ const Perfil = () => {
 	};
 	return (
 		<View style={styles.container}>
-			<View style={{ flex: 0.4, backgroundColor: COLORS.principal }}>
-				<Text style={styles.textTitle}>Perfil</Text>
-			</View>
+			<View style = {{flex: .5}}>
+                <View style={style.bannerHeaderapp}>
+                    <Text style={style.titleHeader}>Perfil</Text>
+                </View>
+            </View>
 
 			<View style={{ flex: 0.4, flexDirection: 'row' }}>
 				<View style={{ flex: 0.5 }}>
@@ -117,7 +119,6 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 		color: COLORS.negro,
 		alignSelf: 'flex-start',
-		bottom: 15
 	},
 	imagen: {
 		alignSelf: 'center',
