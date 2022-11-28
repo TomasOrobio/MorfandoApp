@@ -7,7 +7,7 @@ import { AuthContext } from '../provider/AuthProvider';
 import Onboarding from '../screens/onboarding';
 import Login from '../screens/auth/Login';
 import Register from '../screens/auth/Register';
-import ForgetPassword from '../screens/auth/ForgetPassword';
+import ChangePassword from '../screens/auth/ChangePassword';
 
 import Loading from '../screens/Loading';
 import { ShopNavigation, UserNavigation } from './BottomTabNavigator';
@@ -23,7 +23,8 @@ const Auth = () => {
 	return (
 		<AuthStack.Navigator
 			screenOptions={{
-				headerShown: false
+				headerShown: false,
+				headerTransparent: true
 			}}
 		>
 			<AuthStack.Screen name="Onboarding" component={Onboarding} />
@@ -43,7 +44,7 @@ const Auth = () => {
 			/>
 			<AuthStack.Screen
 				name="ForgetPassword"
-				component={ForgetPassword}
+				component={ChangePassword}
 				options={({ navigation }) => ({
 					headerShown: true,
 					headerTitle: '',

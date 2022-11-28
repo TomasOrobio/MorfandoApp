@@ -2,10 +2,10 @@ import React from 'react';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParams } from '../types';
 import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
-import { COLORS,style } from '../../theme/appTheme';
+import { COLORS, style } from '../../theme/appTheme';
 import { fetchPut } from '../../services';
 
-type ChangePasswordScreenProps = StackScreenProps<RootStackParams, 'Login'>;
+type ChangePasswordScreenProps = StackScreenProps<RootStackParams>;
 const ChangePasswordScreen: React.FC<ChangePasswordScreenProps> = ({ route, navigation }) => {
 	const [email, setEmail] = React.useState('');
 	const [loading, setLoading] = React.useState(false);
@@ -40,12 +40,6 @@ const ChangePasswordScreen: React.FC<ChangePasswordScreenProps> = ({ route, navi
 	}
 	return (
 		<View style={style.container}>
-			<View style={{ flex: 0.2 }}>
-				<TouchableOpacity style={styles.buttonBack}>
-					<Text style={styles.textBack}>BACK</Text>
-				</TouchableOpacity>
-			</View>
-
 			<View style={{ flex: 1.5 }}>
 				<Image style={styles.imagen} source={require('../../../assets/images/imgCambiarContraseña.png')} />
 			</View>
