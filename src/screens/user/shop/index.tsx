@@ -21,7 +21,8 @@ const Navigator = () => {
 		<NavStack.Navigator
 			initialRouteName="ShopList"
 			screenOptions={{
-				headerShown: false
+				headerShown: false,
+				headerTransparent: true
 			}}
 		>
 			<NavStack.Screen name="ShopList" component={ShopList} />
