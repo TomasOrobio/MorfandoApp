@@ -1,4 +1,4 @@
-const server = 'http://ec2-54-82-70-217.compute-1.amazonaws.com:3000/api/v1.1/';
+const server = 'http://ec2-54-91-213-198.compute-1.amazonaws.com:3000/api/v1.1/';
 
 export const fetchEndpoint = (endpoint: string, method: string, body: any) => {
 	const headers = {
