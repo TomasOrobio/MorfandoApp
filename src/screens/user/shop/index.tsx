@@ -5,10 +5,10 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import Back from '../../../../assets/images/Back';
 import { COLORS } from '../../../theme/appTheme';
 import ShopItem from './ShopItem';
-import ShopList from './ShopList';
+import ShopList, { Shop } from './ShopList';
 
 export type RootStackParams = {
-	ShopItem: undefined;
+	ShopItem: { shop: Shop };
 	ShopList: undefined;
 };
 

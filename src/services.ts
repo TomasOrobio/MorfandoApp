@@ -4,16 +4,20 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const server = 'http://ec2-54-91-213-198.compute-1.amazonaws.com:3000/api/v1.1/';
 
-export const fetchEndpoint = (endpoint: string, method: string, body: any, params: string = '') => {
-	const headers = {
+const axios = Axios.create({
+	baseURL: server,
+	headers: {
 		'Content-Type': 'application/json'
-	};
+	}
+});
+
+export const fetchEndpoint = (endpoint: string, method: string, body: any, params: string = '') => {
 	const options = {
+		url: `${endpoint}${params}`,
 		method,
-		headers,
-		body: method === 'GET' ? undefined : JSON.stringify(body)
+		data: method === 'GET' ? undefined : body
 	};
-	return axios(`${server}${endpoint}${params}`, options)
+	return axios(options)
 		.then((res) => res.data)
 		.catch((error) => {
 			console.error(error);
@@ -21,11 +25,9 @@ export const fetchEndpoint = (endpoint: string, method: string, body: any, param
 		});
 };
 
-export const fetchGet = (endpoint: string, params: any) => fetchEndpoint(endpoint, 'GET', {}, params);
+export const fetchGet = (endpoint: string, params: any = '') => fetchEndpoint(endpoint, 'GET', {}, params);
 export const fetchPost = (endpoint: string, body: any) => fetchEndpoint(endpoint, 'POST', body);
 export const fetchPut = (endpoint: string, body: any) => fetchEndpoint(endpoint, 'PUT', body);
-
-const axios = Axios.create();
 
 const tokenKey = '@auth-token';
 
@@ -33,7 +35,7 @@ const getToken = () => {
 	return AsyncStorage.getItem(tokenKey);
 };
 
-const setToken = async (token: string) => {
+export const setToken = async (token: string) => {
 	await AsyncStorage.setItem(tokenKey, token);
 };
 

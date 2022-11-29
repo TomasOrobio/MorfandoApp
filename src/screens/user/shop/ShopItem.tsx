@@ -3,8 +3,10 @@ import { StyleSheet, View, Text, TextInput, Image, ScrollView, TouchableOpacity 
 import { style } from '../../../theme/appTheme';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParams } from '.';
-type RegisterScreenProps = StackScreenProps<RootStackParams>;
+type RegisterScreenProps = StackScreenProps<RootStackParams, 'ShopItem'>;
 const ShopItemScreen: React.FC<RegisterScreenProps> = ({ route, navigation }) => {
+	const { shop } = route.params;
+
 	return (
 		<View style={style.container}>
 			<View style={{ flex: 0.5 }}>
@@ -13,7 +15,7 @@ const ShopItemScreen: React.FC<RegisterScreenProps> = ({ route, navigation }) =>
 			<View style={{ flex: 1, paddingHorizontal: 20 }}>
 				<View style={{ flexDirection: 'row', paddingVertical: 20 }}>
 					<View style={{ flex: 1.5 }}>
-						<Text style={styles.textNombreRestaurante}>Nombre restaurante</Text>
+						<Text style={styles.textNombreRestaurante}>{shop.name}</Text>
 						<Text style={styles.textCalificacion}>
 							Calificación
 							<Text style={styles.textDireccion}> Dirección</Text>
