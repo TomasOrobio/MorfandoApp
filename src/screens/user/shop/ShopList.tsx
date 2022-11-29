@@ -85,7 +85,7 @@ const ShopListScreen: React.FC<RegisterScreenProps> = ({ route, navigation }) =>
 				</View>
 
 				<View style={{ flex: 0.5 }}>
-					<TouchableOpacity style={stylesSheet.buttonFiltrar}>
+					<TouchableOpacity onPress={() => navigation.navigate('Filter')} style={stylesSheet.buttonFiltrar} >
 						<Text style={stylesSheet.textFiltrar}>Filtrar</Text>
 					</TouchableOpacity>
 				</View>
