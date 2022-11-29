@@ -33,7 +33,7 @@ export const UserNavigation: React.FC = () => {
 			/>
 			<Tab.Screen
 				name="Favorite"
-				component={FavoritosConItems}
+				component={FavoriteScreen}
 				options={{
 					tabBarLabel: 'Favoritos',
 					tabBarIcon: ({ color, size }) => <Icon name="star" color={color} size={size} />
