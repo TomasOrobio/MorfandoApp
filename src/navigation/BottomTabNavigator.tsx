@@ -6,7 +6,6 @@ import FavoriteScreen from '../screens/user/FavoriteScreen';
 import ProfileScreen from '../screens/user/ProfileScreen';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ShopScreen from '../screens/user/shop';
-import FavoritosConItems from '../screens/user/FavoritosConItems';
 
 const Tab = createBottomTabNavigator();
 

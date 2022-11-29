@@ -10,7 +10,7 @@ import {
 	KeyboardAvoidingView
 } from 'react-native';
 import { AuthContext } from '../../provider/AuthProvider';
-import { COLORS,style } from '../../theme/appTheme';
+import { COLORS, style } from '../../theme/appTheme';
 import Edit from '../../../assets/images/Edit';
 import { color } from 'react-native-reanimated';
 
@@ -19,13 +19,17 @@ const Perfil = () => {
 	const handleLogout = () => {
 		setUser(false);
 	};
+	const handleChangeProfile = () => {
+		console.log('cambiar perfil');
+	};
+
 	return (
 		<View style={styles.container}>
-			<View style = {{flex: .5}}>
-                <View style={style.bannerHeaderapp}>
-                    <Text style={style.titleHeader}>Perfil</Text>
-                </View>
-            </View>
+			<View style={{ flex: 0.5 }}>
+				<View style={style.bannerHeaderapp}>
+					<Text style={style.titleHeader}>Perfil</Text>
+				</View>
+			</View>
 
 			<View style={{ flex: 0.4, flexDirection: 'row' }}>
 				<View style={{ flex: 0.5 }}>
@@ -68,7 +72,7 @@ const Perfil = () => {
 
 				<View style={{ flex: 0.2 }}>
 					<TouchableOpacity style={styles.buttonEditar}>
-						<Edit fontSize={26} color= "white" />
+						<Edit fontSize={26} color="white" />
 					</TouchableOpacity>
 				</View>
 			</View>
@@ -120,7 +124,7 @@ const styles = StyleSheet.create({
 		fontFamily: 'Poppins-SemiBold',
 		fontSize: 20,
 		color: COLORS.negro,
-		alignSelf: 'flex-start',
+		alignSelf: 'flex-start'
 	},
 	imagen: {
 		alignSelf: 'center',
@@ -185,11 +189,9 @@ const styles = StyleSheet.create({
 		textDecorationLine: 'underline'
 	},
 	buttonEditar: {
-		top: 7,
+		top: 7
 	},
-	textEditar: {
-
-	}
+	textEditar: {}
 });
 
 export default Perfil;

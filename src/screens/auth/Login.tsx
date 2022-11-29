@@ -36,6 +36,7 @@ function LoginScreen({ route, navigation }: LoginScreenProps) {
 						accessToken: response.data.accessToken,
 						refreshToken: response.data.refreshToken
 					};
+					console.log(data);
 					setUser(data);
 					setToken(response.data.accessToken);
 				} else {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
 	View,
 	StyleSheet,
@@ -7,14 +7,69 @@ import {
 	TouchableOpacity,
 	Image,
 	ScrollView,
-	TextInput
+	TextInput,
+	ProgressBarAndroidComponent
 } from 'react-native';
 import { COLORS, style } from '../../../theme/appTheme';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParams } from '.';
+import { fetchGet } from '../../../services';
+
+export interface Shop {
+	location: {
+		coordinates: number[];
+		address: string;
+	};
+	operatingHours: {
+		mon: {
+			open: string;
+			close: string;
+		};
+	};
+	name: string;
+	description: string;
+	stars: number;
+	isClosed: boolean;
+	dishesTypes: string[];
+	pricesRange: string[];
+	ownerID: string;
+	imageURL: string;
+	mediumImageURL: string;
+	thumbnailImageURL: string;
+	id: string;
+}
 
 type RegisterScreenProps = StackScreenProps<RootStackParams>;
 const ShopListScreen: React.FC<RegisterScreenProps> = ({ route, navigation }) => {
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState('');
+	const [shops, setShops] = useState<Shop[]>([]);
+
+	async function handleGetShops() {
+		setLoading(true);
+		setError('');
+		try {
+			const response: { restaurants: Shop[] } = await fetchGet('restaurant');
+			if (response && response.restaurants) {
+				if (response.restaurants.length > 0) {
+					setShops(response.restaurants);
+				} else {
+					setError('No hay restaurantes disponibles');
+				}
+			} else {
+				setError('Error al obtener restaurantes');
+			}
+		} catch (error) {
+			console.error(error);
+			setError('Error al obtener restaurantes');
+		}
+		setLoading(false);
+	}
+
+	useEffect(() => {
+		handleGetShops();
+	}, []);
+
 	return (
 		<View style={style.container}>
 			<View style={{ flex: 0.2 }}>
@@ -31,7 +86,7 @@ const ShopListScreen: React.FC<RegisterScreenProps> = ({ route, navigation }) =>
 				</View>
 
 				<View style={{ flex: 0.5 }}>
-					<TouchableOpacity onPress={() => navigation.navigate('Filter')} style={stylesSheet.buttonFiltrar} >
+					<TouchableOpacity style={stylesSheet.buttonFiltrar}>
 						<Text style={stylesSheet.textFiltrar}>Filtrar</Text>
 					</TouchableOpacity>
 				</View>
@@ -40,22 +95,26 @@ const ShopListScreen: React.FC<RegisterScreenProps> = ({ route, navigation }) =>
 			<View style={{ flex: 0.1 }}>
 				<Text style={stylesSheet.textSubtitle}>Cerca de ti</Text>
 			</View>
-
-			<ScrollView style={{ flex: 1 }}>
-				<TouchableOpacity onPress={() => navigation.navigate('ShopItem')}>
-					<View style={{ flex: 1, flexDirection: 'row' }}>
-						<View style={{ flex: 0.5 }}>
-							<Image style={stylesSheet.imagen} source={require('../../../../assets/images/restaurante-random.png')} />
-						</View>
-
-						<View style={{ flex: 1 }}>
-							<Text style={stylesSheet.textNombreRestaurante}>Nombre restaurante</Text>
-							<Text style={stylesSheet.textDireccion}>Dirección</Text>
-							<Text style={stylesSheet.textCalificacion}>Iconos calificación</Text>
-						</View>
-					</View>
-				</TouchableOpacity>
-			</ScrollView>
+			{loading ? (
+				<Text>Cargando...</Text>
+			) : error ? (
+				<Text>{error}</Text>
+			) : (
+				<ScrollView style={{ flex: 1 }}>
+					{shops.map((shop) => (
+						<TouchableOpacity key={shop.id} onPress={() => navigation.navigate('ShopItem', { shop })}>
+							<View style={{ flex: 1 }}>
+								<Image style={stylesSheet.image} source={{ uri: shop.imageURL }} />
+							</View>
+							<View style={{ flex: 1 }}>
+								<Text style={stylesSheet.textNombreRestaurante}>{shop.name}</Text>
+								<Text style={stylesSheet.textDireccion}>{shop.location.address}</Text>
+								<Text style={stylesSheet.textCalificacion}>{shop.stars}</Text>
+							</View>
+						</TouchableOpacity>
+					))}
+				</ScrollView>
+			)}
 		</View>
 	);
 };
@@ -71,7 +130,7 @@ const stylesSheet = StyleSheet.create({
 		top: 20
 	},
 
-	imagen: {
+	image: {
 		alignSelf: 'center',
 		height: 100,
 		width: 100,
