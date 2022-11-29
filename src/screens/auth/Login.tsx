@@ -3,7 +3,7 @@ import { StackScreenProps } from '@react-navigation/stack';
 import React, { useContext, useState } from 'react';
 import { StyleSheet, View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 import { AuthContext, UserType } from '../../provider/AuthProvider';
-import { fetchPost } from '../../services';
+import { fetchPost, setToken } from '../../services';
 import { COLORS } from '../../theme/appTheme';
 import { RootStackParams } from '../types';
 
@@ -23,7 +23,7 @@ function LoginScreen({ route, navigation }: LoginScreenProps) {
 			password
 		};
 		try {
-			const response: { success: boolean; tokens: { accessToken: string; refreshToken: string } } = await fetchPost(
+			const response: { success: boolean; data: { accessToken: string; refreshToken: string } } = await fetchPost(
 				'auth/login',
 				user
 			);
@@ -33,10 +33,11 @@ function LoginScreen({ route, navigation }: LoginScreenProps) {
 						email: email,
 						password: password,
 						type: 'user',
-						accessToken: response.tokens.accessToken,
-						refreshToken: response.tokens.refreshToken
+						accessToken: response.data.accessToken,
+						refreshToken: response.data.refreshToken
 					};
 					setUser(data);
+					setToken(response.data.accessToken);
 				} else {
 					setError('Email o contraseña incorrectos');
 				}
