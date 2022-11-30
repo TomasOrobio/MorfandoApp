@@ -6,6 +6,7 @@ import FavoriteScreen from '../screens/user/FavoriteScreen';
 import ProfileScreen from '../screens/user/ProfileScreen';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ShopScreen from '../screens/user/shop';
+import MisRestaurantes from '../screens/shop/MisRestaurantes';
 
 const Tab = createBottomTabNavigator();
 
@@ -66,7 +67,7 @@ export const ShopNavigation: React.FC = () => {
 		>
 			<Tab.Screen
 				name="Home"
-				component={HomeScreen}
+				component={MisRestaurantes}
 				options={{
 					tabBarLabel: 'Inicio',
 					tabBarIcon: ({ color, size }) => <Icon name="home" color={color} size={size} />

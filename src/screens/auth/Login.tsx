@@ -32,7 +32,7 @@ function LoginScreen({ route, navigation }: LoginScreenProps) {
 					const data: UserType = {
 						email: email,
 						password: password,
-						type: 'user',
+						type: 'shop',
 						accessToken: response.data.accessToken,
 						refreshToken: response.data.refreshToken
 					};

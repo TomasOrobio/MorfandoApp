@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, View, Text, TextInput, Image,ScrollView, TouchableOpacity, KeyboardAvoidingView } from "react-native";
 import {COLORS} from "../../theme/appTheme";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Edit from "../../../assets/images/Edit";
 
 const MisRestaurantes = () => {
   return (
@@ -26,290 +27,13 @@ const MisRestaurantes = () => {
             <Text style = {styles.textUbicacion}>Palermo, Buenos Aires</Text>
             </View>
 
-            <View style = {{flex: .5}}>
-                <TouchableOpacity style = {styles.buttonEditar}>
-                    <Text style = {styles.textEditar}>Editar</Text>
-                </TouchableOpacity>
-            </View>
+            <View style={{ flex: 0.2 }}>
+					<TouchableOpacity style={styles.buttonEditar}>
+						<Edit fontSize={26} color="white" />
+					</TouchableOpacity>
+				</View>
         </View>
         </TouchableOpacity>
-
-        <TouchableOpacity>
-
-        <View style = {{flex: 1, flexDirection: 'row'}}>
-            <View style = {{flex: 1}}>
-            <Image 
-          style = {styles.imagen}
-          source = {require('../../../assets/images/restaurante-random.png')}
-           />
-          </View>
-
-            <View style = {{flex: 1.5}}>
-            <Text style = {styles.textNombre}>Dean & Dennys</Text>
-            <Text style = {styles.textUbicacion}>Palermo, Buenos Aires</Text>
-            </View>
-
-            <View style = {{flex: .5}}>
-                <TouchableOpacity style = {styles.buttonEditar}>
-                    <Text style = {styles.textEditar}>Editar</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity>
-
-        <View style = {{flex: 1, flexDirection: 'row'}}>
-            <View style = {{flex: 1}}>
-            <Image 
-          style = {styles.imagen}
-          source = {require('../../../assets/images/restaurante-random.png')}
-           />
-          </View>
-
-            <View style = {{flex: 1.5}}>
-            <Text style = {styles.textNombre}>Dean & Dennys</Text>
-            <Text style = {styles.textUbicacion}>Palermo, Buenos Aires</Text>
-            </View>
-
-            <View style = {{flex: .5}}>
-                <TouchableOpacity style = {styles.buttonEditar}>
-                    <Text style = {styles.textEditar}>Editar</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity>
-
-        <View style = {{flex: 1, flexDirection: 'row'}}>
-            <View style = {{flex: 1}}>
-            <Image 
-          style = {styles.imagen}
-          source = {require('../../../assets/images/restaurante-random.png')}
-           />
-          </View>
-
-            <View style = {{flex: 1.5}}>
-            <Text style = {styles.textNombre}>Dean & Dennys</Text>
-            <Text style = {styles.textUbicacion}>Palermo, Buenos Aires</Text>
-            </View>
-
-            <View style = {{flex: .5}}>
-                <TouchableOpacity style = {styles.buttonEditar}>
-                    <Text style = {styles.textEditar}>Editar</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity>
-
-        <View style = {{flex: 1, flexDirection: 'row'}}>
-            <View style = {{flex: 1}}>
-            <Image 
-          style = {styles.imagen}
-          source = {require('../../../assets/images/restaurante-random.png')}
-           />
-          </View>
-
-            <View style = {{flex: 1.5}}>
-            <Text style = {styles.textNombre}>Dean & Dennys</Text>
-            <Text style = {styles.textUbicacion}>Palermo, Buenos Aires</Text>
-            </View>
-
-            <View style = {{flex: .5}}>
-                <TouchableOpacity style = {styles.buttonEditar}>
-                    <Text style = {styles.textEditar}>Editar</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity>
-
-        <View style = {{flex: 1, flexDirection: 'row'}}>
-            <View style = {{flex: 1}}>
-            <Image 
-          style = {styles.imagen}
-          source = {require('../../../assets/images/restaurante-random.png')}
-           />
-          </View>
-
-            <View style = {{flex: 1.5}}>
-            <Text style = {styles.textNombre}>Dean & Dennys</Text>
-            <Text style = {styles.textUbicacion}>Palermo, Buenos Aires</Text>
-            </View>
-
-            <View style = {{flex: .5}}>
-                <TouchableOpacity style = {styles.buttonEditar}>
-                    <Text style = {styles.textEditar}>Editar</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity>
-
-        <View style = {{flex: 1, flexDirection: 'row'}}>
-            <View style = {{flex: 1}}>
-            <Image 
-          style = {styles.imagen}
-          source = {require('../../../assets/images/restaurante-random.png')}
-           />
-          </View>
-
-            <View style = {{flex: 1.5}}>
-            <Text style = {styles.textNombre}>Dean & Dennys</Text>
-            <Text style = {styles.textUbicacion}>Palermo, Buenos Aires</Text>
-            </View>
-
-            <View style = {{flex: .5}}>
-                <TouchableOpacity style = {styles.buttonEditar}>
-                    <Text style = {styles.textEditar}>Editar</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity>
-
-        <View style = {{flex: 1, flexDirection: 'row'}}>
-            <View style = {{flex: 1}}>
-            <Image 
-          style = {styles.imagen}
-          source = {require('../../../assets/images/restaurante-random.png')}
-           />
-          </View>
-
-            <View style = {{flex: 1.5}}>
-            <Text style = {styles.textNombre}>Dean & Dennys</Text>
-            <Text style = {styles.textUbicacion}>Palermo, Buenos Aires</Text>
-            </View>
-
-            <View style = {{flex: .5}}>
-                <TouchableOpacity style = {styles.buttonEditar}>
-                    <Text style = {styles.textEditar}>Editar</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity>
-
-        <View style = {{flex: 1, flexDirection: 'row'}}>
-            <View style = {{flex: 1}}>
-            <Image 
-          style = {styles.imagen}
-          source = {require('../../../assets/images/restaurante-random.png')}
-           />
-          </View>
-
-            <View style = {{flex: 1.5}}>
-            <Text style = {styles.textNombre}>Dean & Dennys</Text>
-            <Text style = {styles.textUbicacion}>Palermo, Buenos Aires</Text>
-            </View>
-
-            <View style = {{flex: .5}}>
-                <TouchableOpacity style = {styles.buttonEditar}>
-                    <Text style = {styles.textEditar}>Editar</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity>
-
-        <View style = {{flex: 1, flexDirection: 'row'}}>
-            <View style = {{flex: 1}}>
-            <Image 
-          style = {styles.imagen}
-          source = {require('../../../assets/images/restaurante-random.png')}
-           />
-          </View>
-
-            <View style = {{flex: 1.5}}>
-            <Text style = {styles.textNombre}>Dean & Dennys</Text>
-            <Text style = {styles.textUbicacion}>Palermo, Buenos Aires</Text>
-            </View>
-
-            <View style = {{flex: .5}}>
-                <TouchableOpacity style = {styles.buttonEditar}>
-                    <Text style = {styles.textEditar}>Editar</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity>
-
-        <View style = {{flex: 1, flexDirection: 'row'}}>
-            <View style = {{flex: 1}}>
-            <Image 
-          style = {styles.imagen}
-          source = {require('../../../assets/images/restaurante-random.png')}
-           />
-          </View>
-
-            <View style = {{flex: 1.5}}>
-            <Text style = {styles.textNombre}>Dean & Dennys</Text>
-            <Text style = {styles.textUbicacion}>Palermo, Buenos Aires</Text>
-            </View>
-
-            <View style = {{flex: .5}}>
-                <TouchableOpacity style = {styles.buttonEditar}>
-                    
-                </TouchableOpacity>
-            </View>
-        </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity>
-
-        <View style = {{flex: 1, flexDirection: 'row'}}>
-            <View style = {{flex: 1}}>
-            <Image 
-          style = {styles.imagen}
-          source = {require('../../../assets/images/restaurante-random.png')}
-           />
-          </View>
-
-            <View style = {{flex: 1.5}}>
-            <Text style = {styles.textNombre}>Dean & Dennys</Text>
-            <Text style = {styles.textUbicacion}>Palermo, Buenos Aires</Text>
-            </View>
-
-            <View style = {{flex: .5}}>
-                <TouchableOpacity style = {styles.buttonEditar}>
-                    <Text style = {styles.textEditar}>Editar</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity>
-
-        <View style = {{flex: 1, flexDirection: 'row'}}>
-            <View style = {{flex: 1}}>
-            <Image 
-          style = {styles.imagen}
-          source = {require('../../../assets/images/restaurante-random.png')}
-           />
-          </View>
-
-            <View style = {{flex: 1.5}}>
-            <Text style = {styles.textNombre}>Dean & Dennys</Text>
-            <Text style = {styles.textUbicacion}>Palermo, Buenos Aires</Text>
-            </View>
-
-            <View style = {{flex: .5}}>
-                <TouchableOpacity style = {styles.buttonEditar} >
-                    <Text style = {styles.textEditar}>Editar</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-        </TouchableOpacity>
-
 
         </ScrollView>
 
@@ -329,7 +53,9 @@ const MisRestaurantes = () => {
       flex: 1,    
     },
     buttonEditar: {
-        
+        alignSelf: 'center',
+        top: 20,
+        marginRight: 20,
     },
     textTitle: {
         fontFamily: 'Poppins-Regular',

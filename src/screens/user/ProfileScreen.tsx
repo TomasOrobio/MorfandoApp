@@ -64,9 +64,8 @@ const Perfil = () => {
 				<View style={{ flex: 1.5 }}>
 					<TextInput
 						style={styles.input}
-						placeholder="Teléfono"
+						placeholder="Apellido"
 						placeholderTextColor={COLORS.gris}
-						keyboardType="numeric"
 					/>
 				</View>
 

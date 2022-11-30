@@ -77,7 +77,7 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ route, navigation }) =>
 					style={styles.input}
 					placeholder="Apellido"
 					placeholderTextColor={'gray'}
-					keyboardType="numeric"
+					autoCapitalize="none"
 					value={lastName}
 					onChangeText={setLastName}
 				/>
