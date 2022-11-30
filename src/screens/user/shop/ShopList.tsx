@@ -103,14 +103,16 @@ const ShopListScreen: React.FC<RegisterScreenProps> = ({ route, navigation }) =>
 				<ScrollView style={{ flex: 1 }}>
 					{shops.map((shop) => (
 						<TouchableOpacity key={shop.id} onPress={() => navigation.navigate('ShopItem', { shop })}>
-							<View style={{ flex: 1 }}>
-								<Image style={stylesSheet.image} source={{ uri: shop.imageURL }} />
-							</View>
-							<View style={{ flex: 1 }}>
-								<Text style={stylesSheet.textNombreRestaurante}>{shop.name}</Text>
-								<Text style={stylesSheet.textDireccion}>{shop.location.address}</Text>
-								<Text style={stylesSheet.textCalificacion}>{shop.stars}</Text>
-							</View>
+							<View style = {{flex: 1, flexDirection: 'row'}}>
+								<View style={{ flex: .4 }}>
+									<Image style={stylesSheet.image} source={{ uri: shop.imageURL }} />
+								</View>
+								<View style={{ flex: 1 }}>
+									<Text style={stylesSheet.textNombreRestaurante}>{shop.name}</Text>
+									<Text style={stylesSheet.textDireccion}>{shop.location.address}</Text>
+									<Text style={stylesSheet.textCalificacion}>{shop.stars}</Text>
+								</View>
+							</View>	
 						</TouchableOpacity>
 					))}
 				</ScrollView>
@@ -132,8 +134,8 @@ const stylesSheet = StyleSheet.create({
 
 	image: {
 		alignSelf: 'center',
-		height: 100,
-		width: 100,
+		height: 80,
+		width: 80,
 		borderWidth: 2,
 		borderColor: 'black',
 		borderRadius: 20,
