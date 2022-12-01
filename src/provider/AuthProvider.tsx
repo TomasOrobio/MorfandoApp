@@ -24,4 +24,11 @@ const AuthProvider = (props: any) => {
 	return <AuthContext.Provider value={value}>{props.children}</AuthContext.Provider>;
 };
 
-export { AuthContext, AuthProvider };
+const useAuth = () =>{
+	const context = React.useContext(AuthContext)
+	if(context === undefined) {
+		throw new Error('useAuth must be used inside AuthProvider')
+	}
+	return context;
+}
+export { useAuth, AuthProvider };

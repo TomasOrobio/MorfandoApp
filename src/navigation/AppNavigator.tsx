@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { AuthContext } from '../provider/AuthProvider';
+import { useAuth } from '../provider/AuthProvider';
 
 // Auth screens
 import Onboarding from '../screens/onboarding';
@@ -16,6 +16,10 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { StyleSheet, Text } from 'react-native';
 import { COLORS } from '../theme/appTheme';
 import Back from '../../assets/images/Back';
+import InformacionRestaurante from '../screens/shop/InformacionRestaurante';
+import Horarios from '../screens/shop/Horarios';
+import FotosRestaurante from '../screens/shop/FotosRestaurante';
+import CrearMenu from '../screens/shop/CrearMenu';
 
 const AuthStack = createStackNavigator<RootStackParams>();
 
@@ -81,19 +85,28 @@ const ShopMain = () => {
 			}}
 		>
 			<MainStack.Screen name="Main" component={ShopNavigation} />
+			<MainStack.Screen name="addRestaurant" component={InformacionRestaurante} />
+			<MainStack.Screen name="schedule" component={Horarios} />
+			<MainStack.Screen name="uploadFile" component={FotosRestaurante} />
+			<MainStack.Screen name="createMenu" component={CrearMenu} />
 		</MainStack.Navigator>
 	);
 };
 
 export default () => {
-	const { user } = useContext(AuthContext);
+	const { user } = useAuth();
 	console.log(user);
 	return (
 		<NavigationContainer>
-			{user === null && <Loading />}
-			{user === false && <Auth />}
-			{user && typeof user === 'object' && user.type === 'user' && <UserMain />}
-			{user && typeof user === 'object' && user.type === 'shop' && <ShopMain />}
+			{user === null ? (
+				<Loading />
+			) : !user ? (
+				<Auth />
+			) : typeof user === 'object' && user.type === 'user' ? (
+				<UserMain />
+			) : (
+				<ShopMain />
+			)}
 		</NavigationContainer>
 	);
 };

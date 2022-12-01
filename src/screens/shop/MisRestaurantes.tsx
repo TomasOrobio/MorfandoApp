@@ -1,10 +1,10 @@
 import React from "react";
-import { StyleSheet, View, Text, TextInput, Image,ScrollView, TouchableOpacity, KeyboardAvoidingView } from "react-native";
+import { StyleSheet, View, Text, Image,ScrollView, TouchableOpacity, } from "react-native";
 import {COLORS} from "../../theme/appTheme";
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Edit from "../../../assets/images/Edit";
+import { FC_RN } from "../../navigation/Navigation.type";
 
-const MisRestaurantes = () => {
+const MisRestaurantes: FC_RN<{addRestaurant: undefined}> = ({navigation}) => {
   return (
     <View style = {styles.container}>
         <View style = {{flex: .1}}>
@@ -38,8 +38,8 @@ const MisRestaurantes = () => {
         </ScrollView>
 
         <View style = {{flex: .2}}>
-            <TouchableOpacity style = {styles.buttonAgregar}>
-                <Text style = {styles.textAgregar}>+</Text>
+            <TouchableOpacity onPress={()=> navigation?.navigate('addRestaurant')}>
+                <Image source={require('../../../assets/images/add.png')} style={styles.buttonAgregar}/>
             </TouchableOpacity>
         </View>
 
@@ -105,12 +105,8 @@ const MisRestaurantes = () => {
 
     },
     buttonAgregar: {
-        width: '15%',
-        height: '50%',
-        backgroundColor: "#FFBC4F",
         alignSelf: 'flex-end',
         margin: 15,
-        borderRadius: 100,
         textAlign: 'center'
 
     },

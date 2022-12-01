@@ -1,8 +1,10 @@
-import React from "react";
-import { View, StyleSheet, Text, TextInput, ProgressBarAndroid, ScrollView, TouchableOpacity } from "react-native";
+import React, { FC } from "react";
+import { View, StyleSheet, Text, TextInput, ScrollView, TouchableOpacity } from "react-native";
+import { ProgressBar } from "@react-native-community/progress-bar-android";
 import SelectDropdown from "react-native-select-dropdown";
+import { FC_RN } from "../../navigation/Navigation.type";
 
-const InformacionRestaurante = () => {
+const InformacionRestaurante: FC_RN<{schedule: undefined}>  = ({navigation}) => {
     const especialidad = [
         'Pastas',
         'Gourmet',
@@ -146,7 +148,7 @@ const InformacionRestaurante = () => {
 
 
         <View style={{flex: .1}}>
-            <ProgressBarAndroid
+            <ProgressBar
             style={styles.barraProgreso}
             styleAttr="Horizontal"
             indeterminate={false}
@@ -156,7 +158,7 @@ const InformacionRestaurante = () => {
         </View>
 
         <View style = {{flex: .2}}>
-            <TouchableOpacity style = {styles.buttonGuardar}>
+            <TouchableOpacity style = {styles.buttonGuardar} onPress={()=> navigation?.navigate('schedule')}>
                 <Text style = {styles.textGuardar}>Siguiente</Text>
             </TouchableOpacity>
         </View>     
@@ -186,8 +188,9 @@ const InformacionRestaurante = () => {
     },
       
     barraProgreso: {
-      alignSelf: 'center',
-      flex: 1
+		flex: 1,
+		alignSelf: 'center',
+		width: '90%',
     },
     buttonGuardar: {
       width: '40%',

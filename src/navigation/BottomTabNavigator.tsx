@@ -1,4 +1,5 @@
 import React from 'react';
+import { Image } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { COLORS } from '../theme/appTheme';
 import HomeScreen from '../screens/user/HomeScreen';
@@ -7,15 +8,17 @@ import ProfileScreen from '../screens/user/ProfileScreen';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ShopScreen from '../screens/user/shop';
 import MisRestaurantes from '../screens/shop/MisRestaurantes';
+import { createStackNavigator } from '@react-navigation/stack';
+import { useAuth } from '../provider/AuthProvider';
 
 const Tab = createBottomTabNavigator();
-
 export const UserNavigation: React.FC = () => {
 	return (
 		<Tab.Navigator
-			initialRouteName="Inicio"
+			initialRouteName="Home"
 			screenOptions={{
 				headerShown: false,
+				tabBarShowLabel: false,
 				tabBarActiveTintColor: COLORS.principal,
 				tabBarInactiveTintColor: COLORS.gris,
 				tabBarStyle: {
@@ -28,7 +31,9 @@ export const UserNavigation: React.FC = () => {
 				component={ShopScreen}
 				options={{
 					tabBarLabel: 'Inicio',
-					tabBarIcon: ({ color, size }) => <Icon name="home" color={color} size={size} />
+					tabBarIcon: ({ color }) => (
+						<Image source={require('../../assets/images/home.png')} style={{ tintColor: color }} />
+					)
 				}}
 			/>
 			<Tab.Screen
@@ -36,7 +41,9 @@ export const UserNavigation: React.FC = () => {
 				component={FavoriteScreen}
 				options={{
 					tabBarLabel: 'Favoritos',
-					tabBarIcon: ({ color, size }) => <Icon name="star" color={color} size={size} />
+					tabBarIcon: ({ color }) => (
+						<Image source={require('../../assets/images/favorites.png')} style={{ tintColor: color }} />
+					)
 				}}
 			/>
 			<Tab.Screen
@@ -44,7 +51,9 @@ export const UserNavigation: React.FC = () => {
 				component={ProfileScreen}
 				options={{
 					tabBarLabel: 'Perfil',
-					tabBarIcon: ({ color, size }) => <Icon name="account" color={color} size={size} />
+					tabBarIcon: ({ color }) => (
+						<Image source={require('../../assets/images/profile.png')} style={{ tintColor: color }} />
+					)
 				}}
 			/>
 		</Tab.Navigator>
@@ -54,10 +63,10 @@ export const UserNavigation: React.FC = () => {
 export const ShopNavigation: React.FC = () => {
 	return (
 		<Tab.Navigator
-			initialRouteName="Inicio"
+			initialRouteName="Home"
 			screenOptions={{
 				headerShown: false,
-				// tabBarShowLabel: false,
+				tabBarShowLabel: false,
 				tabBarActiveTintColor: COLORS.principal,
 				tabBarInactiveTintColor: COLORS.gris,
 				tabBarStyle: {
@@ -70,15 +79,9 @@ export const ShopNavigation: React.FC = () => {
 				component={MisRestaurantes}
 				options={{
 					tabBarLabel: 'Inicio',
-					tabBarIcon: ({ color, size }) => <Icon name="home" color={color} size={size} />
-				}}
-			/>
-			<Tab.Screen
-				name="Favorite"
-				component={FavoriteScreen}
-				options={{
-					tabBarLabel: 'Favoritos',
-					tabBarIcon: ({ color, size }) => <Icon name="star" color={color} size={size} />
+					tabBarIcon: ({ color }) => (
+						<Image source={require('../../assets/images/home.png')} style={{ tintColor: color }} />
+					)
 				}}
 			/>
 			<Tab.Screen
@@ -86,7 +89,9 @@ export const ShopNavigation: React.FC = () => {
 				component={ProfileScreen}
 				options={{
 					tabBarLabel: 'Perfil',
-					tabBarIcon: ({ color, size }) => <Icon name="account" color={color} size={size} />
+					tabBarIcon: ({ color }) => (
+						<Image source={require('../../assets/images/profile.png')} style={{ tintColor: color }} />
+					)
 				}}
 			/>
 		</Tab.Navigator>

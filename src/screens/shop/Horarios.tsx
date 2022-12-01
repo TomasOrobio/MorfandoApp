@@ -367,10 +367,12 @@
 
 
 import React, { useState } from "react";
-import { View, Switch, StyleSheet, Text, ProgressBarAndroid, TouchableOpacity } from "react-native";
+import { View, Switch, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { ProgressBar } from "@react-native-community/progress-bar-android";
 import SelectDropdown from "react-native-select-dropdown";
+import { FC_RN } from "../../navigation/Navigation.type";
 
-const Horarios = () => {
+const Horarios: FC_RN<{uploadFile: undefined}>  = ({navigation, route}) => {
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
   
@@ -834,7 +836,7 @@ const Horarios = () => {
 
 
         <View style={{flex: .2}}>
-            <ProgressBarAndroid
+            <ProgressBar
             style={styles.barraProgreso}
             styleAttr="Horizontal"
             indeterminate={false}
@@ -844,7 +846,7 @@ const Horarios = () => {
         </View>
 
         <View style = {{flex: .2}}>
-        <TouchableOpacity style = {styles.buttonGuardar}>
+        <TouchableOpacity style = {styles.buttonGuardar} onPress={()=>navigation?.navigate('uploadFile')}>
             <Text style = {styles.textGuardar}>Siguiente</Text>
         </TouchableOpacity>
         </View>     

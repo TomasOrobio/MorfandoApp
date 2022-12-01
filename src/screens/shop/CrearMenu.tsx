@@ -1,5 +1,6 @@
 import React, {useState} from "react";
-import { View, StyleSheet, Text, TextInput, TouchableOpacity, Switch, ProgressBarAndroid, ScrollView } from "react-native";
+import { View, StyleSheet, Text, TextInput, TouchableOpacity, Switch, ScrollView } from "react-native";
+import { ProgressBar } from "@react-native-community/progress-bar-android";
 import {COLORS} from '../../theme/appTheme';
 
 const CrearMenu = () => {
@@ -338,7 +339,7 @@ const CrearMenu = () => {
 
 
         <View style={{flex: .2}}>
-            <ProgressBarAndroid
+            <ProgressBar
             style={styles.barraProgreso}
             styleAttr="Horizontal"
             indeterminate={false}

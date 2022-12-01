@@ -4,17 +4,17 @@ import { View, Text, StyleSheet, Image } from 'react-native';
 // import { ButtonWithTitle } from '../../components/ButtonWithTittle';
 // import { TextFieldEdit } from '../../components/TexFieldEdit';
 // import { TextField } from '../../components/TextField';
-import { styles } from '../../theme/appTheme';
+import { style } from '../../theme/appTheme';
 
 const Platos = () => {
     return (
-        <View style={styles.fondo}>
+        <View style={style.fondo}>
 
             {/* HeaderOrangeBar */}
             <View style={stylesScreen.Headerapp} />
             <View style={stylesScreen.container} />
             <View style={stylesScreen.row}>
-            <Text style={ styles.titleHeader } >Plato </Text>
+            <Text style={ style.titleHeader } >Plato </Text>
             <Image
                 style={stylesScreen.tinyLogo}
                 source={require('../user/Vegan.png')}

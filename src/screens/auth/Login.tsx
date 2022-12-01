@@ -1,8 +1,14 @@
-import { CompositeScreenProps } from '@react-navigation/native';
+import { CompositeScreenProps, useFocusEffect } from '@react-navigation/native';
+import {
+	GoogleSignin,
+	statusCodes,
+	GoogleSigninButton,
+	ConfigureParams
+} from '@react-native-google-signin/google-signin';
 import { StackScreenProps } from '@react-navigation/stack';
-import React, { useContext, useState } from 'react';
-import { StyleSheet, View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
-import { AuthContext, UserType } from '../../provider/AuthProvider';
+import React, { useCallback, useState } from 'react';
+import { StyleSheet, View, Text, TextInput, Image, TouchableOpacity, Button } from 'react-native';
+import { useAuth, UserType } from '../../provider/AuthProvider';
 import { fetchPost, setToken } from '../../services';
 import { COLORS } from '../../theme/appTheme';
 import { RootStackParams } from '../types';
@@ -13,7 +19,13 @@ function LoginScreen({ route, navigation }: LoginScreenProps) {
 	const [password, setPassword] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState('');
-	const { setUser } = useContext(AuthContext);
+	const { setUser } = useAuth();
+
+	useFocusEffect(useCallback(() => {
+		GoogleSignin.configure({
+			androidClientId: '669579208186-956fjo61ivp0h8qdvgf2tqo9g7glpv6o.apps.googleusercontent.com'
+		});
+	}, []));
 
 	async function login() {
 		setLoading(true);
@@ -36,7 +48,7 @@ function LoginScreen({ route, navigation }: LoginScreenProps) {
 						accessToken: response.data.accessToken,
 						refreshToken: response.data.refreshToken
 					};
-					console.log(data);
+					console.log(response);
 					setUser(data);
 					setToken(response.data.accessToken);
 				} else {
@@ -51,6 +63,24 @@ function LoginScreen({ route, navigation }: LoginScreenProps) {
 		}
 		setLoading(false);
 	}
+
+	const signIn = async () => {
+		GoogleSignin.hasPlayServices()
+			.then((hasPlayService) => {
+				if (hasPlayService) {
+					GoogleSignin.signIn()
+						.then(({user}) => {
+							console.log(JSON.stringify(user));
+						})
+						.catch((e) => {
+							console.log('ERROR IS: ' + JSON.stringify(e));
+						});
+				}
+			})
+			.catch((e) => {
+				console.log('ERROR IS: ' + JSON.stringify(e));
+			});
+	};
 
 	return (
 		<View style={styles.container}>
@@ -93,7 +123,7 @@ function LoginScreen({ route, navigation }: LoginScreenProps) {
 				)}
 			</View>
 
-			<View>
+			<View style={{ flex: 0.6, paddingHorizontal: 30 }}>
 				<TouchableOpacity
 					style={styles.buttonGuardar}
 					onPress={() => {
@@ -102,6 +132,14 @@ function LoginScreen({ route, navigation }: LoginScreenProps) {
 				>
 					<Text style={styles.textGuardar}>{loading ? 'Iniciando...' : 'Iniciar sesión'}</Text>
 				</TouchableOpacity>
+
+				<GoogleSigninButton
+					size={GoogleSigninButton.Size.Wide}
+					color={GoogleSigninButton.Color.Light}
+					style={{ width: '100%', height: 48, borderRadius: 50, marginVertical: 30, }}
+					onPress={signIn}
+				/>
+
 				<TouchableOpacity
 					style={styles.buttonAccount}
 					onPress={() => {
@@ -158,7 +196,7 @@ const styles = StyleSheet.create({
 		borderWidth: 2,
 		borderRadius: 100,
 		alignSelf: 'center',
-		backgroundColor: COLORS.principal
+		backgroundColor: COLORS.principal,
 	},
 	textGuardar: {
 		fontFamily: 'Poppins-Medium',
@@ -179,6 +217,5 @@ const styles = StyleSheet.create({
 	},
 	buttonAccount: {
 		alignSelf: 'center',
-		marginVertical: 20
 	}
 });
