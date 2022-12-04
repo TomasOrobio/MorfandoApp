@@ -70,6 +70,8 @@ const ShopListScreen: React.FC<RegisterScreenProps> = ({ route, navigation }) =>
 		handleGetShops();
 	}, []);
 
+	const [filter, setFilter] = useState("");
+
 	return (
 		<View style={style.container}>
 			<View>
@@ -80,7 +82,7 @@ const ShopListScreen: React.FC<RegisterScreenProps> = ({ route, navigation }) =>
 
 			<View style={{ flexDirection: 'row', alignItems:"center" }}>
 				<View style={{flex:7}}>
-						<TextInput style={stylesSheet.searchBar} placeholder={'¿Qué desea buscar?'} />
+						<TextInput value={filter} onChange={(e)=>setFilter(e.nativeEvent.text)} style={stylesSheet.searchBar} placeholder={'¿Qué desea buscar?'} />
 				</View>
 				<View style={{flex:3}}>
 					<TouchableOpacity style={stylesSheet.buttonFiltrar}>
@@ -97,7 +99,7 @@ const ShopListScreen: React.FC<RegisterScreenProps> = ({ route, navigation }) =>
 				<Text>{error}</Text>
 			) : (
 				<ScrollView >
-					{shops.map((shop) => (
+					{shops.filter((item)=>item.name.toLowerCase().includes(filter.toLowerCase())).map((shop) => (
 						<TouchableOpacity key={shop.id} onPress={() => navigation.navigate('ShopItem', { shop })}>
 							<View style = {{flex: 1, flexDirection: 'row'}}>
 								<View style={{alignSelf:"center"}}>

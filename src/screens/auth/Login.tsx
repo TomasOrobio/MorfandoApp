@@ -27,6 +27,43 @@ function LoginScreen({ route, navigation }: LoginScreenProps) {
 		});
 	}, []));
 
+	async function LoginWithGoogle(data:any){
+		setLoading(true);
+		setError('');
+		const user = data
+		try {
+			const response: { success: boolean; data: { accessToken: string; refreshToken: string, firstName: string, lastName: string } } = await fetchPost(
+				'auth/login/google',
+				user
+			);
+			console.log(response)
+			if (response) {
+				if (response.success) {
+					const data: UserType = {
+						email: email,
+						password: password,
+						type: 'user',
+						user: response.data.firstName,
+						lastName: response.data.lastName,
+						accessToken: response.data.accessToken,
+						refreshToken: response.data.refreshToken,
+					};
+					console.log(response);
+					setUser(data);
+					setToken(response.data.accessToken);
+				} else {
+					setError('Email o contraseña incorrectos');
+				}
+			} else {
+				setError('Error al iniciar sesión');
+			}
+		} catch (error) {
+			console.error(error);
+			setError('Error al iniciar sesión');
+		}
+		setLoading(false);
+	}
+
 	async function login() {
 		setLoading(true);
 		setError('');
@@ -72,7 +109,8 @@ function LoginScreen({ route, navigation }: LoginScreenProps) {
 				if (hasPlayService) {
 					GoogleSignin.signIn()
 						.then(({user}) => {
-							console.log(JSON.stringify(user));
+							const userData = JSON.stringify(user)
+							LoginWithGoogle(userData);
 						})
 						.catch((e) => {
 							console.log('ERROR IS: ' + JSON.stringify(e));

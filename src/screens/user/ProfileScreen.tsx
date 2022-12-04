@@ -26,13 +26,13 @@ const Perfil = () => {
 
 	return (
 		<View style={styles.container}>
-			<View style={{ flex: 0.5 }}>
+			<View>
 				<View style={style.bannerHeaderapp}>
 					<Text style={style.titleHeader}>Perfil</Text>
 				</View>
 			</View>
 
-			<View style={{ flex: 0.4, flexDirection: 'row' }}>
+			<View style={{ flexDirection: 'row' }}>
 				<View style={{ flex: 0.5 }}>
 					<Image style={styles.imagen} source={require('../../../assets/images/Perfil.png')} />
 				</View>
@@ -170,18 +170,18 @@ const styles = StyleSheet.create({
 		borderRadius: 100,
 		backgroundColor: '#FFC3C3',
 		alignSelf: 'center',
-		top: 100
+		marginTop:40,
+		justifyContent:"center"
 	},
 	textCerrarSesion: {
 		fontFamily: 'Poppins-Medium',
 		fontSize: 16,
 		color: 'red',
 		alignSelf: 'center',
-		top: 14
 	},
 	buttonDesactivarCuenta: {
 		alignSelf: 'center',
-		top: 110
+		marginTop:20
 	},
 	textDesactivarCuenta: {
 		fontFamily: 'Poppins-SemiBold',
