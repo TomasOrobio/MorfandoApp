@@ -6,6 +6,7 @@ import { FC_RN } from "../../navigation/Navigation.type";
 import { fetchGet } from "../../services";
 import { useAuth } from "../../provider/AuthProvider";
 import jwtDecode from "jwt-decode";
+import { StackActions, useNavigation } from "@react-navigation/native";
 
 const MisRestaurantes: FC_RN<{addRestaurant: undefined}> = ({navigation}) => {
     const [restaurants,setRestaurants] = useState([])
@@ -21,6 +22,7 @@ const MisRestaurantes: FC_RN<{addRestaurant: undefined}> = ({navigation}) => {
     useEffect(()=>{
         getMisRestaurants()
     }, [])
+    const navig = useNavigation();
 
   return (
     <View style = {styles.container}>
@@ -31,7 +33,7 @@ const MisRestaurantes: FC_RN<{addRestaurant: undefined}> = ({navigation}) => {
         data={restaurants}
         keyExtractor = {(_item,_index: any) => _index}
         renderItem={({item} : any)=>(
-<TouchableOpacity>
+<TouchableOpacity onPress={() => navig.dispatch(StackActions.push('ShopItem', { shop: item }))}>
 
 <View style = {{flex: 1, flexDirection: 'row'}}>
     <View style = {{flex: 1}}>

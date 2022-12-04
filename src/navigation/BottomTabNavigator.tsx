@@ -43,7 +43,8 @@ export const UserNavigation: React.FC = () => {
 					tabBarLabel: 'Favoritos',
 					tabBarIcon: ({ color }) => (
 						<Image source={require('../../assets/images/favorites.png')} style={{ tintColor: color }} />
-					)
+					),
+					unmountOnBlur:true,
 				}}
 			/>
 			<Tab.Screen

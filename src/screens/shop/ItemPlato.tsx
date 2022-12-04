@@ -101,7 +101,6 @@ const styles = StyleSheet.create({
     },
     input: {
         width: '90%',
-        height: '35%',
         alignSelf: 'center',
         color: COLORS.negro,
         borderColor: COLORS.principal,
@@ -112,41 +111,38 @@ const styles = StyleSheet.create({
     },
     Switch1: {   
         alignSelf: 'center',
-        top: 10,
+        marginTop:10
     },
     Switch2: {   
         alignSelf: 'center',
-        top: 10,
+        marginTop:10
         
     },
     buttonIngredientes: {
         width: '90%',
-        height: '35%',
         alignSelf: 'center',
         alignItems: 'center',
         color: COLORS.negro,
         borderColor: COLORS.principal,
         borderWidth: 2,
         borderRadius: 10,
-        top: 5,
-        
+        marginTop:10
     },
     buttonAgregarFoto: {
         width: '90%',
-        height: '35%',
+        height:45,
         alignSelf: 'center',
         alignItems: 'center',
         color: COLORS.negro,
         borderColor: COLORS.principal,
         borderWidth: 2,
         borderRadius: 10,
-        top: 5
+        marginTop:10
     },
     textBoton: {
         fontFamily: 'Poppins-Medium',
         fontSize: 12,
         color: COLORS.principal,
-        top: 8
     },
     textPlatoVegano: {
         textAlign: 'center',

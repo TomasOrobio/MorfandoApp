@@ -60,10 +60,14 @@ const InformacionRestaurante: FC_RN<{schedule: undefined}>  = ({navigation}) => 
       ];
 
       const goToSchedule = () => {
-        const data = {
-          email,tipo,calle,numero,barrio,localidad,paiss,provincia
+        if(email.length >0 && tipo.length>0 && calle.length >0 && numero.length>0 && barrio.length>0 && localidad.length>0 && paiss.length>0 && provincia.length>0){
+          const data = {
+            email,tipo,calle,numero,barrio,localidad,paiss,provincia
+          }
+          nav.dispatch(StackActions.push("schedule", data))
+        }else{
+          alert("Completa todos los campos")
         }
-        nav.dispatch(StackActions.push("schedule", data))
       }
 
     return (

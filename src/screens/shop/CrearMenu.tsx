@@ -37,19 +37,23 @@ const CrearMenu = (props: any) => {
     }
 
     const agregarPlato = () => {
-        const data = {
-            precio,
-            descuento,
-            ingredientes,
-            isVegano,
-            isLibreDeGluten,
-            imagen: imagen === "Agregar foto" ? "" : imagen,
-            titulo,
+        if(precio.length >0 && descuento.length > 0 && ingredientes.length>0 && imagen !== "Agregar foto" && titulo.length>0){
+            const data = {
+                precio,
+                descuento,
+                ingredientes,
+                isVegano,
+                isLibreDeGluten,
+                imagen: imagen === "Agregar foto" ? "" : imagen,
+                titulo,
+            }
+            let aux = platos
+            aux = aux.concat([data])
+            setPlatos(aux)
+            setShowModal(false)
+        }else{
+            alert("Debes completar todos los campos")
         }
-        let aux = platos
-        aux = aux.concat([data])
-        setPlatos(aux)
-        setShowModal(false)
     }
 
     const agregarFoto = async() => {
@@ -65,8 +69,8 @@ const CrearMenu = (props: any) => {
 					'Content-Type': 'multipart/form-data',
 				})	
 				if(response){
-                    const imageNameSplit = response.name.split("/")
-					setImage(imageNameSplit[imageNameSplit.length - 1])
+                    const imageNameSplit = response.uploadedFile.Location
+					setImage(imageNameSplit)
 				}
 			} catch (error) {
 				alert("Error al subir la imagen")
@@ -90,12 +94,12 @@ const CrearMenu = (props: any) => {
             dishesType : tipo,
             isCeliac: false,
             operatingHours :operatingHours(),
-            mediumImageURL: "https://morfando.s3.amazonaws.com/medium/" + image,
+            mediumImageURL: "https://morfando.s3.amazonaws.com/medium/dish/" + image,
             pricesRange: "$".repeat(rangeLevel),
             name : email,
             isVeggie: false,
             description : "Delicias para nuestros clientes",
-            thumbnailImageURL: "https://morfando.s3.amazonaws.com/thumbnail/" + image,
+            thumbnailImageURL: "https://morfando.s3.amazonaws.com/thumbnail/dish/" + image,
             location:  {
                 "coordinates":  [-34.603686,-58.381561],
                 "address":  `${calle} ${numero}, ${barrio}, ${localidad}, ${provincia}, ${paiss}`
@@ -110,9 +114,9 @@ const CrearMenu = (props: any) => {
             const idRestaurant = response.id
             platos.map(async(item: any) => {
                 const dataDish = {
-                    "imageURL":item.imagen.length > 0 ?  "https://s3-us-east-1.amazonaws.com/resources/dish/large/" + item.imagen : "null",
-                    "mediumImageURL": item.imagen.length > 0 ?  "https://s3-us-east-1.amazonaws.com/resources/dish/medium/" + item.imagen : "null",
-                    "thumbnailImageURL": item.imagen.length > 0 ?  "https://s3-us-east-1.amazonaws.com/resources/dish/thumbnail/" + item.imagen : "null",
+                    "imageURL":item.imagen,
+                    "mediumImageURL": item.imagen,
+                    "thumbnailImageURL": item.imagen,
                     "title": item.titulo,
                     "description": "Los mejores platos",
                     "type":"Promocion",
@@ -142,7 +146,7 @@ const CrearMenu = (props: any) => {
                 <ItemPlato {...item} index={index}/>
             ))}
         </ScrollView>
-        <View style={{flex: .2}}>
+        <View style={{marginBottom:20}}>
             <ProgressBar
             style={styles.barraProgreso}
             styleAttr="Horizontal"
@@ -304,7 +308,8 @@ const styles = StyleSheet.create({
         borderRadius: 100,
         alignSelf: 'center',
         backgroundColor: COLORS.principal,
-        marginTop:10
+        marginTop:10,
+        paddingVertical:5
     },
     textGuardar: {
     fontFamily: 'Poppins-Medium',

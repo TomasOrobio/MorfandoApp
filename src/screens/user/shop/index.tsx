@@ -6,6 +6,7 @@ import Back from '../../../../assets/images/Back';
 import { COLORS } from '../../../theme/appTheme';
 import ShopItem from './ShopItem';
 import ShopList, { Shop } from './ShopList';
+import MenuItemPlatoDetalle from '../../shop/MenuItemPlatoDetalle';
 
 export type RootStackParams = {
 	ShopItem: { shop: Shop };
@@ -26,6 +27,7 @@ const Navigator = () => {
 			}}
 		>
 			<NavStack.Screen name="ShopList" component={ShopList} />
+			<NavStack.Screen name="MenuItem" component={MenuItemPlatoDetalle} />
 			<NavStack.Screen
 				name="ShopItem"
 				component={ShopItem}
