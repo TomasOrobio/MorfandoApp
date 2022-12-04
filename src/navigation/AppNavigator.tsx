@@ -20,6 +20,7 @@ import InformacionRestaurante from '../screens/shop/InformacionRestaurante';
 import Horarios from '../screens/shop/Horarios';
 import FotosRestaurante from '../screens/shop/FotosRestaurante';
 import CrearMenu from '../screens/shop/CrearMenu';
+import ShopItemScreen from '../screens/user/shop/ShopItem';
 
 const AuthStack = createStackNavigator<RootStackParams>();
 
@@ -89,6 +90,7 @@ const ShopMain = () => {
 			<MainStack.Screen name="schedule" component={Horarios} />
 			<MainStack.Screen name="uploadFile" component={FotosRestaurante} />
 			<MainStack.Screen name="createMenu" component={CrearMenu} />
+			<MainStack.Screen name="ShopItem" component={ShopItemScreen} />
 		</MainStack.Navigator>
 	);
 };

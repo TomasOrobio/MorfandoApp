@@ -2,49 +2,53 @@ import React from "react";
 import { StyleSheet, View, Text, TextInput, Image,ScrollView, TouchableOpacity, KeyboardAvoidingView } from "react-native";
 import {COLORS} from '../../theme/appTheme';
 
-const MenuItemPlatoDetalle = () => {
+const MenuItemPlatoDetalle = (props: any) => {
+  const data = props.route.params
+  
   return (
-    <View style = {styles.container}>
+    <ScrollView style = {styles.container}>
 
-        <View style = {{flex: .4, backgroundColor: COLORS.principal}}>
+        <View style = {{backgroundColor: COLORS.principal}}>
         </View>
 
-        <View style = {{flex: 1, backgroundColor: COLORS.blanco}}>
+        <View style = {{backgroundColor: COLORS.blanco}}>
         <Image 
-          style = {styles.imagen}
-          source = {require('../../../assets/images/PlatoEjemplo.png')}
+          style = {[styles.imagen, { height:200,width:"100%", resizeMode:"contain"}]}
+          source = {{uri:data.imageURL}}
            />
           </View>
 
-        <View style = {{flex: .4, flexDirection: 'row'}}>
+        <View style = {{flexDirection: 'row'}}>
             <View style = {{flex: 1}}>
-            <Text style = {styles.textTitle}>Titulo</Text>
-            <Text style = {styles.textNombrePlato}>Nombre plato</Text>
+            <Text style = {styles.textTitle}>{data.title}</Text>
+            <Text style = {styles.textNombrePlato}>{data.description}</Text>
             </View>
 
-            <View style = {{flex: .3}}>
+            {data.isCeliac && <View style = {{flex: .3}}>
             <Image 
           style = {styles.imagen}
           source = {require('../../../assets/images/LibreGluten.png')}
            />
           </View>
+}
 
-            <View style = {{flex: .3}}>
+            {data.isVeggie && <View style = {{flex: .3}}>
             <Image 
           style = {styles.imagen}
           source = {require('../../../assets/images/Vegano.png')}
            />
           </View>
+}
         </View>
 
-        <View style = {{flex: 1}}>
+        <View>
             <Text style = {styles.textIngrediente}>Ingredientes</Text>
-            <Text style = {styles.textIngredientes}>• Ingrediente1</Text>
-            <Text style = {styles.textIngredientes}>• Ingrediente2</Text>
-            <Text style = {styles.textIngredientes}>• Ingrediente3</Text>
+            {data.ingredients.map((itemI)=>(
+              <Text style = {styles.textIngredientes}>• {itemI}</Text>
+            ))}
         </View>
       
-      </View>
+      </ScrollView>
     
   );
 };
@@ -56,8 +60,6 @@ const MenuItemPlatoDetalle = () => {
     },
     imagen: {
         alignSelf: 'center',
-        height: '100%',
-        width: '90%',
         resizeMode: 'contain',
         borderRadius: 30,
     },

@@ -4,11 +4,14 @@ import { style } from '../../../theme/appTheme';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParams } from '.';
 import { fetchGet, fetchPost } from '../../../services';
+import { useAuth } from '../../../provider/AuthProvider';
+import { StackActions, useNavigation } from '@react-navigation/native';
 type RegisterScreenProps = StackScreenProps<RootStackParams, 'ShopItem'>;
 const ShopItemScreen: React.FC<RegisterScreenProps> = ({ route, navigation }) => {
 	const { shop } = route.params;
 	const [isFav, setIsFav] = useState(false)
-	
+	const {user:{type}} = useAuth()
+
 	const getFavorites = async() => {
 		try {
 			const getFavs = await fetchGet("account/favorites")
@@ -20,11 +23,11 @@ const ShopItemScreen: React.FC<RegisterScreenProps> = ({ route, navigation }) =>
 			
 		}
 	}
-
+	const nav = useNavigation()
 	const setFavorite = async() => {
 		try {
 			const getFavs = await fetchPost("account/favorites",{restaurant: shop.id }, {})
-			setIsFav(true);	
+			setIsFav(!isFav);	
 		} catch (error) {
 			alert("Ha ocurrido un error")
 		}
@@ -45,23 +48,23 @@ const ShopItemScreen: React.FC<RegisterScreenProps> = ({ route, navigation }) =>
 		getFavorites()
 		getDishes()
 	}, [])
+
 	return (
-		<View style={style.container}>
-			<View style={{ flex: 0.5 }}>
-				<Image style={styles.imagen} source={require('../../../../assets/images/deandennys.png')} />
+		<ScrollView style={style.container}>
+			<View>
+				<Image style={styles.imagen} source={{uri: shop.imageURL}} />
 			</View>
 			<View style={{ flex: 1, paddingHorizontal: 20 }}>
 				<View style={{ flexDirection: 'row', paddingVertical: 20 }}>
 					<View style={{ flex: 1.5 }}>
 						<Text style={styles.textNombreRestaurante}>{shop.name}</Text>
 						<Text style={styles.textCalificacion}>
-							Calificación
-							<Text style={styles.textDireccion}> Dirección</Text>
+							{shop.stars} estrellas
 						</Text>
-						<Text style={styles.textDireccion}>Dirección</Text>
+						<Text style={styles.textDireccion}>{shop.location.address}</Text>
 					</View>
 					<TouchableOpacity>
-						<View style={{ flex: 0.5 }}>
+						<View>
 							<Image style={styles.imagen1} source={require('../../../../assets/images/map.png')} />
 						</View>
 					</TouchableOpacity>
@@ -72,10 +75,10 @@ const ShopItemScreen: React.FC<RegisterScreenProps> = ({ route, navigation }) =>
 						<Image style={styles.imagenicon} source={require('../../../../assets/images/rateicon.png')} />
 					</TouchableOpacity>
 
-					<TouchableOpacity onPress={setFavorite}>
+					{type !== "shop" && <TouchableOpacity onPress={setFavorite}>
 						<Image style={styles.imagenicon} source={isFav ? require('../../../../assets/images/corazon.png') : require('../../../../assets/images/favicon.png')} />
 					</TouchableOpacity>
-
+}
 					<TouchableOpacity>
 						<Image style={styles.imagenicon} source={require('../../../../assets/images/shareicon.png')} />
 					</TouchableOpacity>
@@ -83,14 +86,15 @@ const ShopItemScreen: React.FC<RegisterScreenProps> = ({ route, navigation }) =>
 
 				<FlatList 
 					data={menu}
+					scrollEnabled={false}
 					keyExtractor={(_item :any,_index: any) => _index}
 					renderItem={({item})=>(
-						<View style={styles.itemList}>
-							<View style={{ flex: 1 }}>
-								<Image style={styles.imagenplato} source={item.imageURL === "null" ? require('../../../../assets/images/Resto.jpg') : item.imageURL} />
+						<TouchableOpacity onPress={()=> nav.dispatch(StackActions.push("MenuItem", {...item}))} style={styles.itemList}>
+							<View>
+								<Image style={styles.imagenplato} source={item.imageURL === "null" ? require('../../../../assets/images/Resto.jpg') : {uri:item.imageURL}} />
 							</View>
 
-							<View style={{ flex: 1.5 }}>
+							<View style={{ flex: 1.5, marginLeft: 10 }}>
 								<Text style={styles.textComida}>{item.title}</Text>
 								<View style={{ flex: 0.1, flexDirection: 'row' }}>
 									<Text style={styles.textDescuento}>{item?.descuento}%</Text>
@@ -107,11 +111,11 @@ const ShopItemScreen: React.FC<RegisterScreenProps> = ({ route, navigation }) =>
 								<Image style={styles.imagentacveg} source={require('../../../../assets/images/Vegano.png')} />
 							</View>
 							}
-						</View>
+						</TouchableOpacity>
 					)}
 				/>
 			</View>
-		</View>
+		</ScrollView>
 	);
 };
 
@@ -123,7 +127,6 @@ const styles = StyleSheet.create({
 		marginBottom: 10
 	},
 	containerIcon: {
-		flex: 0.3,
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		marginBottom: 10
@@ -151,7 +154,7 @@ const styles = StyleSheet.create({
 	imagentacveg: {
 		height: 30,
 		width: 30,
-		top: 10
+		alignSelf:"center",
 	},
 	imagenplato: {
 		alignSelf: 'center',
@@ -165,8 +168,9 @@ const styles = StyleSheet.create({
 		width: 40,
 	},
 	imagen: {
-		height: '100%',
-		width: '100%'
+		height: 200,
+		width:"100%",
+		resizeMode:"contain"
 	},
 	textComida: {
 		fontFamily: 'Poppins-Regular',
@@ -216,8 +220,6 @@ const styles = StyleSheet.create({
 		left: 5
 	},
 	imagen1: {
-		position: 'relative',
-		top: 10,
 		right: 15
 	},
 	textIconos: {

@@ -6,6 +6,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
 
+import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import {
 	StyleSheet,
@@ -26,7 +27,7 @@ const Favoritos = () => {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState('');
 	const [favorite, setFavorite] = useState<Shop[]>([]);
-
+	const nav = useNavigation()
 	const handleGetFavorite = async () => {
 		setLoading(true);
 		setError('');
@@ -65,7 +66,7 @@ const Favoritos = () => {
 			) : error ? (
 				<Text>{error}</Text>
 			) : (
-				<ScrollView style={{ flex: 1 }}>
+				<ScrollView  style={{ flex: 1 }}>
 					{favorite.map((shop) => (
 						<TouchableOpacity>
 							<View style={{ flex: 1, flexDirection: 'row' }}>
