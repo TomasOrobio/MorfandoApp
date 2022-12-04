@@ -74,6 +74,7 @@ const InformacionRestaurante: FC_RN<{schedule: undefined}>  = ({navigation}) => 
       <View style={styles.container}>
 
         <ScrollView style={{flex: 1}}>
+          <Text style={{marginLeft:20, marginTop:10,fontSize:18, fontWeight:"400", fontFamily:"Poppins-Regular", color:"black"}}>Información del restaurant</Text>
             <TextInput 
             style = {styles.input}
             placeholder = 'Nombre del restaurant'

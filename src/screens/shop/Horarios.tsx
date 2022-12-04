@@ -455,6 +455,7 @@ const Horarios: FC_RN<{uploadFile: undefined}>  = ({navigation, route}) => {
     }
     return (
       <View style={styles.container}>
+          <Text style={{marginLeft:20, marginTop:10,marginBottom:10,fontSize:18, fontWeight:"400", fontFamily:"Poppins-Regular", color:"black"}}>Horarios</Text>
 
         {/* DOMINGO */}
 
