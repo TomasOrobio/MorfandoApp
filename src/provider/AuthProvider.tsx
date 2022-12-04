@@ -6,6 +6,8 @@ export interface UserType {
 	type: 'user' | 'shop';
 	accessToken: string;
 	refreshToken: string;
+	user: string;
+	lastName: string;
 }
 
 type UserContextType = UserType | null | boolean;

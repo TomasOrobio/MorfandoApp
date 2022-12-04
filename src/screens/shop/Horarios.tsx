@@ -371,10 +371,18 @@ import { View, Switch, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { ProgressBar } from "@react-native-community/progress-bar-android";
 import SelectDropdown from "react-native-select-dropdown";
 import { FC_RN } from "../../navigation/Navigation.type";
+import { StackActions, useNavigation } from "@react-navigation/native";
 
 const Horarios: FC_RN<{uploadFile: undefined}>  = ({navigation, route}) => {
-    const [isEnabled, setIsEnabled] = useState(false);
-    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+    const [selectedDays, setSelectedDays] = useState<string[]>([])
+    const [selectedRanges, setSelectedRanges] = useState<any[]>([])
+    const toggleSwitch = (day: string) => {
+      if(selectedDays.indexOf(day) === -1){
+        setSelectedDays(prevState => prevState.concat([day]))
+      }else{
+        setSelectedDays((prevState)=>prevState.filter((item) => item !== day))
+      }
+    }
   
     const horario = [
       '12:00AM',
@@ -400,7 +408,51 @@ const Horarios: FC_RN<{uploadFile: undefined}>  = ({navigation, route}) => {
       '10:00PM',
       '11:00PM',        
     ]
-  
+
+    const selectRangeDay = (hour: string, day: string, type: "desde" | "hasta" ) =>  {
+      const data = [{
+        hour, day,type
+      }]
+      if(selectedRanges.filter((item) => item.day === day && item.type === type).length === 0){
+        let aux = selectedRanges
+        aux = aux.concat(data)
+        setSelectedRanges(aux)
+      }else{
+        const aux = selectedRanges
+        let ToChange:any = []
+        aux.map((item) => {
+          if(item.type === type && item.day === day){
+            // ToChange = ToChange.concat([item])
+          }else{
+            ToChange = ToChange.concat([item])
+          }
+        })
+        ToChange = ToChange.concat(data)
+        setSelectedRanges(ToChange)
+      }
+    }
+    const nav = useNavigation();
+    const navigateToNextScreen = () => {
+      let canNavigate = true
+      if(selectedDays.length > 0){
+        selectedDays.map((itemAux: string) => {
+          if(selectedRanges.filter((item) => item.day === itemAux).length !==2){
+            canNavigate = false
+          }
+        })
+        if(canNavigate){
+          const data = {
+            ...route?.params,
+            selectedDays: selectedRanges,
+          }
+          nav.dispatch(StackActions.push("uploadFile", data))
+        }else{
+          alert("Completa todos los horarios de los dias habilitados indicados")
+        }
+      }else{
+        alert("No has indicado ningun dia disponible")
+      }
+    }
     return (
       <View style={styles.container}>
 
@@ -412,7 +464,7 @@ const Horarios: FC_RN<{uploadFile: undefined}>  = ({navigation, route}) => {
                     data={horario}
                     
                     onSelect={(selectedItem, index) => {
-                    console.log(selectedItem, index)
+                      selectRangeDay(selectedItem, "DOM", "desde")
                     }}
                     buttonTextAfterSelection={(selectedItem, index) => {
                     return selectedItem
@@ -434,7 +486,7 @@ const Horarios: FC_RN<{uploadFile: undefined}>  = ({navigation, route}) => {
                     data={horario}
                     
                     onSelect={(selectedItem, index) => {
-                    console.log(selectedItem, index)
+                      selectRangeDay(selectedItem, "DOM", "hasta")
                     }}
                     buttonTextAfterSelection={(selectedItem, index) => {
                     return selectedItem
@@ -457,9 +509,9 @@ const Horarios: FC_RN<{uploadFile: undefined}>  = ({navigation, route}) => {
                 <Switch
                   style = {styles.Switch}
                   trackColor={{ false: '#CBCBCB', true: 'gray' }}
-                  thumbColor={isEnabled ? 'orange' : 'white'}
-                  onValueChange={toggleSwitch}
-                  value={isEnabled}
+                  thumbColor={selectedDays.indexOf("DOM") !== -1 ? 'orange' : 'white'}
+                  onValueChange={()=>toggleSwitch("DOM")}
+                  value={selectedDays.indexOf("DOM") !== -1}
                   />
             </View>
         </View>
@@ -478,7 +530,7 @@ const Horarios: FC_RN<{uploadFile: undefined}>  = ({navigation, route}) => {
                     data={horario}
                     
                     onSelect={(selectedItem, index) => {
-                    console.log(selectedItem, index)
+                      selectRangeDay(selectedItem, "LUN", "desde")
                     }}
                     buttonTextAfterSelection={(selectedItem, index) => {
                     return selectedItem
@@ -500,7 +552,7 @@ const Horarios: FC_RN<{uploadFile: undefined}>  = ({navigation, route}) => {
                     data={horario}
                     
                     onSelect={(selectedItem, index) => {
-                    console.log(selectedItem, index)
+                      selectRangeDay(selectedItem, "LUN", "hasta")
                     }}
                     buttonTextAfterSelection={(selectedItem, index) => {
                     return selectedItem
@@ -523,9 +575,9 @@ const Horarios: FC_RN<{uploadFile: undefined}>  = ({navigation, route}) => {
                 <Switch
                   style = {styles.Switch}
                   trackColor={{ false: '#CBCBCB', true: 'gray' }}
-                  thumbColor={isEnabled ? 'orange' : 'white'}
-                  onValueChange={toggleSwitch}
-                  value={isEnabled}
+                  thumbColor={selectedDays.indexOf("LUN") !== -1 ? 'orange' : 'white'}
+                  onValueChange={()=>toggleSwitch("LUN")}
+                  value={selectedDays.indexOf("LUN") !== -1}
                   />
             </View>
         </View>
@@ -540,7 +592,7 @@ const Horarios: FC_RN<{uploadFile: undefined}>  = ({navigation, route}) => {
                     data={horario}
                     
                     onSelect={(selectedItem, index) => {
-                    console.log(selectedItem, index)
+                      selectRangeDay(selectedItem, "MAR", "desde")
                     }}
                     buttonTextAfterSelection={(selectedItem, index) => {
                     return selectedItem
@@ -562,7 +614,7 @@ const Horarios: FC_RN<{uploadFile: undefined}>  = ({navigation, route}) => {
                     data={horario}
                     
                     onSelect={(selectedItem, index) => {
-                    console.log(selectedItem, index)
+                      selectRangeDay(selectedItem, "MAR", "hasta")
                     }}
                     buttonTextAfterSelection={(selectedItem, index) => {
                     return selectedItem
@@ -585,9 +637,9 @@ const Horarios: FC_RN<{uploadFile: undefined}>  = ({navigation, route}) => {
                 <Switch
                   style = {styles.Switch}
                   trackColor={{ false: '#CBCBCB', true: 'gray' }}
-                  thumbColor={isEnabled ? 'orange' : 'white'}
-                  onValueChange={toggleSwitch}
-                  value={isEnabled}
+                  thumbColor={selectedDays.indexOf("MAR") !== -1 ? 'orange' : 'white'}
+                  onValueChange={()=>toggleSwitch("MAR")}
+                  value={selectedDays.indexOf("MAR") !== -1}
                   />
             </View>
         </View>
@@ -601,7 +653,7 @@ const Horarios: FC_RN<{uploadFile: undefined}>  = ({navigation, route}) => {
                     data={horario}
                     
                     onSelect={(selectedItem, index) => {
-                    console.log(selectedItem, index)
+                    selectRangeDay(selectedItem, "MIE", "desde")
                     }}
                     buttonTextAfterSelection={(selectedItem, index) => {
                     return selectedItem
@@ -623,7 +675,7 @@ const Horarios: FC_RN<{uploadFile: undefined}>  = ({navigation, route}) => {
                     data={horario}
                     
                     onSelect={(selectedItem, index) => {
-                    console.log(selectedItem, index)
+                    selectRangeDay(selectedItem, "MIE", "hasta")
                     }}
                     buttonTextAfterSelection={(selectedItem, index) => {
                     return selectedItem
@@ -646,9 +698,9 @@ const Horarios: FC_RN<{uploadFile: undefined}>  = ({navigation, route}) => {
                 <Switch
                   style = {styles.Switch}
                   trackColor={{ false: '#CBCBCB', true: 'gray' }}
-                  thumbColor={isEnabled ? 'orange' : 'white'}
-                  onValueChange={toggleSwitch}
-                  value={isEnabled}
+                  thumbColor={selectedDays.indexOf("MIE") !== -1 ? 'orange' : 'white'}
+                  onValueChange={()=>toggleSwitch("MIE")}
+                  value={selectedDays.indexOf("MIE") !== -1}
                   />
             </View>
         </View>
@@ -661,7 +713,7 @@ const Horarios: FC_RN<{uploadFile: undefined}>  = ({navigation, route}) => {
                     data={horario}
                     
                     onSelect={(selectedItem, index) => {
-                    console.log(selectedItem, index)
+                      selectRangeDay(selectedItem, "JUE","desde")
                     }}
                     buttonTextAfterSelection={(selectedItem, index) => {
                     return selectedItem
@@ -683,7 +735,7 @@ const Horarios: FC_RN<{uploadFile: undefined}>  = ({navigation, route}) => {
                     data={horario}
                     
                     onSelect={(selectedItem, index) => {
-                    console.log(selectedItem, index)
+                      selectRangeDay(selectedItem, "JUE","hasta")
                     }}
                     buttonTextAfterSelection={(selectedItem, index) => {
                     return selectedItem
@@ -706,9 +758,9 @@ const Horarios: FC_RN<{uploadFile: undefined}>  = ({navigation, route}) => {
                 <Switch
                   style = {styles.Switch}
                   trackColor={{ false: '#CBCBCB', true: 'gray' }}
-                  thumbColor={isEnabled ? 'orange' : 'white'}
-                  onValueChange={toggleSwitch}
-                  value={isEnabled}
+                  thumbColor={selectedDays.indexOf("JUE") !== -1 ? 'orange' : 'white'}
+                  onValueChange={()=>toggleSwitch("JUE")}
+                  value={selectedDays.indexOf("JUE") !== -1}
                   />
             </View>
         </View>
@@ -721,7 +773,7 @@ const Horarios: FC_RN<{uploadFile: undefined}>  = ({navigation, route}) => {
                     data={horario}
                     
                     onSelect={(selectedItem, index) => {
-                    console.log(selectedItem, index)
+                      selectRangeDay(selectedItem, "VIE", "desde")
                     }}
                     buttonTextAfterSelection={(selectedItem, index) => {
                     return selectedItem
@@ -743,7 +795,7 @@ const Horarios: FC_RN<{uploadFile: undefined}>  = ({navigation, route}) => {
                     data={horario}
                     
                     onSelect={(selectedItem, index) => {
-                    console.log(selectedItem, index)
+                      selectRangeDay(selectedItem, "VIE","hasta")
                     }}
                     buttonTextAfterSelection={(selectedItem, index) => {
                     return selectedItem
@@ -766,9 +818,9 @@ const Horarios: FC_RN<{uploadFile: undefined}>  = ({navigation, route}) => {
                 <Switch
                   style = {styles.Switch}
                   trackColor={{ false: '#CBCBCB', true: 'gray' }}
-                  thumbColor={isEnabled ? 'orange' : 'white'}
-                  onValueChange={toggleSwitch}
-                  value={isEnabled}
+                  thumbColor={selectedDays.indexOf("VIE") !== -1 ? 'orange' : 'white'}
+                  onValueChange={()=>toggleSwitch("VIE")}
+                  value={selectedDays.indexOf("VIE") !== -1}
                   />
             </View>
         </View>
@@ -781,7 +833,7 @@ const Horarios: FC_RN<{uploadFile: undefined}>  = ({navigation, route}) => {
                     data={horario}
                     
                     onSelect={(selectedItem, index) => {
-                    console.log(selectedItem, index)
+                      selectRangeDay(selectedItem, "SAB","desde")
                     }}
                     buttonTextAfterSelection={(selectedItem, index) => {
                     return selectedItem
@@ -803,7 +855,7 @@ const Horarios: FC_RN<{uploadFile: undefined}>  = ({navigation, route}) => {
                     data={horario}
                     
                     onSelect={(selectedItem, index) => {
-                    console.log(selectedItem, index)
+                      selectRangeDay(selectedItem, "SAB","hasta")
                     }}
                     buttonTextAfterSelection={(selectedItem, index) => {
                     return selectedItem
@@ -826,9 +878,9 @@ const Horarios: FC_RN<{uploadFile: undefined}>  = ({navigation, route}) => {
                 <Switch
                   style = {styles.Switch}
                   trackColor={{ false: '#CBCBCB', true: 'gray' }}
-                  thumbColor={isEnabled ? 'orange' : 'white'}
-                  onValueChange={toggleSwitch}
-                  value={isEnabled}
+                  thumbColor={selectedDays.indexOf("SAB") !== -1 ? 'orange' : 'white'}
+                  onValueChange={()=>toggleSwitch("SAB")}
+                  value={selectedDays.indexOf("SAB") !== -1}
                   />
             </View>
         </View>
@@ -846,7 +898,7 @@ const Horarios: FC_RN<{uploadFile: undefined}>  = ({navigation, route}) => {
         </View>
 
         <View style = {{flex: .2}}>
-        <TouchableOpacity style = {styles.buttonGuardar} onPress={()=>navigation?.navigate('uploadFile')}>
+        <TouchableOpacity style = {styles.buttonGuardar} onPress={navigateToNextScreen}>
             <Text style = {styles.textGuardar}>Siguiente</Text>
         </TouchableOpacity>
         </View>     

@@ -1,343 +1,147 @@
 import React, {useState} from "react";
-import { View, StyleSheet, Text, TextInput, TouchableOpacity, Switch, ScrollView } from "react-native";
+import { View, StyleSheet, Text, TextInput, TouchableOpacity, Switch, ScrollView, Image, Modal } from "react-native";
 import { ProgressBar } from "@react-native-community/progress-bar-android";
 import {COLORS} from '../../theme/appTheme';
+import ItemPlato from "./ItemPlato";
+import { ButtonWithTitle } from "../../components/ButtonWithTittle";
+import {launchImageLibrary} from 'react-native-image-picker';
+import { fetchPost } from "../../services";
+import { useAuth } from "../../provider/AuthProvider";
+import jwtDecode from "jwt-decode";
+import { StackActions, useNavigation } from "@react-navigation/native";
 
-const CrearMenu = () => {
+const CrearMenu = (props: any) => {
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
     const [selected, setSelected] = React.useState("");
-    
+    const [titulo, setTitulo] = useState("")
+    const [showModal, setShowModal] = useState(false)
+    const [precio, setPrecio] =  useState("")
+    const [descuento, setDescuento] = useState("")
+    const [ingredientes, setIngredientes] = useState("")
+    const [imagen, setImage] = useState("Agregar foto")
+    const [isVegano, setIsVegano] = useState(false)
+    const [isLibreDeGluten, setIsLibreDeGluten] = useState(false)
+    const [platos, setPlatos] = useState<any>([])
+    const {user, setUser} = useAuth();
+
+    const openModal = () => {
+        setTitulo("")
+        setPrecio("")
+        setDescuento("")
+        setIngredientes("")
+        setImage("Agregar foto")
+        setIsVegano(false)
+        setIsLibreDeGluten(false)
+        setShowModal(true)
+    }
+
+    const agregarPlato = () => {
+        const data = {
+            precio,
+            descuento,
+            ingredientes,
+            isVegano,
+            isLibreDeGluten,
+            imagen: imagen === "Agregar foto" ? "" : imagen,
+            titulo,
+        }
+        let aux = platos
+        aux = aux.concat([data])
+        setPlatos(aux)
+        setShowModal(false)
+    }
+
+    const agregarFoto = async() => {
+        const result = await launchImageLibrary({mediaType:"photo"});
+		if(result && result.assets){
+			try {
+				var bodyFormData = new FormData();
+				bodyFormData.append('image', {
+					uri: result.assets[0].uri, name: 'photo.png', filename: 'photo.png', type: 'image/png',
+				  });
+				bodyFormData.append("type","dish")
+				const response = await fetchPost("images",bodyFormData,{
+					'Content-Type': 'multipart/form-data',
+				})	
+				if(response){
+                    const imageNameSplit = response.name.split("/")
+					setImage(imageNameSplit[imageNameSplit.length - 1])
+				}
+			} catch (error) {
+				alert("Error al subir la imagen")
+			}
+		}
+    }
+    const navig = useNavigation();
+    const guardarRestaurant = async() => {
+        const {barrio, calle, email, image, localidad,numero, paiss,provincia, rangeLevel, selectedDays, tipo} = props.route.params
+        const operatingHours = () => {
+            const aux:any = {}
+            selectedDays.map((item:any)=>{
+                aux[`${item.day}`] = {
+                    ...aux[`${item.day}`],
+                    [`${item.type === "desde" ? "open" : "close"}`] : item.hour
+                }
+            })
+            return aux
+        }
+        const dataToPost = {
+            dishesType : tipo,
+            isCeliac: false,
+            operatingHours :operatingHours(),
+            mediumImageURL: "https://morfando.s3.amazonaws.com/medium/" + image,
+            pricesRange: "$".repeat(rangeLevel),
+            name : email,
+            isVeggie: false,
+            description : "Delicias para nuestros clientes",
+            thumbnailImageURL: "https://morfando.s3.amazonaws.com/thumbnail/" + image,
+            location:  {
+                "coordinates":  [-34.603686,-58.381561],
+                "address":  `${calle} ${numero}, ${barrio}, ${localidad}, ${provincia}, ${paiss}`
+            },
+            ownerID:jwtDecode(user.accessToken)._id,
+            stars: 3,
+            imageURL:"https://morfando.s3.amazonaws.com/large/" + image,
+            isClosed: false
+        }
+        try {
+            const response = await fetchPost("restaurant", dataToPost, {})
+            const idRestaurant = response.id
+            platos.map(async(item: any) => {
+                const dataDish = {
+                    "imageURL":item.imagen.length > 0 ?  "https://s3-us-east-1.amazonaws.com/resources/dish/large/" + item.imagen : "null",
+                    "mediumImageURL": item.imagen.length > 0 ?  "https://s3-us-east-1.amazonaws.com/resources/dish/medium/" + item.imagen : "null",
+                    "thumbnailImageURL": item.imagen.length > 0 ?  "https://s3-us-east-1.amazonaws.com/resources/dish/thumbnail/" + item.imagen : "null",
+                    "title": item.titulo,
+                    "description": "Los mejores platos",
+                    "type":"Promocion",
+                    "stars": 4,
+                    "price": item.precio,
+                    "isVeggie": item.isVegano,
+                    "isCeliac": item.isLibreDeGluten,
+                    "ingredients": item.ingredientes.replace(" ","").split(","),
+                    "restaurantID": idRestaurant
+                }
+                const responses = await fetchPost("dish", dataDish, {})
+            })
+            navig.dispatch(StackActions.replace("Main"))
+        } catch (error) {
+            
+        }
+    }
+
   return (
     <View style={styles.container}>
-        <View style={{flex: .1}}>
+        <View >
             <Text style = {styles.textTitle}> Crear Menú </Text>
         </View>
-
         <ScrollView style={{flex: 1}}>
-
-        <View>
-            <Text style = {styles.textComida}> 1. Milanesa con Puré </Text>
-            <View style={{flex: 1, flexDirection: 'row'}}>
-                <View style={{flex: 1}}>
-                <Text style = {styles.textPrecio}> PRECIO </Text>
-                    <TextInput 
-                            style = {styles.input}
-                            placeholder = 'Precio ($)'
-                            placeholderTextColor={COLORS.negro}
-                            keyboardType='numeric'
-                    />
-                    <TouchableOpacity style = {styles.buttonIngredientes}>
-                        <Text style = {styles.textBoton}>Ingredientes</Text>
-                    </TouchableOpacity>
-                </View>
-
-                <View style={{flex: 1}}>
-                    <Text style = {styles.textDescuento}> DESCUENTO </Text>
-                    <TextInput 
-                            style = {styles.input}
-                            placeholder = 'Descuento (%)'
-                            placeholderTextColor={COLORS.negro}
-                            keyboardType='numeric'
-                    />
-                    <TouchableOpacity style = {styles.buttonAgregarFoto}>
-                        <Text style = {styles.textBoton}>Agregar foto</Text>
-                    </TouchableOpacity>
-                </View>
-
-                <View style={{flex: .8}}>
-                    <Text style = {styles.textPlatoVegano}> Plato Vegano </Text>
-                    <Switch
-                        style = {styles.Switch1}
-                        trackColor={{ false: '#CBCBCB', true: COLORS.gris }}
-                        thumbColor={isEnabled ? COLORS.principal : COLORS.blanco}
-                        onValueChange={toggleSwitch}
-                        value={isEnabled}
-                    />
-
-                    <Text style = {styles.textLibreGluten}> Libre de Gluten </Text>
-                    <Switch
-                        style = {styles.Switch2}
-                        trackColor={{ false: '#CBCBCB', true: COLORS.gris }}
-                        thumbColor={isEnabled ? COLORS.principal : COLORS.blanco}
-                        onValueChange={toggleSwitch}
-                        value={isEnabled}
-                    />
-                </View>
-                
-            </View>
-
-        </View>
-
-        <View>
-            <Text style = {styles.textComida}> 1. Milanesa con Puré </Text>
-            <View style={{flex: 1, flexDirection: 'row'}}>
-                <View style={{flex: 1}}>
-                <Text style = {styles.textPrecio}> PRECIO </Text>
-                    <TextInput 
-                            style = {styles.input}
-                            placeholder = 'Precio ($)'
-                            placeholderTextColor={COLORS.negro}
-                            keyboardType='numeric'
-                    />
-                    <TouchableOpacity style = {styles.buttonIngredientes}>
-                        <Text style = {styles.textBoton}>Ingredientes</Text>
-                    </TouchableOpacity>
-                </View>
-
-                <View style={{flex: 1}}>
-                    <Text style = {styles.textDescuento}> DESCUENTO </Text>
-                    <TextInput 
-                            style = {styles.input}
-                            placeholder = 'Descuento (%)'
-                            placeholderTextColor={COLORS.negro}
-                            keyboardType='numeric'
-                    />
-                    <TouchableOpacity style = {styles.buttonAgregarFoto}>
-                        <Text style = {styles.textBoton}>Agregar foto</Text>
-                    </TouchableOpacity>
-                </View>
-
-                <View style={{flex: .8}}>
-                    <Text style = {styles.textPlatoVegano}> Plato Vegano </Text>
-                    <Switch
-                        style = {styles.Switch1}
-                        trackColor={{ false: '#CBCBCB', true: COLORS.gris }}
-                        thumbColor={isEnabled ? COLORS.principal : COLORS.blanco}
-                        onValueChange={toggleSwitch}
-                        value={isEnabled}
-                    />
-
-                    <Text style = {styles.textLibreGluten}> Libre de Gluten </Text>
-                    <Switch
-                        style = {styles.Switch2}
-                        trackColor={{ false: '#CBCBCB', true: COLORS.gris }}
-                        thumbColor={isEnabled ? COLORS.principal : COLORS.blanco}
-                        onValueChange={toggleSwitch}
-                        value={isEnabled}
-                    />
-                </View>
-                
-            </View>
-
-        </View>
-
-        <View>
-            <Text style = {styles.textComida}> 1. Milanesa con Puré </Text>
-            <View style={{flex: 1, flexDirection: 'row'}}>
-                <View style={{flex: 1}}>
-                <Text style = {styles.textPrecio}> PRECIO </Text>
-                    <TextInput 
-                            style = {styles.input}
-                            placeholder = 'Precio ($)'
-                            placeholderTextColor={COLORS.negro}
-                            keyboardType='numeric'
-                    />
-                    <TouchableOpacity style = {styles.buttonIngredientes}>
-                        <Text style = {styles.textBoton}>Ingredientes</Text>
-                    </TouchableOpacity>
-                </View>
-
-                <View style={{flex: 1}}>
-                    <Text style = {styles.textDescuento}> DESCUENTO </Text>
-                    <TextInput 
-                            style = {styles.input}
-                            placeholder = 'Descuento (%)'
-                            placeholderTextColor={COLORS.negro}
-                            keyboardType='numeric'
-                    />
-                    <TouchableOpacity style = {styles.buttonAgregarFoto}>
-                        <Text style = {styles.textBoton}>Agregar foto</Text>
-                    </TouchableOpacity>
-                </View>
-
-                <View style={{flex: .8}}>
-                    <Text style = {styles.textPlatoVegano}> Plato Vegano </Text>
-                    <Switch
-                        style = {styles.Switch1}
-                        trackColor={{ false: '#CBCBCB', true: COLORS.gris }}
-                        thumbColor={isEnabled ? COLORS.principal : COLORS.blanco}
-                        onValueChange={toggleSwitch}
-                        value={isEnabled}
-                    />
-
-                    <Text style = {styles.textLibreGluten}> Libre de Gluten </Text>
-                    <Switch
-                        style = {styles.Switch2}
-                        trackColor={{ false: '#CBCBCB', true: COLORS.gris }}
-                        thumbColor={isEnabled ? COLORS.principal : COLORS.blanco}
-                        onValueChange={toggleSwitch}
-                        value={isEnabled}
-                    />
-                </View>
-                
-            </View>
-
-        </View>
-
-        <View>
-            <Text style = {styles.textComida}> 1. Milanesa con Puré </Text>
-            <View style={{flex: 1, flexDirection: 'row'}}>
-                <View style={{flex: 1}}>
-                <Text style = {styles.textPrecio}> PRECIO </Text>
-                    <TextInput 
-                            style = {styles.input}
-                            placeholder = 'Precio ($)'
-                            placeholderTextColor={COLORS.negro}
-                            keyboardType='numeric'
-                    />
-                    <TouchableOpacity style = {styles.buttonIngredientes}>
-                        <Text style = {styles.textBoton}>Ingredientes</Text>
-                    </TouchableOpacity>
-                </View>
-
-                <View style={{flex: 1}}>
-                    <Text style = {styles.textDescuento}> DESCUENTO </Text>
-                    <TextInput 
-                            style = {styles.input}
-                            placeholder = 'Descuento (%)'
-                            placeholderTextColor={COLORS.negro}
-                            keyboardType='numeric'
-                    />
-                    <TouchableOpacity style = {styles.buttonAgregarFoto}>
-                        <Text style = {styles.textBoton}>Agregar foto</Text>
-                    </TouchableOpacity>
-                </View>
-
-                <View style={{flex: .8}}>
-                    <Text style = {styles.textPlatoVegano}> Plato Vegano </Text>
-                    <Switch
-                        style = {styles.Switch1}
-                        trackColor={{ false: '#CBCBCB', true: COLORS.gris }}
-                        thumbColor={isEnabled ? COLORS.principal : COLORS.blanco}
-                        onValueChange={toggleSwitch}
-                        value={isEnabled}
-                    />
-
-                    <Text style = {styles.textLibreGluten}> Libre de Gluten </Text>
-                    <Switch
-                        style = {styles.Switch2}
-                        trackColor={{ false: '#CBCBCB', true: COLORS.gris }}
-                        thumbColor={isEnabled ? COLORS.principal : COLORS.blanco}
-                        onValueChange={toggleSwitch}
-                        value={isEnabled}
-                    />
-                </View>
-                
-            </View>
-
-        </View>
-
-        <View>
-            <Text style = {styles.textComida}> 1. Milanesa con Puré </Text>
-            <View style={{flex: 1, flexDirection: 'row'}}>
-                <View style={{flex: 1}}>
-                <Text style = {styles.textPrecio}> PRECIO </Text>
-                    <TextInput 
-                            style = {styles.input}
-                            placeholder = 'Precio ($)'
-                            placeholderTextColor={COLORS.negro}
-                            keyboardType='numeric'
-                    />
-                    <TouchableOpacity style = {styles.buttonIngredientes}>
-                        <Text style = {styles.textBoton}>Ingredientes</Text>
-                    </TouchableOpacity>
-                </View>
-
-                <View style={{flex: 1}}>
-                    <Text style = {styles.textDescuento}> DESCUENTO </Text>
-                    <TextInput 
-                            style = {styles.input}
-                            placeholder = 'Descuento (%)'
-                            placeholderTextColor={COLORS.negro}
-                            keyboardType='numeric'
-                    />
-                    <TouchableOpacity style = {styles.buttonAgregarFoto}>
-                        <Text style = {styles.textBoton}>Agregar foto</Text>
-                    </TouchableOpacity>
-                </View>
-
-                <View style={{flex: .8}}>
-                    <Text style = {styles.textPlatoVegano}> Plato Vegano </Text>
-                    <Switch
-                        style = {styles.Switch1}
-                        trackColor={{ false: '#CBCBCB', true: COLORS.gris }}
-                        thumbColor={isEnabled ? COLORS.principal : COLORS.blanco}
-                        onValueChange={toggleSwitch}
-                        value={isEnabled}
-                    />
-
-                    <Text style = {styles.textLibreGluten}> Libre de Gluten </Text>
-                    <Switch
-                        style = {styles.Switch2}
-                        trackColor={{ false: '#CBCBCB', true: COLORS.gris }}
-                        thumbColor={isEnabled ? COLORS.principal : COLORS.blanco}
-                        onValueChange={toggleSwitch}
-                        value={isEnabled}
-                    />
-                </View>
-                
-            </View>
-
-        </View>
-
-        <View>
-            <Text style = {styles.textComida}> 1. Milanesa con Puré </Text>
-            <View style={{flex: 1, flexDirection: 'row'}}>
-                <View style={{flex: 1}}>
-                <Text style = {styles.textPrecio}> PRECIO </Text>
-                    <TextInput 
-                            style = {styles.input}
-                            placeholder = 'Precio ($)'
-                            placeholderTextColor={COLORS.negro}
-                            keyboardType='numeric'
-                    />
-                    <TouchableOpacity style = {styles.buttonIngredientes}>
-                        <Text style = {styles.textBoton}>Ingredientes</Text>
-                    </TouchableOpacity>
-                </View>
-
-                <View style={{flex: 1}}>
-                    <Text style = {styles.textDescuento}> DESCUENTO </Text>
-                    <TextInput 
-                            style = {styles.input}
-                            placeholder = 'Descuento (%)'
-                            placeholderTextColor={COLORS.negro}
-                            keyboardType='numeric'
-                    />
-                    <TouchableOpacity style = {styles.buttonAgregarFoto}>
-                        <Text style = {styles.textBoton}>Agregar foto</Text>
-                    </TouchableOpacity>
-                </View>
-
-                <View style={{flex: .8}}>
-                    <Text style = {styles.textPlatoVegano}> Plato Vegano </Text>
-                    <Switch
-                        style = {styles.Switch1}
-                        trackColor={{ false: '#CBCBCB', true: COLORS.gris }}
-                        thumbColor={isEnabled ? COLORS.principal : COLORS.blanco}
-                        onValueChange={toggleSwitch}
-                        value={isEnabled}
-                    />
-
-                    <Text style = {styles.textLibreGluten}> Libre de Gluten </Text>
-                    <Switch
-                        style = {styles.Switch2}
-                        trackColor={{ false: '#CBCBCB', true: COLORS.gris }}
-                        thumbColor={isEnabled ? COLORS.principal : COLORS.blanco}
-                        onValueChange={toggleSwitch}
-                        value={isEnabled}
-                    />
-                </View>
-                
-            </View>
-
-        </View>
-
+            {platos.length === 0 && <Text>Todavia no has agregado platos a tu menu</Text>}
+            {platos.map((item:any, index: number)=>(
+                <ItemPlato {...item} index={index}/>
+            ))}
         </ScrollView>
-        
-
-
         <View style={{flex: .2}}>
             <ProgressBar
             style={styles.barraProgreso}
@@ -346,15 +150,41 @@ const CrearMenu = () => {
             progress={0.85}
             color={COLORS.principal}
             />
-
-
-
-        <TouchableOpacity style = {styles.buttonGuardar}>
+        <TouchableOpacity onPress={guardarRestaurant} style = {styles.buttonGuardar}>
             <Text style = {styles.textGuardar}>Guardar</Text>
         </TouchableOpacity>
-
         </View>
+        <TouchableOpacity onPress={openModal} style={{position:"absolute",bottom:"17%", right:25}}>
+            <Image source={require("../../../assets/images/add.png")}/>
+        </TouchableOpacity>
+        <Modal visible={showModal} transparent>
+            <View style={{flex:1, backgroundColor:"rgba(0,0,0,0.5)", justifyContent:"center"}}>
+                <View style={{backgroundColor:"white"}}>
+                    <ScrollView>
+                    <Text style={{textAlign:"center",marginVertical:10,fontSize:14,fontWeight:"bold"}}>Agregar plato al menu</Text>
+                    <TextInput style={styles.inputModal} value={titulo} onChange={(e)=>setTitulo(e.nativeEvent.text)} placeholder="Nombre del plato"/>
 
+                    <TextInput style={styles.inputModal} value={precio} onChange={(e)=>setPrecio(e.nativeEvent.text)} placeholder="Precio"/>
+                <TextInput style={styles.inputModal} value={descuento} onChange={(e)=>setDescuento(e.nativeEvent.text)}  placeholder="Descuento (%)"/>
+                <TextInput style={styles.inputModal} value={ingredientes} onChange={(e)=>setIngredientes(e.nativeEvent.text)}  placeholder="Ingredientes"/>
+                <TextInput style={styles.inputModal} onPressIn={agregarFoto} value={imagen}/>
+                <View style={{flexDirection:"row", justifyContent:"center"}}>
+                    <View>
+                        <Text>Plato Vegano</Text>
+                         <Switch value={isVegano} onChange={()=>setIsVegano(!isVegano)} style={{ alignSelf:"center"}}/>
+                    </View>
+                    <View style={{marginLeft:20}}>
+                        <Text>Libre De Gluten</Text>
+                         <Switch value={isLibreDeGluten} onChange={()=>setIsLibreDeGluten(!isLibreDeGluten)} style={{alignSelf:"center"}}/>
+                    </View>
+                </View>
+                <TouchableOpacity onPress={agregarPlato} style={{justifyContent:"center",alignSelf:"center",marginVertical:10,backgroundColor:COLORS.principal,paddingVertical:10,paddingHorizontal:20,borderRadius:50}}>
+                    <Text style={{color:"white"}}>Agregar plato</Text>
+                </TouchableOpacity>
+                </ScrollView>
+                </View>
+            </View>
+        </Modal>
     </View>
   );
 }
@@ -394,7 +224,6 @@ const styles = StyleSheet.create({
     },
     input: {
         width: '90%',
-        height: '35%',
         alignSelf: 'center',
         color: COLORS.negro,
         borderColor: COLORS.principal,
@@ -402,6 +231,17 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         fontSize: 12,
         textAlign: 'center'
+    },
+    inputModal: {
+        width: '90%',
+        alignSelf: 'center',
+        color: COLORS.negro,
+        borderColor: COLORS.principal,
+        borderWidth: 2,
+        borderRadius: 10,
+        fontSize: 12,
+        textAlign: 'center',
+        marginVertical:5
     },
     Switch1: {   
         alignSelf: 'center',
@@ -458,20 +298,18 @@ const styles = StyleSheet.create({
     },
     buttonGuardar: {
         width: '40%',
-        height: '30%',
         color: COLORS.negro,
         borderColor: COLORS.principal,
         borderWidth: 2,
         borderRadius: 100,
-        top: 20,
         alignSelf: 'center',
         backgroundColor: COLORS.principal,
+        marginTop:10
     },
     textGuardar: {
     fontFamily: 'Poppins-Medium',
     color: COLORS.blanco,
     textAlign: 'center',
-    top: '25%'
     
     },
     buttonBack: {
@@ -489,7 +327,6 @@ const styles = StyleSheet.create({
     color: COLORS.negro,
     textAlign: 'center',
     },
-
 });
 
 export default CrearMenu;

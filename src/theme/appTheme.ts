@@ -24,8 +24,8 @@ export const style = StyleSheet.create({
 	// Header App
 	bannerHeaderapp: {
 		backgroundColor: '#FFBC4F', //TODO
-		height: 125,
-		top: -27,
+		paddingBottom:15,
+		marginBottom:10,
 		width: '100%',
 		borderRadius: 12,
 		alignItems: 'center',
@@ -38,7 +38,7 @@ export const style = StyleSheet.create({
 		marginBottom: 10,
 		fontFamily: 'Poppins',
 		color: 'white',
-		marginTop: '12%'
+		marginTop: 15
 	},
 	container: {
 		backgroundColor: COLORS.blanco,

@@ -7,7 +7,7 @@ import {
 } from '@react-native-google-signin/google-signin';
 import { StackScreenProps } from '@react-navigation/stack';
 import React, { useCallback, useState } from 'react';
-import { StyleSheet, View, Text, TextInput, Image, TouchableOpacity, Button } from 'react-native';
+import { StyleSheet, View, Text, TextInput, Image, TouchableOpacity, Button, ScrollView } from 'react-native';
 import { useAuth, UserType } from '../../provider/AuthProvider';
 import { fetchPost, setToken } from '../../services';
 import { COLORS } from '../../theme/appTheme';
@@ -27,6 +27,43 @@ function LoginScreen({ route, navigation }: LoginScreenProps) {
 		});
 	}, []));
 
+	async function LoginWithGoogle(data:any){
+		setLoading(true);
+		setError('');
+		const user = data
+		try {
+			const response: { success: boolean; data: { accessToken: string; refreshToken: string, firstName: string, lastName: string } } = await fetchPost(
+				'auth/login/google',
+				user
+			);
+			console.log(response)
+			if (response) {
+				if (response.success) {
+					const data: UserType = {
+						email: email,
+						password: password,
+						type: 'user',
+						user: response.data.firstName,
+						lastName: response.data.lastName,
+						accessToken: response.data.accessToken,
+						refreshToken: response.data.refreshToken,
+					};
+					console.log(response);
+					setUser(data);
+					setToken(response.data.accessToken);
+				} else {
+					setError('Email o contraseña incorrectos');
+				}
+			} else {
+				setError('Error al iniciar sesión');
+			}
+		} catch (error) {
+			console.error(error);
+			setError('Error al iniciar sesión');
+		}
+		setLoading(false);
+	}
+
 	async function login() {
 		setLoading(true);
 		setError('');
@@ -35,7 +72,7 @@ function LoginScreen({ route, navigation }: LoginScreenProps) {
 			password
 		};
 		try {
-			const response: { success: boolean; data: { accessToken: string; refreshToken: string } } = await fetchPost(
+			const response: { success: boolean; data: { accessToken: string; refreshToken: string, firstName: string, lastName: string } } = await fetchPost(
 				'auth/login',
 				user
 			);
@@ -45,8 +82,10 @@ function LoginScreen({ route, navigation }: LoginScreenProps) {
 						email: email,
 						password: password,
 						type: 'shop',
+						user: response.data.firstName,
+						lastName: response.data.lastName,
 						accessToken: response.data.accessToken,
-						refreshToken: response.data.refreshToken
+						refreshToken: response.data.refreshToken,
 					};
 					console.log(response);
 					setUser(data);
@@ -70,7 +109,8 @@ function LoginScreen({ route, navigation }: LoginScreenProps) {
 				if (hasPlayService) {
 					GoogleSignin.signIn()
 						.then(({user}) => {
-							console.log(JSON.stringify(user));
+							const userData = JSON.stringify(user)
+							LoginWithGoogle(userData);
 						})
 						.catch((e) => {
 							console.log('ERROR IS: ' + JSON.stringify(e));
@@ -83,12 +123,13 @@ function LoginScreen({ route, navigation }: LoginScreenProps) {
 	};
 
 	return (
+		<ScrollView style={{flex:1, backgroundColor:"white"}}>
 		<View style={styles.container}>
-			<View style={{ flex: 0.7 }}>
+			<View>
 				<Image style={styles.imagen} source={require('../../../assets/images/Login.png')} />
 			</View>
 
-			<View style={{ flex: 0.6, paddingHorizontal: 30 }}>
+			<View style={{paddingHorizontal: 30 }}>
 				<View>
 					<Text style={styles.text}>Iniciar sesión </Text>
 				</View>
@@ -123,7 +164,7 @@ function LoginScreen({ route, navigation }: LoginScreenProps) {
 				)}
 			</View>
 
-			<View style={{ flex: 0.6, paddingHorizontal: 30 }}>
+			<View style={{ paddingHorizontal: 30 }}>
 				<TouchableOpacity
 					style={styles.buttonGuardar}
 					onPress={() => {
@@ -136,7 +177,7 @@ function LoginScreen({ route, navigation }: LoginScreenProps) {
 				<GoogleSigninButton
 					size={GoogleSigninButton.Size.Wide}
 					color={GoogleSigninButton.Color.Light}
-					style={{ width: '100%', height: 48, borderRadius: 50, marginVertical: 30, }}
+					style={{ width: '100%', height: 38, borderRadius: 50, marginVertical: 15, }}
 					onPress={signIn}
 				/>
 
@@ -153,6 +194,7 @@ function LoginScreen({ route, navigation }: LoginScreenProps) {
 				</TouchableOpacity>
 			</View>
 		</View>
+		</ScrollView>
 	);
 }
 
@@ -170,7 +212,6 @@ const styles = StyleSheet.create({
 	},
 	input: {
 		width: '100%',
-		heigh: '30%',
 		alignSelf: 'center',
 		borderWidth: 2,
 		borderRadius: 10,
@@ -183,10 +224,8 @@ const styles = StyleSheet.create({
 	},
 	imagen: {
 		alignSelf: 'center',
-		height: '80%',
-		width: '80%',
 		resizeMode: 'contain',
-		top: '10%'
+		marginTop:10
 	},
 	buttonGuardar: {
 		paddingHorizontal: 20,
@@ -196,6 +235,7 @@ const styles = StyleSheet.create({
 		borderWidth: 2,
 		borderRadius: 100,
 		alignSelf: 'center',
+		marginTop:10,
 		backgroundColor: COLORS.principal,
 	},
 	textGuardar: {

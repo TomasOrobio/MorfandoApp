@@ -1,10 +1,50 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
 import { ProgressBar } from '@react-native-community/progress-bar-android';
 import { COLORS } from '../../theme/appTheme';
 import { FC_RN } from '../../navigation/Navigation.type';
+import {launchImageLibrary} from 'react-native-image-picker';
+import { StackActions, useNavigation } from '@react-navigation/native';
+import { fetchPost } from '../../services';
 
-const FotosRestaurante: FC_RN<{ createMenu: undefined }> = ({ navigation }) => {
+const FotosRestaurante: FC_RN<{ createMenu: undefined }> = ({ navigation, route }) => {
+	const [image, setImage] = useState<any>(null)
+	const [range, setRange] = useState(0)
+	const seleccionarFoto = async() => { 
+		const result = await launchImageLibrary({mediaType:"photo"});
+		if(result && result.assets){
+			try {
+				var bodyFormData = new FormData();
+				bodyFormData.append('image', {
+					uri: result.assets[0].uri, name: 'photo.png', filename: 'photo.png', type: 'image/png',
+				  });
+				bodyFormData.append("type","restaurant")
+				const response = await fetchPost("images",bodyFormData,{
+					'Content-Type': 'multipart/form-data',
+				})	
+				if(response){
+					setImage(response.name)
+				}
+			} catch (error) {
+				alert("Error al subir la imagen")
+			}
+		}
+	}
+	const nav = useNavigation();
+	const goToNextScreeen = () => {
+		if(image && range !==0){
+			const data = {
+				...route?.params,
+				image,
+				rangeLevel: range
+			}
+			nav.dispatch(StackActions.push("createMenu", data))
+		}else{
+			alert("No has completado todos los campos solicitados!")
+		}
+		// () => navigation?.navigate('createMenu')
+	}
+
 	return (
 		<View style={styles.container}>
 			<View style={{ flex: 0.2 }}>
@@ -18,11 +58,11 @@ const FotosRestaurante: FC_RN<{ createMenu: undefined }> = ({ navigation }) => {
 			</View>
 
 			<View style={{ flex: 1 }}>
-				<Image style={styles.imagen} source={require('../../../assets/images/restaurante-random.png')} />
+				<Image style={styles.imagen} source={image ? {uri: "https://morfando.s3.amazonaws.com/large/"+image} : require('../../../assets/images/restaurante-random.png')} />
 			</View>
 
 			<View style={{ flex: 0.2 }}>
-				<TouchableOpacity style={styles.buttonSeleccionarFoto}>
+				<TouchableOpacity style={styles.buttonSeleccionarFoto} onPress={seleccionarFoto}>
 					<Text style={styles.textSeleccionarFoto}>Seleccionar foto</Text>
 				</TouchableOpacity>
 			</View>
@@ -31,9 +71,22 @@ const FotosRestaurante: FC_RN<{ createMenu: undefined }> = ({ navigation }) => {
 				<Text style={styles.text}>Rango de Precio</Text>
 			</View>
 
-			<View>
+			<View style={{marginHorizontal:18}}>
 				<Text>top bar</Text>
-				<Text>$ $$ $$$ $$$$</Text>
+				<View style={{flexDirection:"row", marginTop:10}}>
+				<TouchableOpacity onPress={() => setRange(1)} style={{backgroundColor:range === 1 ? COLORS.principal : "white", paddingHorizontal:10, paddingVertical:5, borderWidth: 1, borderColor: "black"}}>
+					<Text>$</Text>
+				</TouchableOpacity>
+				<TouchableOpacity onPress={() => setRange(2)} style={{backgroundColor:range === 2 ? COLORS.principal : "white", paddingHorizontal:10, marginLeft:5, paddingVertical:5, borderWidth: 1, borderColor: "black"}}>
+					<Text>$$</Text>
+				</TouchableOpacity>
+				<TouchableOpacity onPress={() => setRange(3)} style={{backgroundColor:range === 3 ? COLORS.principal : "white", paddingHorizontal:10, marginLeft:5, paddingVertical:5, borderWidth: 1, borderColor: "black"}}>
+					<Text>$$$</Text>
+				</TouchableOpacity>
+				<TouchableOpacity onPress={() => setRange(4)} style={{backgroundColor:range === 4 ? COLORS.principal : "white", paddingHorizontal:10, marginLeft:5, paddingVertical:5, borderWidth: 1, borderColor: "black"}}>
+					<Text>$$$$</Text>
+				</TouchableOpacity>
+				</View>
 			</View>
 
 			<View style={{ flex: 0.2 }}>
@@ -47,7 +100,7 @@ const FotosRestaurante: FC_RN<{ createMenu: undefined }> = ({ navigation }) => {
 			</View>
 
 			<View style={{ flex: 0.4 }}>
-				<TouchableOpacity style={styles.buttonGuardar} onPress={() => navigation?.navigate('createMenu')}>
+				<TouchableOpacity style={styles.buttonGuardar} onPress={goToNextScreeen}>
 					<Text style={styles.textGuardar}>Guardar</Text>
 				</TouchableOpacity>
 			</View>

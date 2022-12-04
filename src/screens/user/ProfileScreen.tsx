@@ -9,13 +9,14 @@ import {
 	TouchableOpacity,
 	KeyboardAvoidingView
 } from 'react-native';
-import { AuthContext } from '../../provider/AuthProvider';
 import { COLORS, style } from '../../theme/appTheme';
 import Edit from '../../../assets/images/Edit';
 import { color } from 'react-native-reanimated';
+import { useAuth } from '../../provider/AuthProvider';
 
 const Perfil = () => {
-	const { setUser } = useContext(AuthContext);
+	const {user: {user, lastName, email }, setUser} = useAuth();
+	// const { setUser } = useContext(AuthContext);
 	const handleLogout = () => {
 		setUser(false);
 	};
@@ -25,20 +26,20 @@ const Perfil = () => {
 
 	return (
 		<View style={styles.container}>
-			<View style={{ flex: 0.5 }}>
+			<View>
 				<View style={style.bannerHeaderapp}>
 					<Text style={style.titleHeader}>Perfil</Text>
 				</View>
 			</View>
 
-			<View style={{ flex: 0.4, flexDirection: 'row' }}>
+			<View style={{ flexDirection: 'row' }}>
 				<View style={{ flex: 0.5 }}>
 					<Image style={styles.imagen} source={require('../../../assets/images/Perfil.png')} />
 				</View>
 
 				<View style={{ flex: 1.5 }}>
 					<Text style={styles.textHola}>Hola!</Text>
-					<Text style={styles.textUserName}>nombre de usuario</Text>
+					<Text style={styles.textUserName}>{user}</Text>
 				</View>
 			</View>
 
@@ -50,7 +51,7 @@ const Perfil = () => {
 
 			<View style={{ flex: 0.3, flexDirection: 'row' }}>
 				<View style={{ flex: 1.5 }}>
-					<TextInput style={styles.input} placeholder="Nombre" placeholderTextColor={COLORS.gris} />
+					<TextInput style={styles.input} placeholder="Nombre" value={user} placeholderTextColor={COLORS.gris} />
 				</View>
 
 				<View style={{ flex: 0.2 }}>
@@ -66,6 +67,7 @@ const Perfil = () => {
 						style={styles.input}
 						placeholder="Apellido"
 						placeholderTextColor={COLORS.gris}
+						value={lastName}
 					/>
 				</View>
 
@@ -78,7 +80,7 @@ const Perfil = () => {
 
 			<View style={{ flex: 0.3, flexDirection: 'row' }}>
 				<View style={{ flex: 1.5 }}>
-					<TextInput style={styles.input} placeholder="Email" placeholderTextColor={COLORS.gris} />
+					<TextInput style={styles.input} placeholder="Email" value={email} placeholderTextColor={COLORS.gris} />
 				</View>
 
 				<View style={{ flex: 0.2 }}>
@@ -168,18 +170,18 @@ const styles = StyleSheet.create({
 		borderRadius: 100,
 		backgroundColor: '#FFC3C3',
 		alignSelf: 'center',
-		top: 100
+		marginTop:40,
+		justifyContent:"center"
 	},
 	textCerrarSesion: {
 		fontFamily: 'Poppins-Medium',
 		fontSize: 16,
 		color: 'red',
 		alignSelf: 'center',
-		top: 14
 	},
 	buttonDesactivarCuenta: {
 		alignSelf: 'center',
-		top: 110
+		marginTop:20
 	},
 	textDesactivarCuenta: {
 		fontFamily: 'Poppins-SemiBold',

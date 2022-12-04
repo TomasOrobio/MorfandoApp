@@ -1,43 +1,62 @@
-import React from "react";
-import { StyleSheet, View, Text, Image,ScrollView, TouchableOpacity, } from "react-native";
+import React, { useEffect, useState } from "react";
+import { StyleSheet, View, Text, Image,ScrollView, TouchableOpacity, FlatList, } from "react-native";
 import {COLORS} from "../../theme/appTheme";
 import Edit from "../../../assets/images/Edit";
 import { FC_RN } from "../../navigation/Navigation.type";
+import { fetchGet } from "../../services";
+import { useAuth } from "../../provider/AuthProvider";
+import jwtDecode from "jwt-decode";
 
 const MisRestaurantes: FC_RN<{addRestaurant: undefined}> = ({navigation}) => {
+    const [restaurants,setRestaurants] = useState([])
+    const getMisRestaurants = async() => {
+        try {
+            const response = await fetchGet("restaurant")
+        setRestaurants(response.restaurants)
+        } catch (error) {
+            alert("Error al obtener los datos")
+        }
+    }
+
+    useEffect(()=>{
+        getMisRestaurants()
+    }, [])
+
   return (
     <View style = {styles.container}>
-        <View style = {{flex: .1}}>
+        <View>
             <Text style = {styles.textTitle}>Mis Restaurantes</Text>
         </View>
+        <FlatList 
+        data={restaurants}
+        keyExtractor = {(_item,_index: any) => _index}
+        renderItem={({item} : any)=>(
+<TouchableOpacity>
 
-        <ScrollView style = {{flex: 1}}>
-        <TouchableOpacity>
+<View style = {{flex: 1, flexDirection: 'row'}}>
+    <View style = {{flex: 1}}>
+    <Image 
+  style = {styles.imagen}
+  source = {{uri: item.mediumImageURL}}
+   />
+  </View>
 
-        <View style = {{flex: 1, flexDirection: 'row'}}>
-            <View style = {{flex: 1}}>
-            <Image 
-          style = {styles.imagen}
-          source = {require('../../../assets/images/restaurante-random.png')}
-           />
-          </View>
+    <View style = {{flex: 1.5}}>
+    <Text style = {styles.textNombre}>{item.name}</Text>
+    <Text style = {styles.textUbicacion}>{item.location.address}</Text>
+    </View>
 
-            <View style = {{flex: 1.5}}>
-            <Text style = {styles.textNombre}>Dean & Dennys</Text>
-            <Text style = {styles.textUbicacion}>Palermo, Buenos Aires</Text>
-            </View>
-
-            <View style={{ flex: 0.2 }}>
-					<TouchableOpacity style={styles.buttonEditar}>
-						<Edit fontSize={26} color="white" />
-					</TouchableOpacity>
-				</View>
+    <View style={{ flex: 0.2 }}>
+            <TouchableOpacity style={styles.buttonEditar}>
+                <Edit fontSize={26} color="white" />
+            </TouchableOpacity>
         </View>
-        </TouchableOpacity>
+</View>
+</TouchableOpacity>
+        )}
+        />
 
-        </ScrollView>
-
-        <View style = {{flex: .2}}>
+        <View style={{position:"absolute", bottom: 0, right:10}}>
             <TouchableOpacity onPress={()=> navigation?.navigate('addRestaurant')}>
                 <Image source={require('../../../assets/images/add.png')} style={styles.buttonAgregar}/>
             </TouchableOpacity>
