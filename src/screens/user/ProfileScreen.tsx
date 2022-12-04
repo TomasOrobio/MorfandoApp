@@ -9,13 +9,14 @@ import {
 	TouchableOpacity,
 	KeyboardAvoidingView
 } from 'react-native';
-import { AuthContext } from '../../provider/AuthProvider';
 import { COLORS, style } from '../../theme/appTheme';
 import Edit from '../../../assets/images/Edit';
 import { color } from 'react-native-reanimated';
+import { useAuth } from '../../provider/AuthProvider';
 
 const Perfil = () => {
-	const { setUser } = useContext(AuthContext);
+	const {user: {user, lastName, email }, setUser} = useAuth();
+	// const { setUser } = useContext(AuthContext);
 	const handleLogout = () => {
 		setUser(false);
 	};
@@ -38,7 +39,7 @@ const Perfil = () => {
 
 				<View style={{ flex: 1.5 }}>
 					<Text style={styles.textHola}>Hola!</Text>
-					<Text style={styles.textUserName}>nombre de usuario</Text>
+					<Text style={styles.textUserName}>{user}</Text>
 				</View>
 			</View>
 
@@ -50,7 +51,7 @@ const Perfil = () => {
 
 			<View style={{ flex: 0.3, flexDirection: 'row' }}>
 				<View style={{ flex: 1.5 }}>
-					<TextInput style={styles.input} placeholder="Nombre" placeholderTextColor={COLORS.gris} />
+					<TextInput style={styles.input} placeholder="Nombre" value={user} placeholderTextColor={COLORS.gris} />
 				</View>
 
 				<View style={{ flex: 0.2 }}>
@@ -66,6 +67,7 @@ const Perfil = () => {
 						style={styles.input}
 						placeholder="Apellido"
 						placeholderTextColor={COLORS.gris}
+						value={lastName}
 					/>
 				</View>
 
@@ -78,7 +80,7 @@ const Perfil = () => {
 
 			<View style={{ flex: 0.3, flexDirection: 'row' }}>
 				<View style={{ flex: 1.5 }}>
-					<TextInput style={styles.input} placeholder="Email" placeholderTextColor={COLORS.gris} />
+					<TextInput style={styles.input} placeholder="Email" value={email} placeholderTextColor={COLORS.gris} />
 				</View>
 
 				<View style={{ flex: 0.2 }}>

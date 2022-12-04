@@ -1,12 +1,50 @@
-import React from 'react';
-import { StyleSheet, View, Text, TextInput, Image, ScrollView, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View, Text, TextInput, Image, ScrollView, TouchableOpacity, FlatList } from 'react-native';
 import { style } from '../../../theme/appTheme';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParams } from '.';
+import { fetchGet, fetchPost } from '../../../services';
 type RegisterScreenProps = StackScreenProps<RootStackParams, 'ShopItem'>;
 const ShopItemScreen: React.FC<RegisterScreenProps> = ({ route, navigation }) => {
 	const { shop } = route.params;
+	const [isFav, setIsFav] = useState(false)
+	
+	const getFavorites = async() => {
+		try {
+			const getFavs = await fetchGet("account/favorites")
+			const favs: any[] = getFavs.user.favorites
+			if(favs.indexOf(shop.id) !== -1){
+				setIsFav(true)
+			}
+		} catch (error) {
+			
+		}
+	}
 
+	const setFavorite = async() => {
+		try {
+			const getFavs = await fetchPost("account/favorites",{restaurant: shop.id }, {})
+			setIsFav(true);	
+		} catch (error) {
+			alert("Ha ocurrido un error")
+		}
+	}
+	const [menu, setMenu] = useState([])
+	const getDishes = async() => {
+		try {
+			const idRest = shop.id
+		const getDishes = await fetchGet(`restaurant/${idRest}/menu`)
+		console.log(getDishes.menu)
+		setMenu(getDishes.menu)
+		} catch (error) {
+			alert("No ha posible obtener el menu")
+		}
+	}	
+
+	useEffect(()=> {
+		getFavorites()
+		getDishes()
+	}, [])
 	return (
 		<View style={style.container}>
 			<View style={{ flex: 0.5 }}>
@@ -34,8 +72,8 @@ const ShopItemScreen: React.FC<RegisterScreenProps> = ({ route, navigation }) =>
 						<Image style={styles.imagenicon} source={require('../../../../assets/images/rateicon.png')} />
 					</TouchableOpacity>
 
-					<TouchableOpacity>
-						<Image style={styles.imagenicon} source={require('../../../../assets/images/favicon.png')} />
+					<TouchableOpacity onPress={setFavorite}>
+						<Image style={styles.imagenicon} source={isFav ? require('../../../../assets/images/corazon.png') : require('../../../../assets/images/favicon.png')} />
 					</TouchableOpacity>
 
 					<TouchableOpacity>
@@ -43,75 +81,35 @@ const ShopItemScreen: React.FC<RegisterScreenProps> = ({ route, navigation }) =>
 					</TouchableOpacity>
 				</View>
 
-				<ScrollView style={{ flex: 1 }}>
-					<TouchableOpacity>
+				<FlatList 
+					data={menu}
+					keyExtractor={(_item :any,_index: any) => _index}
+					renderItem={({item})=>(
 						<View style={styles.itemList}>
 							<View style={{ flex: 1 }}>
-								<Image style={styles.imagenplato} source={require('../../../../assets/images/Resto.jpg')} />
+								<Image style={styles.imagenplato} source={item.imageURL === "null" ? require('../../../../assets/images/Resto.jpg') : item.imageURL} />
 							</View>
 
 							<View style={{ flex: 1.5 }}>
-								<Text style={styles.textComida}>Comida</Text>
+								<Text style={styles.textComida}>{item.title}</Text>
 								<View style={{ flex: 0.1, flexDirection: 'row' }}>
-									<Text style={styles.textDescuento}>_%</Text>
-									<Text style={styles.textPrecio}> Precio</Text>
+									<Text style={styles.textDescuento}>{item?.descuento}%</Text>
+									<Text style={styles.textPrecio}>${item.price}</Text>
 								</View>
 							</View>
 
-							<View style={{ flex: 0.5 }}>
+							{item.isCeliac && <View style={{ flex: 0.5 }}>
 								<Image style={styles.imagentacveg} source={require('../../../../assets/images/LibreGluten.png')} />
 							</View>
-
+					}
+						{item.isVeggie && 
 							<View style={{ flex: 0.5 }}>
 								<Image style={styles.imagentacveg} source={require('../../../../assets/images/Vegano.png')} />
 							</View>
+							}
 						</View>
-					</TouchableOpacity>
-
-					<View style={styles.itemList}>
-						<View style={{ flex: 1 }}>
-							<Image style={styles.imagenplato} source={require('../../../../assets/images/Resto.jpg')} />
-						</View>
-
-						<View style={{ flex: 1.5 }}>
-							<Text style={styles.textComida}>Comida</Text>
-							<View style={{ flex: 0.1, flexDirection: 'row' }}>
-								<Text style={styles.textDescuento}>_%</Text>
-								<Text style={styles.textPrecio}> Precio</Text>
-							</View>
-						</View>
-
-						<View style={{ flex: 0.5 }}>
-							<Image style={styles.imagentacveg} source={require('../../../../assets/images/LibreGluten.png')} />
-						</View>
-
-						<View style={{ flex: 0.5 }}>
-							<Image style={styles.imagentacveg} source={require('../../../../assets/images/Vegano.png')} />
-						</View>
-					</View>
-
-					<View style={styles.itemList}>
-						<View style={{ flex: 1 }}>
-							<Image style={styles.imagenplato} source={require('../../../../assets/images/Resto.jpg')} />
-						</View>
-
-						<View style={{ flex: 1.5 }}>
-							<Text style={styles.textComida}>Comida</Text>
-							<View style={{ flex: 0.1, flexDirection: 'row' }}>
-								<Text style={styles.textDescuento}>_%</Text>
-								<Text style={styles.textPrecio}> Precio</Text>
-							</View>
-						</View>
-
-						<View style={{ flex: 0.5 }}>
-							<Image style={styles.imagentacveg} source={require('../../../../assets/images/LibreGluten.png')} />
-						</View>
-
-						<View style={{ flex: 0.5 }}>
-							<Image style={styles.imagentacveg} source={require('../../../../assets/images/Vegano.png')} />
-						</View>
-					</View>
-				</ScrollView>
+					)}
+				/>
 			</View>
 		</View>
 	);
@@ -164,7 +162,7 @@ const styles = StyleSheet.create({
 	imagenicon: {
 		alignSelf: 'center',
 		height: 40,
-		width: 40
+		width: 40,
 	},
 	imagen: {
 		height: '100%',

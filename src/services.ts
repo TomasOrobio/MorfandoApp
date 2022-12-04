@@ -11,10 +11,11 @@ const axios = Axios.create({
 	}
 });
 
-export const fetchEndpoint = (endpoint: string, method: string, body: any, params: string = '') => {
+export const fetchEndpoint = (endpoint: string, method: string, body: any, params: string = '', header = {}) => {
 	const options = {
 		url: `${endpoint}${params}`,
 		method,
+		headers : header,
 		data: method === 'GET' ? undefined : body
 	};
 	return axios(options)
@@ -26,7 +27,7 @@ export const fetchEndpoint = (endpoint: string, method: string, body: any, param
 };
 
 export const fetchGet = (endpoint: string, params: any = '') => fetchEndpoint(endpoint, 'GET', {}, params);
-export const fetchPost = (endpoint: string, body: any) => fetchEndpoint(endpoint, 'POST', body);
+export const fetchPost = (endpoint: string, body: any, header: any) => fetchEndpoint(endpoint, 'POST', body,"",header);
 export const fetchPut = (endpoint: string, body: any) => fetchEndpoint(endpoint, 'PUT', body);
 
 const tokenKey = '@auth-token';

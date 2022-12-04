@@ -31,10 +31,10 @@ const Favoritos = () => {
 		setLoading(true);
 		setError('');
 		try {
-			const response: { favorites: Shop[] } = await fetchGet('account/favorites');
-			if (response && response.favorites) {
-				if (response.favorites.length > 0) {
-					setFavorite(response.favorites);
+			const response: any = await fetchGet('account/favorites');
+			if (response) {
+				if (response.length > 0) {
+					setFavorite(response);
 				} else {
 					setError('No hay favoritos disponibles');
 				}
@@ -70,14 +70,14 @@ const Favoritos = () => {
 						<TouchableOpacity>
 							<View style={{ flex: 1, flexDirection: 'row' }}>
 								<View style={{ flex: 0.5 }}>
-									<Image style={styles.imagen} source={require('../../../assets/images/restaurante-random.png')} />
+									<Image style={styles.imagen} source={{uri:shop.imageURL}} />
 								</View>
 
 								<View style={{ flex: 1 }}>
 									<View>
-										<Text style={styles.textNombreRestaurante}>Nombre restaurante</Text>
-										<Text style={styles.textDireccion}>Dirección</Text>
-										<Text style={styles.textIconos}>iconos estrellas calificación</Text>
+										<Text style={styles.textNombreRestaurante}>{shop.name}</Text>
+										<Text style={styles.textDireccion}>{shop.location.address}</Text>
+										<Text style={styles.textIconos}>{shop.stars} estrellas</Text>
 									</View>
 								</View>
 							</View>

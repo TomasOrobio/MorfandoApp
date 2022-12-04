@@ -1,10 +1,20 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { View, StyleSheet, Text, TextInput, ScrollView, TouchableOpacity } from "react-native";
 import { ProgressBar } from "@react-native-community/progress-bar-android";
 import SelectDropdown from "react-native-select-dropdown";
 import { FC_RN } from "../../navigation/Navigation.type";
+import { StackActions, useNavigation } from "@react-navigation/native";
 
 const InformacionRestaurante: FC_RN<{schedule: undefined}>  = ({navigation}) => {
+  const nav = useNavigation();
+  const [email, setEmail] = useState("")
+  const [tipo, setTipo] = useState("")
+  const [calle, setCalle] = useState("")
+  const [numero, setNumero] = useState("")
+  const [barrio, setBarrio] = useState("")
+  const [localidad, setLocalidad] = useState("")
+  const [paiss, setPais] = useState("")
+  const [provincia, setProvincia] = useState("")
     const especialidad = [
         'Pastas',
         'Gourmet',
@@ -49,13 +59,21 @@ const InformacionRestaurante: FC_RN<{schedule: undefined}>  = ({navigation}) => 
         'Tucumán',
       ];
 
+      const goToSchedule = () => {
+        const data = {
+          email,tipo,calle,numero,barrio,localidad,paiss,provincia
+        }
+        nav.dispatch(StackActions.push("schedule", data))
+      }
+
     return (
       <View style={styles.container}>
 
         <ScrollView style={{flex: 1}}>
             <TextInput 
             style = {styles.input}
-            placeholder = 'Email'
+            placeholder = 'Nombre del restaurant'
+            onChange={(e) => setEmail(e.nativeEvent.text)}
             placeholderTextColor={'gray'}
             />
               
@@ -63,7 +81,7 @@ const InformacionRestaurante: FC_RN<{schedule: undefined}>  = ({navigation}) => 
               data={especialidad}
               
               onSelect={(selectedItem, index) => {
-              console.log(selectedItem, index)
+               setTipo(selectedItem)
               }}
               buttonTextAfterSelection={(selectedItem, index) => {
               return selectedItem
@@ -82,12 +100,14 @@ const InformacionRestaurante: FC_RN<{schedule: undefined}>  = ({navigation}) => 
             <TextInput 
             style = {styles.input}
             placeholder = 'Calle'
+            onChange={(e) => setCalle(e.nativeEvent.text)}
             placeholderTextColor={'gray'}
             />
                 
             <TextInput 
             style = {styles.input}
             placeholder = 'Número'
+            onChange={(e) => setNumero(e.nativeEvent.text)}
             placeholderTextColor={'gray'}
             keyboardType='numeric'
             />
@@ -95,12 +115,14 @@ const InformacionRestaurante: FC_RN<{schedule: undefined}>  = ({navigation}) => 
             <TextInput 
             style = {styles.input}
             placeholder = 'Barrio'
+            onChange={(e) => setBarrio(e.nativeEvent.text)}
             placeholderTextColor={'gray'}
             />
                 
             <TextInput 
             style = {styles.input}
             placeholder = 'Localidad'
+            onChange={(e) => setLocalidad(e.nativeEvent.text)}
             placeholderTextColor={'gray'}            
             />
 
@@ -108,7 +130,7 @@ const InformacionRestaurante: FC_RN<{schedule: undefined}>  = ({navigation}) => 
               data={pais}
               
               onSelect={(selectedItem, index) => {
-              console.log(selectedItem, index)
+              setPais(selectedItem)
               }}
               buttonTextAfterSelection={(selectedItem, index) => {
               return selectedItem
@@ -128,7 +150,7 @@ const InformacionRestaurante: FC_RN<{schedule: undefined}>  = ({navigation}) => 
               data={provincias}
               
               onSelect={(selectedItem, index) => {
-              console.log(selectedItem, index)
+              setProvincia(selectedItem)
               }}
               buttonTextAfterSelection={(selectedItem, index) => {
               return selectedItem
@@ -158,7 +180,7 @@ const InformacionRestaurante: FC_RN<{schedule: undefined}>  = ({navigation}) => 
         </View>
 
         <View style = {{flex: .2}}>
-            <TouchableOpacity style = {styles.buttonGuardar} onPress={()=> navigation?.navigate('schedule')}>
+            <TouchableOpacity style = {styles.buttonGuardar} onPress={goToSchedule}>
                 <Text style = {styles.textGuardar}>Siguiente</Text>
             </TouchableOpacity>
         </View>     

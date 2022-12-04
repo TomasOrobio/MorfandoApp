@@ -72,27 +72,23 @@ const ShopListScreen: React.FC<RegisterScreenProps> = ({ route, navigation }) =>
 
 	return (
 		<View style={style.container}>
-			<View style={{ flex: 0.2 }}>
+			<View>
 				<View style={style.bannerHeaderapp}>
 					<Text style={style.titleHeader}>Dirección</Text>
 				</View>
 			</View>
 
-			<View style={{ flex: 0.2, flexDirection: 'row' }}>
-				<View style={{ flex: 1 }}>
-					<View>
+			<View style={{ flexDirection: 'row', alignItems:"center" }}>
+				<View style={{flex:7}}>
 						<TextInput style={stylesSheet.searchBar} placeholder={'¿Qué desea buscar?'} />
-					</View>
 				</View>
-
-				<View style={{ flex: 0.5 }}>
+				<View style={{flex:3}}>
 					<TouchableOpacity style={stylesSheet.buttonFiltrar}>
 						<Text style={stylesSheet.textFiltrar}>Filtrar</Text>
 					</TouchableOpacity>
 				</View>
 			</View>
-
-			<View style={{ flex: 0.1 }}>
+			<View>
 				<Text style={stylesSheet.textSubtitle}>Cerca de ti</Text>
 			</View>
 			{loading ? (
@@ -100,17 +96,20 @@ const ShopListScreen: React.FC<RegisterScreenProps> = ({ route, navigation }) =>
 			) : error ? (
 				<Text>{error}</Text>
 			) : (
-				<ScrollView style={{ flex: 1 }}>
+				<ScrollView >
 					{shops.map((shop) => (
 						<TouchableOpacity key={shop.id} onPress={() => navigation.navigate('ShopItem', { shop })}>
 							<View style = {{flex: 1, flexDirection: 'row'}}>
-								<View style={{ flex: .4 }}>
+								<View style={{alignSelf:"center"}}>
 									<Image style={stylesSheet.image} source={{ uri: shop.imageURL }} />
 								</View>
-								<View style={{ flex: 1 }}>
+								<View style={{alignSelf:"center"}}>
 									<Text style={stylesSheet.textNombreRestaurante}>{shop.name}</Text>
 									<Text style={stylesSheet.textDireccion}>{shop.location.address}</Text>
-									<Text style={stylesSheet.textCalificacion}>{shop.stars}</Text>
+									<View style={{flexDirection:"row"}}>
+										<Image style={{height:20, width:20, resizeMode:"contain"}} source={require("../../../../assets/images/estrella.png")}/>
+										<Text style={stylesSheet.textCalificacion}>{shop.stars}</Text>
+									</View>
 								</View>
 							</View>	
 						</TouchableOpacity>
@@ -125,11 +124,10 @@ const stylesSheet = StyleSheet.create({
 	searchBar: {
 		marginLeft: 5,
 		fontSize: 20,
-		height: '70%',
 		width: '100%',
 		backgroundColor: 'lightgray',
 		borderRadius: 50,
-		top: 20
+		paddingHorizontal:10
 	},
 
 	image: {
@@ -167,24 +165,24 @@ const stylesSheet = StyleSheet.create({
 	},
 	buttonFiltrar: {
 		width: '80%',
-		height: '40%',
 		color: COLORS.negro,
 		borderColor: COLORS.principal,
 		borderWidth: 2,
-		borderRadius: 100,
-		top: 25,
+		borderRadius: 60,
 		alignSelf: 'center',
-		backgroundColor: COLORS.principal
+		backgroundColor: COLORS.principal,
+		justifyContent:"center",
 	},
 	textFiltrar: {
 		fontFamily: 'Poppins-Medium',
 		color: COLORS.blanco,
 		textAlign: 'center',
 		fontSize: 18,
-		top: '20%'
 	},
 	textCalificacion: {
-		color: COLORS.gris
+		color: COLORS.gris,
+		alignSelf:"center",
+		marginLeft:5
 	}
 });
 
