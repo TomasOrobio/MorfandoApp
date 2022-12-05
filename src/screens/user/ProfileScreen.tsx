@@ -138,13 +138,14 @@ const styles = StyleSheet.create({
 	},
 	buttonCambiarFoto: {
 		width: '20%',
-		height: '30%',
+		height: '40%',
 		color: COLORS.negro,
 		borderColor: COLORS.principal,
 		borderWidth: 2,
 		borderRadius: 100,
 		backgroundColor: COLORS.principal,
-		left: 20
+		left: 20,
+		marginTop: 5
 	},
 	textCambiarFoto: {
 		fontFamily: 'Poppins-Medium',
