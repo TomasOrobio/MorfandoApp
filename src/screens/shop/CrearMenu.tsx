@@ -5,7 +5,7 @@ import {COLORS} from '../../theme/appTheme';
 import ItemPlato from "./ItemPlato";
 import { ButtonWithTitle } from "../../components/ButtonWithTittle";
 import {launchImageLibrary} from 'react-native-image-picker';
-import { fetchPost } from "../../services";
+import { fetchGet, fetchPost } from "../../services";
 import { useAuth } from "../../provider/AuthProvider";
 import jwtDecode from "jwt-decode";
 import { StackActions, useNavigation } from "@react-navigation/native";
@@ -90,6 +90,10 @@ const CrearMenu = (props: any) => {
             })
             return aux
         }
+        const getLocation = 
+        await fetchGet(`https://maps.googleapis.com/maps/api/geocode/json?address=${calle.replace(" ","+")}+${provincia.replace(" ","+")}+${paiss.replace(" ","+")}&key=AIzaSyCb2AjCOdOYC5EGb3ok1Yf6JAztPK7KaTE`)
+        const lat = getLocation.results.length > 0 ? (getLocation.results[0].geometry.location.lat) : -34.603686
+        const long =  getLocation.results.length > 0 ? (getLocation.results[0].geometry.location.lng) : -58.381561
         const dataToPost = {
             dishesType : tipo,
             isCeliac: false,
@@ -101,7 +105,7 @@ const CrearMenu = (props: any) => {
             description : "Delicias para nuestros clientes",
             thumbnailImageURL: "https://morfando.s3.amazonaws.com/thumbnail/dish/" + image,
             location:  {
-                "coordinates":  [-34.603686,-58.381561],
+                "coordinates":  [lat,long],
                 "address":  `${calle} ${numero}, ${barrio}, ${localidad}, ${provincia}, ${paiss}`
             },
             ownerID:jwtDecode(user.accessToken)._id,

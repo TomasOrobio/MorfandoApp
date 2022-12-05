@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, TextInput, Image, ScrollView, TouchableOpacity, FlatList } from 'react-native';
+import { StyleSheet, View, Text, TextInput, Image, ScrollView, TouchableOpacity, FlatList, Linking } from 'react-native';
 import { style } from '../../../theme/appTheme';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParams } from '.';
@@ -44,6 +44,15 @@ const ShopItemScreen: React.FC<RegisterScreenProps> = ({ route, navigation }) =>
 		}
 	}	
 
+	const navigateToMaps = async() => {
+		const getPosition = await fetchPost("https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyCb2AjCOdOYC5EGb3ok1Yf6JAztPK7KaTE",{},{})
+		const latPosition = getPosition.location.lat
+		const lngPosition = getPosition.location.lng
+		const destLatPosition = shop.location.coordinates[0]
+		const destLngPosition = shop.location.coordinates[1]
+		Linking.openURL(`http://maps.google.com/maps?saddr=${latPosition},${lngPosition}&daddr=${destLatPosition},${destLngPosition}`)
+	}
+
 	useEffect(()=> {
 		getFavorites()
 		getDishes()
@@ -56,14 +65,14 @@ const ShopItemScreen: React.FC<RegisterScreenProps> = ({ route, navigation }) =>
 			</View>
 			<View style={{ flex: 1, paddingHorizontal: 20 }}>
 				<View style={{ flexDirection: 'row', paddingVertical: 20 }}>
-					<View style={{ flex: 1.5 }}>
+					<View>
 						<Text style={styles.textNombreRestaurante}>{shop.name}</Text>
 						<Text style={styles.textCalificacion}>
 							{shop.stars} estrellas
 						</Text>
 						<Text style={styles.textDireccion}>{shop.location.address}</Text>
 					</View>
-					<TouchableOpacity>
+					<TouchableOpacity onPress={navigateToMaps}>
 						<View>
 							<Image style={styles.imagen1} source={require('../../../../assets/images/map.png')} />
 						</View>
