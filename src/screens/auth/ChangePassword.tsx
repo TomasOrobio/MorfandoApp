@@ -50,7 +50,7 @@ const ChangePasswordScreen: React.FC<ChangePasswordScreenProps> = ({ route, navi
 			</View>
 
 			<View style={{ flex: 0.5 }}>
-				<TextInput style={styles.input} placeholder="Email" value={email} onChangeText={setEmail} />
+				<TextInput style={styles.input} placeholder="Email" value={email} placeholderTextColor={COLORS.gris} autoCapitalize = 'none' onChangeText={setEmail} />
 			</View>
 
 			<View style={{ flex: 0.5 }}>
@@ -104,20 +104,21 @@ const styles = StyleSheet.create({
 	},
 
 	input: {
-		margin: 20,
+		alignSelf: 'center',
 		padding: 10,
 		width: '90%',
 		height: '40%',
 		borderWidth: 2,
 		borderColor: COLORS.principal,
 		borderRadius: 10,
-		fontSize: 16
+		fontSize: 16,
+		color: COLORS.negro
 	},
 	imagen: {
 		alignSelf: 'center',
-		height: 225,
-		width: 336.4,
-		top: 60
+        height: '100%',
+        width: '80%',
+        resizeMode: 'contain'
 	},
 	buttonBack: {
 		width: '15%',

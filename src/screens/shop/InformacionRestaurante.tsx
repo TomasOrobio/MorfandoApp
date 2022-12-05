@@ -28,9 +28,6 @@ const InformacionRestaurante: FC_RN<{schedule: undefined}>  = ({navigation}) => 
 
     const pais = [
         'Argentina',
-        'Brasil',
-        'Chile',
-        'Uruguay',
     ];
 
     const provincias = [
@@ -66,7 +63,7 @@ const InformacionRestaurante: FC_RN<{schedule: undefined}>  = ({navigation}) => 
           }
           nav.dispatch(StackActions.push("schedule", data))
         }else{
-          alert("Completa todos los campos")
+          alert("Complete todos los campos, por favor.")
         }
       }
 
@@ -74,10 +71,10 @@ const InformacionRestaurante: FC_RN<{schedule: undefined}>  = ({navigation}) => 
       <View style={styles.container}>
 
         <ScrollView style={{flex: 1}}>
-          <Text style={{marginLeft:20, marginTop:10,fontSize:18, fontWeight:"400", fontFamily:"Poppins-Regular", color:"black"}}>Información del restaurant</Text>
+          <Text style={{marginLeft:20, marginTop:10,fontSize:18, fontWeight:"400", fontFamily:"Poppins-Regular", color:"black"}}>Información del restaurante</Text>
             <TextInput 
             style = {styles.input}
-            placeholder = 'Nombre del restaurant'
+            placeholder = 'Nombre del restaurante'
             onChange={(e) => setEmail(e.nativeEvent.text)}
             placeholderTextColor={'gray'}
             />
@@ -234,7 +231,8 @@ const InformacionRestaurante: FC_RN<{schedule: undefined}>  = ({navigation}) => 
       fontFamily: 'Poppins-Medium',
       color: 'white',
       textAlign: 'center',
-      top: '25%'
+      top: '25%',
+      fontSize: 20
       
     },
     dropdown1BtnStyle: {

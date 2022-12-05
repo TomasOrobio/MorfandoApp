@@ -141,7 +141,7 @@ const CrearMenu = (props: any) => {
             <Text style = {styles.textTitle}> Crear Menú </Text>
         </View>
         <ScrollView style={{flex: 1}}>
-            {platos.length === 0 && <Text>Todavia no has agregado platos a tu menu</Text>}
+            {platos.length === 0 && <Text style = {styles.textSubtitle}>Todavía no has agregado platos a tu menú. ¡Presiona el "+" para agregar un nuevo plato!</Text>}
             {platos.map((item:any, index: number)=>(
                 <ItemPlato {...item} index={index}/>
             ))}
@@ -166,19 +166,19 @@ const CrearMenu = (props: any) => {
                 <View style={{backgroundColor:"white"}}>
                     <ScrollView>
                     <Text style={{textAlign:"center",marginVertical:10,fontSize:14,fontWeight:"bold"}}>Agregar plato al menu</Text>
-                    <TextInput style={styles.inputModal} value={titulo} onChange={(e)=>setTitulo(e.nativeEvent.text)} placeholder="Nombre del plato"/>
+                    <TextInput style={styles.inputModal} placeholderTextColor={COLORS.gris} value={titulo} onChange={(e)=>setTitulo(e.nativeEvent.text)} placeholder="Nombre del plato"/>
 
-                    <TextInput style={styles.inputModal} value={precio} onChange={(e)=>setPrecio(e.nativeEvent.text)} placeholder="Precio"/>
-                <TextInput style={styles.inputModal} value={descuento} onChange={(e)=>setDescuento(e.nativeEvent.text)}  placeholder="Descuento (%)"/>
-                <TextInput style={styles.inputModal} value={ingredientes} onChange={(e)=>setIngredientes(e.nativeEvent.text)}  placeholder="Ingredientes"/>
-                <TextInput style={styles.inputModal} onPressIn={agregarFoto} value={imagen}/>
+                    <TextInput style={styles.inputModal} placeholderTextColor={COLORS.gris} value={precio} onChange={(e)=>setPrecio(e.nativeEvent.text)} placeholder="Precio"/>
+                <TextInput style={styles.inputModal} placeholderTextColor={COLORS.gris} value={descuento} onChange={(e)=>setDescuento(e.nativeEvent.text)}  placeholder="Descuento (%)"/>
+                <TextInput style={styles.inputModal} placeholderTextColor={COLORS.gris} value={ingredientes} onChange={(e)=>setIngredientes(e.nativeEvent.text)}  placeholder="Ingredientes"/>
+                <TextInput style={styles.inputModal} placeholderTextColor={COLORS.gris} onPressIn={agregarFoto} value={imagen}/>
                 <View style={{flexDirection:"row", justifyContent:"center"}}>
                     <View>
-                        <Text>Plato Vegano</Text>
+                        <Text style={styles.textVeganoSinTacc} >Plato Vegano</Text>
                          <Switch value={isVegano} onChange={()=>setIsVegano(!isVegano)} style={{ alignSelf:"center"}}/>
                     </View>
                     <View style={{marginLeft:20}}>
-                        <Text>Libre De Gluten</Text>
+                        <Text style={styles.textVeganoSinTacc}>Libre De Gluten</Text>
                          <Switch value={isLibreDeGluten} onChange={()=>setIsLibreDeGluten(!isLibreDeGluten)} style={{alignSelf:"center"}}/>
                     </View>
                 </View>
@@ -202,7 +202,13 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins-Regular',
         fontSize: 21,
         color: COLORS.negro,
-        margin: 4
+        left: 5
+    },
+    textSubtitle: {
+        fontFamily: 'Poppins-Regular',
+        fontSize: 14,
+        color: COLORS.gris,
+        left: 12
     },
     textComida: {
         fontFamily: 'Poppins-Bold',
@@ -225,6 +231,11 @@ const styles = StyleSheet.create({
         fontSize: 10,
         margin: 4,
         left: '3%'
+    },
+    textVeganoSinTacc: {
+        fontFamily: 'Poppins-Bold',
+        fontSize: 14,
+        color: COLORS.gris,
     },
     input: {
         width: '90%',
@@ -296,7 +307,6 @@ const styles = StyleSheet.create({
         top: 10,
     },
     barraProgreso: {
-        top: 10,
         width: '90%',
         alignSelf: 'center',
     },

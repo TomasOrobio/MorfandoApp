@@ -137,6 +137,7 @@ function LoginScreen({ route, navigation }: LoginScreenProps) {
 					style={styles.input}
 					placeholder="Email"
 					placeholderTextColor={COLORS.gris}
+					autoCapitalize = 'none'
 					value={email}
 					onChangeText={setEmail}
 				/>
@@ -145,16 +146,16 @@ function LoginScreen({ route, navigation }: LoginScreenProps) {
 					style={styles.input}
 					placeholder="Contraseña"
 					placeholderTextColor={COLORS.gris}
+					autoCapitalize = 'none'
 					value={password}
 					onChangeText={setPassword}
 				/>
 				<TouchableOpacity
-					style={styles.textPassword}
 					onPress={() => {
 						navigation.navigate('ForgetPassword');
 					}}
 				>
-					<Text>¿Olvidaste tu contraseña?</Text>
+					<Text style={styles.textPassword}>¿Olvidaste tu contraseña?</Text>
 				</TouchableOpacity>
 
 				{Boolean(error) && (

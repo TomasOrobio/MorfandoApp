@@ -76,7 +76,7 @@ const ShopListScreen: React.FC<RegisterScreenProps> = ({ route, navigation }) =>
 		<View style={style.container}>
 			<View>
 				<View style={style.bannerHeaderapp}>
-					<Text style={style.titleHeader}>Dirección</Text>
+					<Text style={style.titleHeader}>Restaurantes cercanos</Text>
 				</View>
 			</View>
 

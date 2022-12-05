@@ -61,7 +61,7 @@ const MenuItemPlatoDetalle = (props: any) => {
     imagen: {
         alignSelf: 'center',
         resizeMode: 'contain',
-        borderRadius: 30,
+        
     },
     imagen1: {
         alignSelf: 'center'
@@ -78,14 +78,15 @@ const MenuItemPlatoDetalle = (props: any) => {
         fontFamily: 'Poppins-Regular',
         fontSize: 18,
         color: COLORS.negro,
-        marginLeft: 15
+        marginLeft: 15,
 
     },
     textIngrediente: {
         fontFamily: 'Poppins-Medium',
         fontSize: 22,
         color: COLORS.negro,
-        marginLeft: 15
+        marginLeft: 15,
+        marginTop: 15,
     },
     textIngredientes: {
         fontFamily: 'Poppins-Regular',

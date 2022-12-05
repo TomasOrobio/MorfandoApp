@@ -137,8 +137,8 @@ const styles = StyleSheet.create({
 		marginTop: 2
 	},
 	buttonCambiarFoto: {
-		width: '30%',
-		height: '65%',
+		width: '20%',
+		height: '30%',
 		color: COLORS.negro,
 		borderColor: COLORS.principal,
 		borderWidth: 2,
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
 	},
 	buttonCerrarSesion: {
 		width: '50%',
-		height: '20%',
+		height: '15%',
 		borderRadius: 100,
 		backgroundColor: '#FFC3C3',
 		alignSelf: 'center',
@@ -178,6 +178,7 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 		color: 'red',
 		alignSelf: 'center',
+		
 	},
 	buttonDesactivarCuenta: {
 		alignSelf: 'center',

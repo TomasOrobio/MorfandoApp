@@ -447,10 +447,10 @@ const Horarios: FC_RN<{uploadFile: undefined}>  = ({navigation, route}) => {
           }
           nav.dispatch(StackActions.push("uploadFile", data))
         }else{
-          alert("Completa todos los horarios de los dias habilitados indicados")
+          alert("Complete todos los horarios de los dias habilitados indicados.")
         }
       }else{
-        alert("No has indicado ningun dia disponible")
+        alert("No has indicado ningún día disponible.")
       }
     }
     return (
@@ -956,7 +956,8 @@ const Horarios: FC_RN<{uploadFile: undefined}>  = ({navigation, route}) => {
       fontFamily: 'Poppins-Medium',
       color: 'white',
       textAlign: 'center',
-      top: '25%'
+      top: '25%',
+      fontSize: 20
       
     },
     dropdown1BtnStyle: {
