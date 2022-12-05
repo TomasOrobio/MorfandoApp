@@ -368,6 +368,7 @@ const stylesScreen = StyleSheet.create({
   title: {
     fontSize: 22,
     marginBottom: 10,
+    color: 'black'
   },
   text:{
     color: 'white',
@@ -406,6 +407,8 @@ const stylesScreen = StyleSheet.create({
     fontFamily: 'Poppins',
     fontSize: 15,
     fontweight: 19900,
+    color: 'black',
+    left: 5
   }
 });
 export default Filtros;
