@@ -15,8 +15,9 @@ const ShopItemScreen: React.FC<RegisterScreenProps> = ({ route, navigation }) =>
 	const getFavorites = async() => {
 		try {
 			const getFavs = await fetchGet("account/favorites")
-			const favs: any[] = getFavs.user.favorites
-			if(favs.indexOf(shop.id) !== -1){
+			const favs: any[] = getFavs
+			console.log(favs, "favoritos")
+			if(favs.filter((item: any) => item.id === shop.id).length > 0){
 				setIsFav(true)
 			}
 		} catch (error) {
@@ -37,7 +38,6 @@ const ShopItemScreen: React.FC<RegisterScreenProps> = ({ route, navigation }) =>
 		try {
 			const idRest = shop.id
 		const getDishes = await fetchGet(`restaurant/${idRest}/menu`)
-		console.log(getDishes.menu)
 		setMenu(getDishes.menu)
 		} catch (error) {
 			alert("No ha posible obtener el menu")

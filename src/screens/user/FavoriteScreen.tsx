@@ -6,7 +6,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
 
-import { useNavigation } from '@react-navigation/native';
+import { StackActions, useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import {
 	StyleSheet,
@@ -68,7 +68,7 @@ const Favoritos = () => {
 			) : (
 				<ScrollView  style={{ flex: 1 }}>
 					{favorite.map((shop) => (
-						<TouchableOpacity>
+						<TouchableOpacity onPress={() => nav.dispatch(StackActions.push('ShopItem', { shop }))}>
 							<View style={{ flex: 1, flexDirection: 'row' }}>
 								<View style={{ flex: 0.5 }}>
 									<Image style={styles.imagen} source={{uri:shop.imageURL}} />
@@ -78,7 +78,10 @@ const Favoritos = () => {
 									<View>
 										<Text style={styles.textNombreRestaurante}>{shop.name}</Text>
 										<Text style={styles.textDireccion}>{shop.location.address}</Text>
-										<Text style={styles.textIconos}>{shop.stars} estrellas</Text>
+										<View style={{flexDirection:"row", alignItems:"center"}}>
+											<Image style={{width:20,height:20,resizeMode:"contain"}} source={require("../../../assets/images/estrella.png")}/>
+											<Text style={{marginLeft:5}}>{shop.stars}</Text>
+										</View>
 									</View>
 								</View>
 							</View>

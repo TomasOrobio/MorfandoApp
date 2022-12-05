@@ -39,7 +39,7 @@ const MisRestaurantes: FC_RN<{addRestaurant: undefined}> = ({navigation}) => {
     <View style = {{flex: 1}}>
     <Image 
   style = {styles.imagen}
-  source = {{uri: item.mediumImageURL}}
+  source = {{uri: item.imageURL}}
    />
   </View>
 
