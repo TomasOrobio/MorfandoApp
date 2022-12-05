@@ -8,6 +8,7 @@ import ShopItem from './ShopItem';
 import ShopList, { Shop } from './ShopList';
 import MenuItemPlatoDetalle from '../../shop/MenuItemPlatoDetalle';
 import FavoriteScreen from '../FavoriteScreen';
+import Filtros from '../../Filtros';
 
 export type RootStackParams = {
 	ShopItem: { shop: Shop };
@@ -29,6 +30,7 @@ const Navigator = () => {
 		>
 			<NavStack.Screen name="ShopList" component={ShopList} />
 			<NavStack.Screen name="MenuItem" component={MenuItemPlatoDetalle} />
+			<NavStack.Screen name="Filters" component={Filtros} />
 			<NavStack.Screen
 				name="ShopItem"
 				component={ShopItem}

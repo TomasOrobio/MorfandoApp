@@ -85,7 +85,7 @@ const ShopListScreen: React.FC<RegisterScreenProps> = ({ route, navigation }) =>
 						<TextInput value={filter} onChange={(e)=>setFilter(e.nativeEvent.text)} style={stylesSheet.searchBar} placeholder={'¿Qué desea buscar?'} />
 				</View>
 				<View style={{flex:3}}>
-					<TouchableOpacity style={stylesSheet.buttonFiltrar}>
+					<TouchableOpacity onPress={()=>navigation.navigate("Filters")} style={stylesSheet.buttonFiltrar}>
 						<Text style={stylesSheet.textFiltrar}>Filtrar</Text>
 					</TouchableOpacity>
 				</View>
