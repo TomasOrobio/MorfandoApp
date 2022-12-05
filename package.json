@@ -8,7 +8,8 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint .",
-    "pretty:precommit": "pretty:precommit --"
+    "pretty:precommit": "pretty:precommit --",
+    "buildapk": "cd android && ./gradlew assembleRelease"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^4",
