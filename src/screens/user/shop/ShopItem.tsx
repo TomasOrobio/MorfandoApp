@@ -97,7 +97,6 @@ const ShopItemScreen: React.FC<RegisterScreenProps> = ({ route, navigation }) =>
 							<View style={{ flex: 1.5, marginLeft: 10 }}>
 								<Text style={styles.textComida}>{item.title}</Text>
 								<View style={{ flex: 0.1, flexDirection: 'row' }}>
-									<Text style={styles.textDescuento}>{item?.descuento}%</Text>
 									<Text style={styles.textPrecio}>${item.price}</Text>
 								</View>
 							</View>
@@ -154,7 +153,7 @@ const styles = StyleSheet.create({
 	imagentacveg: {
 		height: 30,
 		width: 30,
-		alignSelf:"center",
+		alignSelf:"center"
 	},
 	imagenplato: {
 		alignSelf: 'center',
@@ -192,7 +191,6 @@ const styles = StyleSheet.create({
 	textPrecio: {
 		fontFamily: 'Poppins-Regular',
 		fontSize: 16,
-		marginLeft: 10,
 		color: 'orange'
 	},
 	textNombreRestaurante: {
