@@ -7,6 +7,7 @@ import { COLORS } from '../../../theme/appTheme';
 import ShopItem from './ShopItem';
 import ShopList, { Shop } from './ShopList';
 import MenuItemPlatoDetalle from '../../shop/MenuItemPlatoDetalle';
+import FavoriteScreen from '../FavoriteScreen';
 
 export type RootStackParams = {
 	ShopItem: { shop: Shop };
@@ -44,6 +45,34 @@ const Navigator = () => {
 		</NavStack.Navigator>
 	);
 };
+
+export const FavoriteNavigator = () => {
+		return (
+			<NavStack.Navigator
+				initialRouteName="Favorite"
+				screenOptions={{
+					headerShown: false,
+					headerTransparent: true
+				}}
+			>
+				<NavStack.Screen name="Favorite" component={FavoriteScreen} />
+				<NavStack.Screen name="MenuItem" component={MenuItemPlatoDetalle} />
+				<NavStack.Screen
+					name="ShopItem"
+					component={ShopItem}
+					options={({ navigation }: Props) => ({
+						headerShown: true,
+						headerTitle: '',
+						headerLeft: () => (
+							<TouchableOpacity style={styles.buttonBack} onPress={() => navigation.goBack()}>
+								<Back fontSize={12} color="#000" />
+							</TouchableOpacity>
+						)
+					})}
+				/>
+			</NavStack.Navigator>
+		);
+}
 
 export default Navigator;
 

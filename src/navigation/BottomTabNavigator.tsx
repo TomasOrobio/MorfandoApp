@@ -6,7 +6,7 @@ import HomeScreen from '../screens/user/HomeScreen';
 import FavoriteScreen from '../screens/user/FavoriteScreen';
 import ProfileScreen from '../screens/user/ProfileScreen';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import ShopScreen from '../screens/user/shop';
+import ShopScreen, { FavoriteNavigator } from '../screens/user/shop';
 import MisRestaurantes from '../screens/shop/MisRestaurantes';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useAuth } from '../provider/AuthProvider';
@@ -38,7 +38,7 @@ export const UserNavigation: React.FC = () => {
 			/>
 			<Tab.Screen
 				name="Favorite"
-				component={FavoriteScreen}
+				component={FavoriteNavigator}
 				options={{
 					tabBarLabel: 'Favoritos',
 					tabBarIcon: ({ color }) => (
